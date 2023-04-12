@@ -14,8 +14,11 @@ def space_counter(token):
 states = (('idstate', 'exclusive'),
           ('dedstate', 'exclusive'),)
 
-tokens = ['COMMENT', 'MINUS', 'PLUS', 'TIMES', 'DIVIDE', 'REST', 'EXPONEN', 'LSHIFT', 'RSHIFT', 'BIGGEST', 'SMALL','EQUAL', 'SMALLEQUAL', 'BIGGESTEQUAL', 'BIGSMALLERESQUAL','DOUBLEEQUAL','TRIPLEEQUAL', 'DIFF', 'SIMPLEE', 'SIMPLEBAR', 'EXCLAMATION', 'DOUBLEE', 'DOUBLEBAR', 'ATR', 'LPAREN', 'RPAREN', 'AND', 'OR', 'FALSE','TRUE','NOT','IF', 'ELSE', 'ELSIF', 'BEGIN', 'BREAK', 'CLASS', 'DEF', 'DO', 'END', 'FOR', 'IN', 'MODULE', 'NIL', 'RETURN', 'SELF', 'SUPER', 'THEN', 'WHILE', 'NUMBER', 'ID','OPENKEY','CLOSEKEY','PONTO','PONTOEVIRGULA','VIRGULA', 'LINHA', 'IDENT', 'DEDENT']
-
+tokens = ['COMMENT', 'MINUS', 'PLUS', 'TIMES', 'DIVIDE', 'REST', 'EXPONEN', 'LSHIFT', 'RSHIFT', 'BIGGEST', 'SMALL','EQUAL', 'SMALLEQUAL', 'BIGGESTEQUAL', 'BIGSMALLERESQUAL','DOUBLEEQUAL','TRIPLEEQUAL', 'DIFF', 'SIMPLEE', 'SIMPLEBAR', 'EXCLAMATION', 'DOUBLEE', 'DOUBLEBAR',  'LPAREN', 'RPAREN', 'AND', 'OR', 'FALSE','TRUE','NOT','IF', 'ELSE', 'ELSIF', 'BEGIN', 'BREAK', 'CLASS', 'DEF', 'DO', 'END', 'FOR', 'IN', 'MODULE', 'NIL', 'RETURN', 'SELF', 'SUPER', 'THEN', 'WHILE', 'NUMBER', 'ID','OPENKEY','CLOSEKEY','PONTO','PONTOEVIRGULA','VIRGULA', 'LINHA', 'IDENT', 'DEDENT']
+#Comentário de multiplas linhas
+def t_MULTILINECOMMENT(t):
+  r'=begin(.|\n)*=end'
+  pass
 # operadores e delimitadores
 t_MINUS = r'-'
 t_PLUS = r'\+'
@@ -156,10 +159,7 @@ def t_idstate_error(t):
 def t_dedstate_error(t):
     print("ERROR in dedstate state")
     t.lexer.skip(1)
-def t_MULTILINECOMMENT(t):
-  r'\=begin.*=end'
-  return t 
-t_ATR = r'='
+
 lex.lex()
 programa = """cleardef perm
     if len lsurf   

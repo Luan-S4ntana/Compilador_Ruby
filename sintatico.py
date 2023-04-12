@@ -1,6 +1,15 @@
 import ply.yacc as yacc
 from lexico import *
 
+precedence = (
+    ('left', 'OR', 'AND'),
+    ('left', 'DIFF','DOUBLEEQUAL','TRIPLEEQUAL'),
+    ('left', 'BIGGESTEQUAL','BIGGEST','SMALL','SMALLEQUAL'),
+    ('left', 'PLUS', 'MINUS'),
+    ('left', 'TIMES', 'DIVIDE','REST'),
+    ('left', 'EXPONEN')
+)
+
 def p_program(p):
   '''program : funcao program'''
   pass
@@ -20,65 +29,61 @@ def p_funcao(p):
   pass
   
 def p_stms(p):
-  '''stms : stm | 
-            stm stms'''
+  '''stms : stm  
+          |  stm stms'''
   pass
   
 def p_opcional(p):
-  '''opcional : ELSIF exp THEN stms END | 
-                ELSE stms END |
-                '''
+  '''opcional : ELSIF exp THEN stms END  
+              |  ELSE stms END 
+              |  '''
   pass
 def p_stms_while1(p):
-  '''stm : exp |
-           WHILE LAPREN exp RPAREN stms END
+  '''stm : exp 
+        |   WHILE LPAREN exp RPAREN stms END
   '''
   pass
   
 def p_stms_while2(p):
-  '''stm : exp | 
-           WHILE exp stms END '''
+  '''stm : WHILE exp stms END '''
   pass
   
 def p_stms_for1(p):
-  '''stm : exp | 
-           FOR ID IN exp DO stms END '''
+  '''stm : FOR ID IN exp DO stms END '''
   pass
 
 def p_stms_for2(p):
-  '''stm : exp | 
-           FOR ID IN exp stms END'''
+  '''stm : FOR ID IN exp stms END'''
   pass
 
 def p_stms_if1(p):
-  '''stm : exp | 
-           IF exp THEN stms END opcional'''
+  '''stm : IF exp THEN stms END opcional'''
   pass
 
 def p_smts_if2(p):
-  '''stm : exp | 
-           IF exp stms END opcional'''
+  '''stm : IF exp stms END opcional'''
   pass
 
 def p_stms_if3(p):
-  '''stm : exp | 
-           IF LPAREN exp RPAREN THEN stms END opcional'''
+  '''stm : IF LPAREN exp RPAREN THEN stms END opcional'''
   pass
 
 def p_stms_if4(p):
-  '''stm : exp |
-           IF LPAREN exp RPAREN stms END opcional'''
+  '''stm : IF LPAREN exp RPAREN stms END opcional'''
   pass
 
 def p_stms_return(p):
-  '''stm : exp |
-           return exp'''
+  '''stm : RETURN exp'''
   pass
 
 def p_exp_soma(p):
   '''exp : exp PLUS exp'''
   pass
-
+  
+def p_exp_exponen(p):
+  '''exp : exp EXPONEN exp'''
+  pass
+  
 def p_exp_subtracao(p):
   '''exp : exp MINUS exp'''
   pass
@@ -96,7 +101,7 @@ def p_exp_mod(p):
   pass
 
 def p_exp_doubleequal(p):
-  '''exp : exp EQUAL exp'''
+  '''exp : exp DOUBLEEQUAL exp'''
   pass
 
 def p_exp_tripleequal(p):
@@ -107,7 +112,7 @@ def p_exp_diff(p):
   '''exp : exp DIFF exp'''
   pass
 
-def p_exp_maiorque(p):
+def p_exp_maiorQue(p):
   '''exp : exp BIGGEST exp'''
   pass
 
@@ -115,11 +120,11 @@ def p_exp_maiorQueIgual(p):
   '''exp : exp BIGGESTEQUAL exp'''
   pass
 
-def p_exp_menorque(p):
+def p_exp_menorQue(p):
   '''exp : exp SMALL exp'''
   pass
 
-def p_exp_menorqueIgual(p):
+def p_exp_menorQueIgual(p):
   '''exp : exp SMALLEQUAL exp'''
   pass
 
@@ -174,3 +179,6 @@ def p_sigparams1(p):
 def p_assign(p):
   '''assign : ID EQUAL exp'''
   pass
+
+def p_error(p):
+    print("Syntax error in input!")
