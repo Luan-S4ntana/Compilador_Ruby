@@ -1,0 +1,4072 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    BEGIN
+    BIGSMALLERESQUAL
+    BREAK
+    CLASS
+    CLOSEKEY
+    COMMENT
+    DEDENT
+    DOUBLEBAR
+    DOUBLEE
+    EXCLAMATION
+    FALSE
+    IDENT
+    LINHA
+    LSHIFT
+    MODULE
+    NIL
+    NOT
+    OPENKEY
+    PONTO
+    PONTOEVIRGULA
+    RSHIFT
+    SELF
+    SIMPLEBAR
+    SIMPLEE
+    SUPER
+    TRUE
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> funcao program
+Rule 2     program -> assign program
+Rule 3     program -> assign
+Rule 4     program -> funcao
+Rule 5     funcao -> DEF ID LPAREN sigParams RPAREN BREAKLINE body
+Rule 6     funcao -> DEF ID BREAKLINE body
+Rule 7     stms -> stm
+Rule 8     stms -> stm stms
+Rule 9     opcional -> ELSIF exp THEN body
+Rule 10    opcional -> ELSE stms END
+Rule 11    opcional -> <empty>
+Rule 12    opcional -> ELSIF exp THEN body opcional
+Rule 13    body -> stms END
+Rule 14    stm -> exp BREAKLINE
+Rule 15    stm -> WHILE LPAREN exp RPAREN BREAKLINE body
+Rule 16    stm -> WHILE exp BREAKLINE body
+Rule 17    stm -> FOR ID IN exp DO BREAKLINE body
+Rule 18    stm -> FOR ID IN exp BREAKLINE body
+Rule 19    stm -> IF exp THEN BREAKLINE body opcional
+Rule 20    stm -> IF exp BREAKLINE body opcional
+Rule 21    stm -> IF LPAREN exp RPAREN THEN BREAKLINE body opcional
+Rule 22    stm -> IF LPAREN exp RPAREN BREAKLINE body opcional
+Rule 23    stm -> RETURN exp BREAKLINE
+Rule 24    stm -> RETURN BREAKLINE
+Rule 25    exp -> exp PLUS exp
+Rule 26    exp -> exp EXPONEN exp
+Rule 27    exp -> exp MINUS exp
+Rule 28    exp -> exp TIMES exp
+Rule 29    exp -> exp DIVIDE exp
+Rule 30    exp -> exp REST exp
+Rule 31    exp -> exp DOUBLEEQUAL exp
+Rule 32    exp -> exp TRIPLEEQUAL exp
+Rule 33    exp -> exp DIFF exp
+Rule 34    exp -> exp BIGGEST exp
+Rule 35    exp -> exp BIGGESTEQUAL exp
+Rule 36    exp -> exp SMALL exp
+Rule 37    exp -> exp SMALLEQUAL exp
+Rule 38    exp -> exp OR exp
+Rule 39    exp -> exp AND exp
+Rule 40    exp -> call
+Rule 41    exp -> assign
+Rule 42    exp -> NUMBER
+Rule 43    call -> ID LPAREN sigParams RPAREN
+Rule 44    call -> ID LPAREN RPAREN
+Rule 45    call -> ID
+Rule 46    call -> ID sigParams
+Rule 47    sigParams -> exp
+Rule 48    sigParams -> exp VIRGULA sigParams
+Rule 49    assign -> ID EQUAL exp
+Rule 50    stm -> assign BREAKLINE
+
+Terminals, with rules where they appear
+
+AND                  : 39
+BEGIN                : 
+BIGGEST              : 34
+BIGGESTEQUAL         : 35
+BIGSMALLERESQUAL     : 
+BREAK                : 
+BREAKLINE            : 5 6 14 15 16 17 18 19 20 21 22 23 24 50
+CLASS                : 
+CLOSEKEY             : 
+COMMENT              : 
+DEDENT               : 
+DEF                  : 5 6
+DIFF                 : 33
+DIVIDE               : 29
+DO                   : 17
+DOUBLEBAR            : 
+DOUBLEE              : 
+DOUBLEEQUAL          : 31
+ELSE                 : 10
+ELSIF                : 9 12
+END                  : 10 13
+EQUAL                : 49
+EXCLAMATION          : 
+EXPONEN              : 26
+FALSE                : 
+FOR                  : 17 18
+ID                   : 5 6 17 18 43 44 45 46 49
+IDENT                : 
+IF                   : 19 20 21 22
+IN                   : 17 18
+LINHA                : 
+LPAREN               : 5 15 21 22 43 44
+LSHIFT               : 
+MINUS                : 27
+MODULE               : 
+NIL                  : 
+NOT                  : 
+NUMBER               : 42
+OPENKEY              : 
+OR                   : 38
+PLUS                 : 25
+PONTO                : 
+PONTOEVIRGULA        : 
+REST                 : 30
+RETURN               : 23 24
+RPAREN               : 5 15 21 22 43 44
+RSHIFT               : 
+SELF                 : 
+SIMPLEBAR            : 
+SIMPLEE              : 
+SMALL                : 36
+SMALLEQUAL           : 37
+SUPER                : 
+THEN                 : 9 12 19 21
+TIMES                : 28
+TRIPLEEQUAL          : 32
+TRUE                 : 
+VIRGULA              : 48
+WHILE                : 15 16
+error                : 
+
+Nonterminals, with rules where they appear
+
+assign               : 2 3 41 50
+body                 : 5 6 9 12 15 16 17 18 19 20 21 22
+call                 : 40
+exp                  : 9 12 14 15 16 17 18 19 20 21 22 23 25 25 26 26 27 27 28 28 29 29 30 30 31 31 32 32 33 33 34 34 35 35 36 36 37 37 38 38 39 39 47 48 49
+funcao               : 1 4
+opcional             : 12 19 20 21 22
+program              : 1 2 0
+sigParams            : 5 43 46 48
+stm                  : 7 8
+stms                 : 8 10 13
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . funcao program
+    (2) program -> . assign program
+    (3) program -> . assign
+    (4) program -> . funcao
+    (5) funcao -> . DEF ID LPAREN sigParams RPAREN BREAKLINE body
+    (6) funcao -> . DEF ID BREAKLINE body
+    (49) assign -> . ID EQUAL exp
+
+    DEF             shift and go to state 4
+    ID              shift and go to state 5
+
+    program                        shift and go to state 1
+    funcao                         shift and go to state 2
+    assign                         shift and go to state 3
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> funcao . program
+    (4) program -> funcao .
+    (1) program -> . funcao program
+    (2) program -> . assign program
+    (3) program -> . assign
+    (4) program -> . funcao
+    (5) funcao -> . DEF ID LPAREN sigParams RPAREN BREAKLINE body
+    (6) funcao -> . DEF ID BREAKLINE body
+    (49) assign -> . ID EQUAL exp
+
+    $end            reduce using rule 4 (program -> funcao .)
+    DEF             shift and go to state 4
+    ID              shift and go to state 5
+
+    funcao                         shift and go to state 2
+    program                        shift and go to state 6
+    assign                         shift and go to state 3
+
+state 3
+
+    (2) program -> assign . program
+    (3) program -> assign .
+    (1) program -> . funcao program
+    (2) program -> . assign program
+    (3) program -> . assign
+    (4) program -> . funcao
+    (5) funcao -> . DEF ID LPAREN sigParams RPAREN BREAKLINE body
+    (6) funcao -> . DEF ID BREAKLINE body
+    (49) assign -> . ID EQUAL exp
+
+    $end            reduce using rule 3 (program -> assign .)
+    DEF             shift and go to state 4
+    ID              shift and go to state 5
+
+    assign                         shift and go to state 3
+    program                        shift and go to state 7
+    funcao                         shift and go to state 2
+
+state 4
+
+    (5) funcao -> DEF . ID LPAREN sigParams RPAREN BREAKLINE body
+    (6) funcao -> DEF . ID BREAKLINE body
+
+    ID              shift and go to state 8
+
+
+state 5
+
+    (49) assign -> ID . EQUAL exp
+
+    EQUAL           shift and go to state 9
+
+
+state 6
+
+    (1) program -> funcao program .
+
+    $end            reduce using rule 1 (program -> funcao program .)
+
+
+state 7
+
+    (2) program -> assign program .
+
+    $end            reduce using rule 2 (program -> assign program .)
+
+
+state 8
+
+    (5) funcao -> DEF ID . LPAREN sigParams RPAREN BREAKLINE body
+    (6) funcao -> DEF ID . BREAKLINE body
+
+    LPAREN          shift and go to state 10
+    BREAKLINE       shift and go to state 11
+
+
+state 9
+
+    (49) assign -> ID EQUAL . exp
+    (25) exp -> . exp PLUS exp
+    (26) exp -> . exp EXPONEN exp
+    (27) exp -> . exp MINUS exp
+    (28) exp -> . exp TIMES exp
+    (29) exp -> . exp DIVIDE exp
+    (30) exp -> . exp REST exp
+    (31) exp -> . exp DOUBLEEQUAL exp
+    (32) exp -> . exp TRIPLEEQUAL exp
+    (33) exp -> . exp DIFF exp
+    (34) exp -> . exp BIGGEST exp
+    (35) exp -> . exp BIGGESTEQUAL exp
+    (36) exp -> . exp SMALL exp
+    (37) exp -> . exp SMALLEQUAL exp
+    (38) exp -> . exp OR exp
+    (39) exp -> . exp AND exp
+    (40) exp -> . call
+    (41) exp -> . assign
+    (42) exp -> . NUMBER
+    (43) call -> . ID LPAREN sigParams RPAREN
+    (44) call -> . ID LPAREN RPAREN
+    (45) call -> . ID
+    (46) call -> . ID sigParams
+    (49) assign -> . ID EQUAL exp
+
+    NUMBER          shift and go to state 16
+    ID              shift and go to state 12
+
+    exp                            shift and go to state 13
+    call                           shift and go to state 14
+    assign                         shift and go to state 15
+
+state 10
+
+    (5) funcao -> DEF ID LPAREN . sigParams RPAREN BREAKLINE body
+    (47) sigParams -> . exp
+    (48) sigParams -> . exp VIRGULA sigParams
+    (25) exp -> . exp PLUS exp
+    (26) exp -> . exp EXPONEN exp
+    (27) exp -> . exp MINUS exp
+    (28) exp -> . exp TIMES exp
+    (29) exp -> . exp DIVIDE exp
+    (30) exp -> . exp REST exp
+    (31) exp -> . exp DOUBLEEQUAL exp
+    (32) exp -> . exp TRIPLEEQUAL exp
+    (33) exp -> . exp DIFF exp
+    (34) exp -> . exp BIGGEST exp
+    (35) exp -> . exp BIGGESTEQUAL exp
+    (36) exp -> . exp SMALL exp
+    (37) exp -> . exp SMALLEQUAL exp
+    (38) exp -> . exp OR exp
+    (39) exp -> . exp AND exp
+    (40) exp -> . call
+    (41) exp -> . assign
+    (42) exp -> . NUMBER
+    (43) call -> . ID LPAREN sigParams RPAREN
+    (44) call -> . ID LPAREN RPAREN
+    (45) call -> . ID
+    (46) call -> . ID sigParams
+    (49) assign -> . ID EQUAL exp
+
+    NUMBER          shift and go to state 16
+    ID              shift and go to state 12
+
+    sigParams                      shift and go to state 17
+    exp                            shift and go to state 18
+    call                           shift and go to state 14
+    assign                         shift and go to state 15
+
+state 11
+
+    (6) funcao -> DEF ID BREAKLINE . body
+    (13) body -> . stms END
+    (7) stms -> . stm
+    (8) stms -> . stm stms
+    (14) stm -> . exp BREAKLINE
+    (15) stm -> . WHILE LPAREN exp RPAREN BREAKLINE body
+    (16) stm -> . WHILE exp BREAKLINE body
+    (17) stm -> . FOR ID IN exp DO BREAKLINE body
+    (18) stm -> . FOR ID IN exp BREAKLINE body
+    (19) stm -> . IF exp THEN BREAKLINE body opcional
+    (20) stm -> . IF exp BREAKLINE body opcional
+    (21) stm -> . IF LPAREN exp RPAREN THEN BREAKLINE body opcional
+    (22) stm -> . IF LPAREN exp RPAREN BREAKLINE body opcional
+    (23) stm -> . RETURN exp BREAKLINE
+    (24) stm -> . RETURN BREAKLINE
+    (50) stm -> . assign BREAKLINE
+    (25) exp -> . exp PLUS exp
+    (26) exp -> . exp EXPONEN exp
+    (27) exp -> . exp MINUS exp
+    (28) exp -> . exp TIMES exp
+    (29) exp -> . exp DIVIDE exp
+    (30) exp -> . exp REST exp
+    (31) exp -> . exp DOUBLEEQUAL exp
+    (32) exp -> . exp TRIPLEEQUAL exp
+    (33) exp -> . exp DIFF exp
+    (34) exp -> . exp BIGGEST exp
+    (35) exp -> . exp BIGGESTEQUAL exp
+    (36) exp -> . exp SMALL exp
+    (37) exp -> . exp SMALLEQUAL exp
+    (38) exp -> . exp OR exp
+    (39) exp -> . exp AND exp
+    (40) exp -> . call
+    (41) exp -> . assign
+    (42) exp -> . NUMBER
+    (49) assign -> . ID EQUAL exp
+    (43) call -> . ID LPAREN sigParams RPAREN
+    (44) call -> . ID LPAREN RPAREN
+    (45) call -> . ID
+    (46) call -> . ID sigParams
+
+    WHILE           shift and go to state 24
+    FOR             shift and go to state 25
+    IF              shift and go to state 26
+    RETURN          shift and go to state 27
+    NUMBER          shift and go to state 16
+    ID              shift and go to state 19
+
+    body                           shift and go to state 20
+    stms                           shift and go to state 21
+    stm                            shift and go to state 22
+    exp                            shift and go to state 23
+    assign                         shift and go to state 28
+    call                           shift and go to state 14
+
+state 12
+
+    (43) call -> ID . LPAREN sigParams RPAREN
+    (44) call -> ID . LPAREN RPAREN
+    (45) call -> ID .
+    (46) call -> ID . sigParams
+    (49) assign -> ID . EQUAL exp
+    (47) sigParams -> . exp
+    (48) sigParams -> . exp VIRGULA sigParams
+    (25) exp -> . exp PLUS exp
+    (26) exp -> . exp EXPONEN exp
+    (27) exp -> . exp MINUS exp
+    (28) exp -> . exp TIMES exp
+    (29) exp -> . exp DIVIDE exp
+    (30) exp -> . exp REST exp
+    (31) exp -> . exp DOUBLEEQUAL exp
+    (32) exp -> . exp TRIPLEEQUAL exp
+    (33) exp -> . exp DIFF exp
+    (34) exp -> . exp BIGGEST exp
+    (35) exp -> . exp BIGGESTEQUAL exp
+    (36) exp -> . exp SMALL exp
+    (37) exp -> . exp SMALLEQUAL exp
+    (38) exp -> . exp OR exp
+    (39) exp -> . exp AND exp
+    (40) exp -> . call
+    (41) exp -> . assign
+    (42) exp -> . NUMBER
+    (43) call -> . ID LPAREN sigParams RPAREN
+    (44) call -> . ID LPAREN RPAREN
+    (45) call -> . ID
+    (46) call -> . ID sigParams
+    (49) assign -> . ID EQUAL exp
+
+    LPAREN          shift and go to state 29
+    PLUS            reduce using rule 45 (call -> ID .)
+    EXPONEN         reduce using rule 45 (call -> ID .)
+    MINUS           reduce using rule 45 (call -> ID .)
+    TIMES           reduce using rule 45 (call -> ID .)
+    DIVIDE          reduce using rule 45 (call -> ID .)
+    REST            reduce using rule 45 (call -> ID .)
+    DOUBLEEQUAL     reduce using rule 45 (call -> ID .)
+    TRIPLEEQUAL     reduce using rule 45 (call -> ID .)
+    DIFF            reduce using rule 45 (call -> ID .)
+    BIGGEST         reduce using rule 45 (call -> ID .)
+    BIGGESTEQUAL    reduce using rule 45 (call -> ID .)
+    SMALL           reduce using rule 45 (call -> ID .)
+    SMALLEQUAL      reduce using rule 45 (call -> ID .)
+    OR              reduce using rule 45 (call -> ID .)
+    AND             reduce using rule 45 (call -> ID .)
+    DEF             reduce using rule 45 (call -> ID .)
+    ID              reduce using rule 45 (call -> ID .)
+    $end            reduce using rule 45 (call -> ID .)
+    VIRGULA         reduce using rule 45 (call -> ID .)
+    RPAREN          reduce using rule 45 (call -> ID .)
+    BREAKLINE       reduce using rule 45 (call -> ID .)
+    THEN            reduce using rule 45 (call -> ID .)
+    DO              reduce using rule 45 (call -> ID .)
+    EQUAL           shift and go to state 9
+    NUMBER          shift and go to state 16
+
+  ! ID              [ shift and go to state 12 ]
+
+    sigParams                      shift and go to state 30
+    exp                            shift and go to state 18
+    call                           shift and go to state 14
+    assign                         shift and go to state 15
+
+state 13
+
+    (49) assign -> ID EQUAL exp .
+    (25) exp -> exp . PLUS exp
+    (26) exp -> exp . EXPONEN exp
+    (27) exp -> exp . MINUS exp
+    (28) exp -> exp . TIMES exp
+    (29) exp -> exp . DIVIDE exp
+    (30) exp -> exp . REST exp
+    (31) exp -> exp . DOUBLEEQUAL exp
+    (32) exp -> exp . TRIPLEEQUAL exp
+    (33) exp -> exp . DIFF exp
+    (34) exp -> exp . BIGGEST exp
+    (35) exp -> exp . BIGGESTEQUAL exp
+    (36) exp -> exp . SMALL exp
+    (37) exp -> exp . SMALLEQUAL exp
+    (38) exp -> exp . OR exp
+    (39) exp -> exp . AND exp
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for EXPONEN resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+  ! shift/reduce conflict for REST resolved as shift
+  ! shift/reduce conflict for DOUBLEEQUAL resolved as shift
+  ! shift/reduce conflict for TRIPLEEQUAL resolved as shift
+  ! shift/reduce conflict for DIFF resolved as shift
+  ! shift/reduce conflict for BIGGEST resolved as shift
+  ! shift/reduce conflict for BIGGESTEQUAL resolved as shift
+  ! shift/reduce conflict for SMALL resolved as shift
+  ! shift/reduce conflict for SMALLEQUAL resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
+  ! shift/reduce conflict for AND resolved as shift
+    DEF             reduce using rule 49 (assign -> ID EQUAL exp .)
+    ID              reduce using rule 49 (assign -> ID EQUAL exp .)
+    $end            reduce using rule 49 (assign -> ID EQUAL exp .)
+    VIRGULA         reduce using rule 49 (assign -> ID EQUAL exp .)
+    RPAREN          reduce using rule 49 (assign -> ID EQUAL exp .)
+    BREAKLINE       reduce using rule 49 (assign -> ID EQUAL exp .)
+    THEN            reduce using rule 49 (assign -> ID EQUAL exp .)
+    DO              reduce using rule 49 (assign -> ID EQUAL exp .)
+    PLUS            shift and go to state 31
+    EXPONEN         shift and go to state 32
+    MINUS           shift and go to state 33
+    TIMES           shift and go to state 34
+    DIVIDE          shift and go to state 35
+    REST            shift and go to state 36
+    DOUBLEEQUAL     shift and go to state 37
+    TRIPLEEQUAL     shift and go to state 38
+    DIFF            shift and go to state 39
+    BIGGEST         shift and go to state 40
+    BIGGESTEQUAL    shift and go to state 41
+    SMALL           shift and go to state 42
+    SMALLEQUAL      shift and go to state 43
+    OR              shift and go to state 44
+    AND             shift and go to state 45
+
+  ! PLUS            [ reduce using rule 49 (assign -> ID EQUAL exp .) ]
+  ! EXPONEN         [ reduce using rule 49 (assign -> ID EQUAL exp .) ]
+  ! MINUS           [ reduce using rule 49 (assign -> ID EQUAL exp .) ]
+  ! TIMES           [ reduce using rule 49 (assign -> ID EQUAL exp .) ]
+  ! DIVIDE          [ reduce using rule 49 (assign -> ID EQUAL exp .) ]
+  ! REST            [ reduce using rule 49 (assign -> ID EQUAL exp .) ]
+  ! DOUBLEEQUAL     [ reduce using rule 49 (assign -> ID EQUAL exp .) ]
+  ! TRIPLEEQUAL     [ reduce using rule 49 (assign -> ID EQUAL exp .) ]
+  ! DIFF            [ reduce using rule 49 (assign -> ID EQUAL exp .) ]
+  ! BIGGEST         [ reduce using rule 49 (assign -> ID EQUAL exp .) ]
+  ! BIGGESTEQUAL    [ reduce using rule 49 (assign -> ID EQUAL exp .) ]
+  ! SMALL           [ reduce using rule 49 (assign -> ID EQUAL exp .) ]
+  ! SMALLEQUAL      [ reduce using rule 49 (assign -> ID EQUAL exp .) ]
+  ! OR              [ reduce using rule 49 (assign -> ID EQUAL exp .) ]
+  ! AND             [ reduce using rule 49 (assign -> ID EQUAL exp .) ]
+
+
+state 14
+
+    (40) exp -> call .
+
+    PLUS            reduce using rule 40 (exp -> call .)
+    EXPONEN         reduce using rule 40 (exp -> call .)
+    MINUS           reduce using rule 40 (exp -> call .)
+    TIMES           reduce using rule 40 (exp -> call .)
+    DIVIDE          reduce using rule 40 (exp -> call .)
+    REST            reduce using rule 40 (exp -> call .)
+    DOUBLEEQUAL     reduce using rule 40 (exp -> call .)
+    TRIPLEEQUAL     reduce using rule 40 (exp -> call .)
+    DIFF            reduce using rule 40 (exp -> call .)
+    BIGGEST         reduce using rule 40 (exp -> call .)
+    BIGGESTEQUAL    reduce using rule 40 (exp -> call .)
+    SMALL           reduce using rule 40 (exp -> call .)
+    SMALLEQUAL      reduce using rule 40 (exp -> call .)
+    OR              reduce using rule 40 (exp -> call .)
+    AND             reduce using rule 40 (exp -> call .)
+    DEF             reduce using rule 40 (exp -> call .)
+    ID              reduce using rule 40 (exp -> call .)
+    $end            reduce using rule 40 (exp -> call .)
+    VIRGULA         reduce using rule 40 (exp -> call .)
+    RPAREN          reduce using rule 40 (exp -> call .)
+    BREAKLINE       reduce using rule 40 (exp -> call .)
+    THEN            reduce using rule 40 (exp -> call .)
+    DO              reduce using rule 40 (exp -> call .)
+
+
+state 15
+
+    (41) exp -> assign .
+
+    PLUS            reduce using rule 41 (exp -> assign .)
+    EXPONEN         reduce using rule 41 (exp -> assign .)
+    MINUS           reduce using rule 41 (exp -> assign .)
+    TIMES           reduce using rule 41 (exp -> assign .)
+    DIVIDE          reduce using rule 41 (exp -> assign .)
+    REST            reduce using rule 41 (exp -> assign .)
+    DOUBLEEQUAL     reduce using rule 41 (exp -> assign .)
+    TRIPLEEQUAL     reduce using rule 41 (exp -> assign .)
+    DIFF            reduce using rule 41 (exp -> assign .)
+    BIGGEST         reduce using rule 41 (exp -> assign .)
+    BIGGESTEQUAL    reduce using rule 41 (exp -> assign .)
+    SMALL           reduce using rule 41 (exp -> assign .)
+    SMALLEQUAL      reduce using rule 41 (exp -> assign .)
+    OR              reduce using rule 41 (exp -> assign .)
+    AND             reduce using rule 41 (exp -> assign .)
+    DEF             reduce using rule 41 (exp -> assign .)
+    ID              reduce using rule 41 (exp -> assign .)
+    $end            reduce using rule 41 (exp -> assign .)
+    VIRGULA         reduce using rule 41 (exp -> assign .)
+    RPAREN          reduce using rule 41 (exp -> assign .)
+    BREAKLINE       reduce using rule 41 (exp -> assign .)
+    THEN            reduce using rule 41 (exp -> assign .)
+    DO              reduce using rule 41 (exp -> assign .)
+
+
+state 16
+
+    (42) exp -> NUMBER .
+
+    PLUS            reduce using rule 42 (exp -> NUMBER .)
+    EXPONEN         reduce using rule 42 (exp -> NUMBER .)
+    MINUS           reduce using rule 42 (exp -> NUMBER .)
+    TIMES           reduce using rule 42 (exp -> NUMBER .)
+    DIVIDE          reduce using rule 42 (exp -> NUMBER .)
+    REST            reduce using rule 42 (exp -> NUMBER .)
+    DOUBLEEQUAL     reduce using rule 42 (exp -> NUMBER .)
+    TRIPLEEQUAL     reduce using rule 42 (exp -> NUMBER .)
+    DIFF            reduce using rule 42 (exp -> NUMBER .)
+    BIGGEST         reduce using rule 42 (exp -> NUMBER .)
+    BIGGESTEQUAL    reduce using rule 42 (exp -> NUMBER .)
+    SMALL           reduce using rule 42 (exp -> NUMBER .)
+    SMALLEQUAL      reduce using rule 42 (exp -> NUMBER .)
+    OR              reduce using rule 42 (exp -> NUMBER .)
+    AND             reduce using rule 42 (exp -> NUMBER .)
+    DEF             reduce using rule 42 (exp -> NUMBER .)
+    ID              reduce using rule 42 (exp -> NUMBER .)
+    $end            reduce using rule 42 (exp -> NUMBER .)
+    VIRGULA         reduce using rule 42 (exp -> NUMBER .)
+    RPAREN          reduce using rule 42 (exp -> NUMBER .)
+    BREAKLINE       reduce using rule 42 (exp -> NUMBER .)
+    THEN            reduce using rule 42 (exp -> NUMBER .)
+    DO              reduce using rule 42 (exp -> NUMBER .)
+
+
+state 17
+
+    (5) funcao -> DEF ID LPAREN sigParams . RPAREN BREAKLINE body
+
+    RPAREN          shift and go to state 46
+
+
+state 18
+
+    (47) sigParams -> exp .
+    (48) sigParams -> exp . VIRGULA sigParams
+    (25) exp -> exp . PLUS exp
+    (26) exp -> exp . EXPONEN exp
+    (27) exp -> exp . MINUS exp
+    (28) exp -> exp . TIMES exp
+    (29) exp -> exp . DIVIDE exp
+    (30) exp -> exp . REST exp
+    (31) exp -> exp . DOUBLEEQUAL exp
+    (32) exp -> exp . TRIPLEEQUAL exp
+    (33) exp -> exp . DIFF exp
+    (34) exp -> exp . BIGGEST exp
+    (35) exp -> exp . BIGGESTEQUAL exp
+    (36) exp -> exp . SMALL exp
+    (37) exp -> exp . SMALLEQUAL exp
+    (38) exp -> exp . OR exp
+    (39) exp -> exp . AND exp
+
+  ! shift/reduce conflict for VIRGULA resolved as shift
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for EXPONEN resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+  ! shift/reduce conflict for REST resolved as shift
+  ! shift/reduce conflict for DOUBLEEQUAL resolved as shift
+  ! shift/reduce conflict for TRIPLEEQUAL resolved as shift
+  ! shift/reduce conflict for DIFF resolved as shift
+  ! shift/reduce conflict for BIGGEST resolved as shift
+  ! shift/reduce conflict for BIGGESTEQUAL resolved as shift
+  ! shift/reduce conflict for SMALL resolved as shift
+  ! shift/reduce conflict for SMALLEQUAL resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
+  ! shift/reduce conflict for AND resolved as shift
+    RPAREN          reduce using rule 47 (sigParams -> exp .)
+    DEF             reduce using rule 47 (sigParams -> exp .)
+    ID              reduce using rule 47 (sigParams -> exp .)
+    $end            reduce using rule 47 (sigParams -> exp .)
+    BREAKLINE       reduce using rule 47 (sigParams -> exp .)
+    THEN            reduce using rule 47 (sigParams -> exp .)
+    DO              reduce using rule 47 (sigParams -> exp .)
+    VIRGULA         shift and go to state 47
+    PLUS            shift and go to state 31
+    EXPONEN         shift and go to state 32
+    MINUS           shift and go to state 33
+    TIMES           shift and go to state 34
+    DIVIDE          shift and go to state 35
+    REST            shift and go to state 36
+    DOUBLEEQUAL     shift and go to state 37
+    TRIPLEEQUAL     shift and go to state 38
+    DIFF            shift and go to state 39
+    BIGGEST         shift and go to state 40
+    BIGGESTEQUAL    shift and go to state 41
+    SMALL           shift and go to state 42
+    SMALLEQUAL      shift and go to state 43
+    OR              shift and go to state 44
+    AND             shift and go to state 45
+
+  ! PLUS            [ reduce using rule 47 (sigParams -> exp .) ]
+  ! EXPONEN         [ reduce using rule 47 (sigParams -> exp .) ]
+  ! MINUS           [ reduce using rule 47 (sigParams -> exp .) ]
+  ! TIMES           [ reduce using rule 47 (sigParams -> exp .) ]
+  ! DIVIDE          [ reduce using rule 47 (sigParams -> exp .) ]
+  ! REST            [ reduce using rule 47 (sigParams -> exp .) ]
+  ! DOUBLEEQUAL     [ reduce using rule 47 (sigParams -> exp .) ]
+  ! TRIPLEEQUAL     [ reduce using rule 47 (sigParams -> exp .) ]
+  ! DIFF            [ reduce using rule 47 (sigParams -> exp .) ]
+  ! BIGGEST         [ reduce using rule 47 (sigParams -> exp .) ]
+  ! BIGGESTEQUAL    [ reduce using rule 47 (sigParams -> exp .) ]
+  ! SMALL           [ reduce using rule 47 (sigParams -> exp .) ]
+  ! SMALLEQUAL      [ reduce using rule 47 (sigParams -> exp .) ]
+  ! OR              [ reduce using rule 47 (sigParams -> exp .) ]
+  ! AND             [ reduce using rule 47 (sigParams -> exp .) ]
+  ! VIRGULA         [ reduce using rule 47 (sigParams -> exp .) ]
+
+
+state 19
+
+    (49) assign -> ID . EQUAL exp
+    (43) call -> ID . LPAREN sigParams RPAREN
+    (44) call -> ID . LPAREN RPAREN
+    (45) call -> ID .
+    (46) call -> ID . sigParams
+    (47) sigParams -> . exp
+    (48) sigParams -> . exp VIRGULA sigParams
+    (25) exp -> . exp PLUS exp
+    (26) exp -> . exp EXPONEN exp
+    (27) exp -> . exp MINUS exp
+    (28) exp -> . exp TIMES exp
+    (29) exp -> . exp DIVIDE exp
+    (30) exp -> . exp REST exp
+    (31) exp -> . exp DOUBLEEQUAL exp
+    (32) exp -> . exp TRIPLEEQUAL exp
+    (33) exp -> . exp DIFF exp
+    (34) exp -> . exp BIGGEST exp
+    (35) exp -> . exp BIGGESTEQUAL exp
+    (36) exp -> . exp SMALL exp
+    (37) exp -> . exp SMALLEQUAL exp
+    (38) exp -> . exp OR exp
+    (39) exp -> . exp AND exp
+    (40) exp -> . call
+    (41) exp -> . assign
+    (42) exp -> . NUMBER
+    (43) call -> . ID LPAREN sigParams RPAREN
+    (44) call -> . ID LPAREN RPAREN
+    (45) call -> . ID
+    (46) call -> . ID sigParams
+    (49) assign -> . ID EQUAL exp
+
+    EQUAL           shift and go to state 9
+    LPAREN          shift and go to state 29
+    BREAKLINE       reduce using rule 45 (call -> ID .)
+    PLUS            reduce using rule 45 (call -> ID .)
+    EXPONEN         reduce using rule 45 (call -> ID .)
+    MINUS           reduce using rule 45 (call -> ID .)
+    TIMES           reduce using rule 45 (call -> ID .)
+    DIVIDE          reduce using rule 45 (call -> ID .)
+    REST            reduce using rule 45 (call -> ID .)
+    DOUBLEEQUAL     reduce using rule 45 (call -> ID .)
+    TRIPLEEQUAL     reduce using rule 45 (call -> ID .)
+    DIFF            reduce using rule 45 (call -> ID .)
+    BIGGEST         reduce using rule 45 (call -> ID .)
+    BIGGESTEQUAL    reduce using rule 45 (call -> ID .)
+    SMALL           reduce using rule 45 (call -> ID .)
+    SMALLEQUAL      reduce using rule 45 (call -> ID .)
+    OR              reduce using rule 45 (call -> ID .)
+    AND             reduce using rule 45 (call -> ID .)
+    NUMBER          shift and go to state 16
+    ID              shift and go to state 12
+
+    exp                            shift and go to state 18
+    sigParams                      shift and go to state 30
+    call                           shift and go to state 14
+    assign                         shift and go to state 15
+
+state 20
+
+    (6) funcao -> DEF ID BREAKLINE body .
+
+    DEF             reduce using rule 6 (funcao -> DEF ID BREAKLINE body .)
+    ID              reduce using rule 6 (funcao -> DEF ID BREAKLINE body .)
+    $end            reduce using rule 6 (funcao -> DEF ID BREAKLINE body .)
+
+
+state 21
+
+    (13) body -> stms . END
+
+    END             shift and go to state 48
+
+
+state 22
+
+    (7) stms -> stm .
+    (8) stms -> stm . stms
+    (7) stms -> . stm
+    (8) stms -> . stm stms
+    (14) stm -> . exp BREAKLINE
+    (15) stm -> . WHILE LPAREN exp RPAREN BREAKLINE body
+    (16) stm -> . WHILE exp BREAKLINE body
+    (17) stm -> . FOR ID IN exp DO BREAKLINE body
+    (18) stm -> . FOR ID IN exp BREAKLINE body
+    (19) stm -> . IF exp THEN BREAKLINE body opcional
+    (20) stm -> . IF exp BREAKLINE body opcional
+    (21) stm -> . IF LPAREN exp RPAREN THEN BREAKLINE body opcional
+    (22) stm -> . IF LPAREN exp RPAREN BREAKLINE body opcional
+    (23) stm -> . RETURN exp BREAKLINE
+    (24) stm -> . RETURN BREAKLINE
+    (50) stm -> . assign BREAKLINE
+    (25) exp -> . exp PLUS exp
+    (26) exp -> . exp EXPONEN exp
+    (27) exp -> . exp MINUS exp
+    (28) exp -> . exp TIMES exp
+    (29) exp -> . exp DIVIDE exp
+    (30) exp -> . exp REST exp
+    (31) exp -> . exp DOUBLEEQUAL exp
+    (32) exp -> . exp TRIPLEEQUAL exp
+    (33) exp -> . exp DIFF exp
+    (34) exp -> . exp BIGGEST exp
+    (35) exp -> . exp BIGGESTEQUAL exp
+    (36) exp -> . exp SMALL exp
+    (37) exp -> . exp SMALLEQUAL exp
+    (38) exp -> . exp OR exp
+    (39) exp -> . exp AND exp
+    (40) exp -> . call
+    (41) exp -> . assign
+    (42) exp -> . NUMBER
+    (49) assign -> . ID EQUAL exp
+    (43) call -> . ID LPAREN sigParams RPAREN
+    (44) call -> . ID LPAREN RPAREN
+    (45) call -> . ID
+    (46) call -> . ID sigParams
+
+    END             reduce using rule 7 (stms -> stm .)
+    WHILE           shift and go to state 24
+    FOR             shift and go to state 25
+    IF              shift and go to state 26
+    RETURN          shift and go to state 27
+    NUMBER          shift and go to state 16
+    ID              shift and go to state 19
+
+    stm                            shift and go to state 22
+    stms                           shift and go to state 49
+    exp                            shift and go to state 23
+    assign                         shift and go to state 28
+    call                           shift and go to state 14
+
+state 23
+
+    (14) stm -> exp . BREAKLINE
+    (25) exp -> exp . PLUS exp
+    (26) exp -> exp . EXPONEN exp
+    (27) exp -> exp . MINUS exp
+    (28) exp -> exp . TIMES exp
+    (29) exp -> exp . DIVIDE exp
+    (30) exp -> exp . REST exp
+    (31) exp -> exp . DOUBLEEQUAL exp
+    (32) exp -> exp . TRIPLEEQUAL exp
+    (33) exp -> exp . DIFF exp
+    (34) exp -> exp . BIGGEST exp
+    (35) exp -> exp . BIGGESTEQUAL exp
+    (36) exp -> exp . SMALL exp
+    (37) exp -> exp . SMALLEQUAL exp
+    (38) exp -> exp . OR exp
+    (39) exp -> exp . AND exp
+
+    BREAKLINE       shift and go to state 50
+    PLUS            shift and go to state 31
+    EXPONEN         shift and go to state 32
+    MINUS           shift and go to state 33
+    TIMES           shift and go to state 34
+    DIVIDE          shift and go to state 35
+    REST            shift and go to state 36
+    DOUBLEEQUAL     shift and go to state 37
+    TRIPLEEQUAL     shift and go to state 38
+    DIFF            shift and go to state 39
+    BIGGEST         shift and go to state 40
+    BIGGESTEQUAL    shift and go to state 41
+    SMALL           shift and go to state 42
+    SMALLEQUAL      shift and go to state 43
+    OR              shift and go to state 44
+    AND             shift and go to state 45
+
+
+state 24
+
+    (15) stm -> WHILE . LPAREN exp RPAREN BREAKLINE body
+    (16) stm -> WHILE . exp BREAKLINE body
+    (25) exp -> . exp PLUS exp
+    (26) exp -> . exp EXPONEN exp
+    (27) exp -> . exp MINUS exp
+    (28) exp -> . exp TIMES exp
+    (29) exp -> . exp DIVIDE exp
+    (30) exp -> . exp REST exp
+    (31) exp -> . exp DOUBLEEQUAL exp
+    (32) exp -> . exp TRIPLEEQUAL exp
+    (33) exp -> . exp DIFF exp
+    (34) exp -> . exp BIGGEST exp
+    (35) exp -> . exp BIGGESTEQUAL exp
+    (36) exp -> . exp SMALL exp
+    (37) exp -> . exp SMALLEQUAL exp
+    (38) exp -> . exp OR exp
+    (39) exp -> . exp AND exp
+    (40) exp -> . call
+    (41) exp -> . assign
+    (42) exp -> . NUMBER
+    (43) call -> . ID LPAREN sigParams RPAREN
+    (44) call -> . ID LPAREN RPAREN
+    (45) call -> . ID
+    (46) call -> . ID sigParams
+    (49) assign -> . ID EQUAL exp
+
+    LPAREN          shift and go to state 51
+    NUMBER          shift and go to state 16
+    ID              shift and go to state 12
+
+    exp                            shift and go to state 52
+    call                           shift and go to state 14
+    assign                         shift and go to state 15
+
+state 25
+
+    (17) stm -> FOR . ID IN exp DO BREAKLINE body
+    (18) stm -> FOR . ID IN exp BREAKLINE body
+
+    ID              shift and go to state 53
+
+
+state 26
+
+    (19) stm -> IF . exp THEN BREAKLINE body opcional
+    (20) stm -> IF . exp BREAKLINE body opcional
+    (21) stm -> IF . LPAREN exp RPAREN THEN BREAKLINE body opcional
+    (22) stm -> IF . LPAREN exp RPAREN BREAKLINE body opcional
+    (25) exp -> . exp PLUS exp
+    (26) exp -> . exp EXPONEN exp
+    (27) exp -> . exp MINUS exp
+    (28) exp -> . exp TIMES exp
+    (29) exp -> . exp DIVIDE exp
+    (30) exp -> . exp REST exp
+    (31) exp -> . exp DOUBLEEQUAL exp
+    (32) exp -> . exp TRIPLEEQUAL exp
+    (33) exp -> . exp DIFF exp
+    (34) exp -> . exp BIGGEST exp
+    (35) exp -> . exp BIGGESTEQUAL exp
+    (36) exp -> . exp SMALL exp
+    (37) exp -> . exp SMALLEQUAL exp
+    (38) exp -> . exp OR exp
+    (39) exp -> . exp AND exp
+    (40) exp -> . call
+    (41) exp -> . assign
+    (42) exp -> . NUMBER
+    (43) call -> . ID LPAREN sigParams RPAREN
+    (44) call -> . ID LPAREN RPAREN
+    (45) call -> . ID
+    (46) call -> . ID sigParams
+    (49) assign -> . ID EQUAL exp
+
+    LPAREN          shift and go to state 55
+    NUMBER          shift and go to state 16
+    ID              shift and go to state 12
+
+    exp                            shift and go to state 54
+    call                           shift and go to state 14
+    assign                         shift and go to state 15
+
+state 27
+
+    (23) stm -> RETURN . exp BREAKLINE
+    (24) stm -> RETURN . BREAKLINE
+    (25) exp -> . exp PLUS exp
+    (26) exp -> . exp EXPONEN exp
+    (27) exp -> . exp MINUS exp
+    (28) exp -> . exp TIMES exp
+    (29) exp -> . exp DIVIDE exp
+    (30) exp -> . exp REST exp
+    (31) exp -> . exp DOUBLEEQUAL exp
+    (32) exp -> . exp TRIPLEEQUAL exp
+    (33) exp -> . exp DIFF exp
+    (34) exp -> . exp BIGGEST exp
+    (35) exp -> . exp BIGGESTEQUAL exp
+    (36) exp -> . exp SMALL exp
+    (37) exp -> . exp SMALLEQUAL exp
+    (38) exp -> . exp OR exp
+    (39) exp -> . exp AND exp
+    (40) exp -> . call
+    (41) exp -> . assign
+    (42) exp -> . NUMBER
+    (43) call -> . ID LPAREN sigParams RPAREN
+    (44) call -> . ID LPAREN RPAREN
+    (45) call -> . ID
+    (46) call -> . ID sigParams
+    (49) assign -> . ID EQUAL exp
+
+    BREAKLINE       shift and go to state 57
+    NUMBER          shift and go to state 16
+    ID              shift and go to state 12
+
+    exp                            shift and go to state 56
+    call                           shift and go to state 14
+    assign                         shift and go to state 15
+
+state 28
+
+    (50) stm -> assign . BREAKLINE
+    (41) exp -> assign .
+
+  ! shift/reduce conflict for BREAKLINE resolved as shift
+    BREAKLINE       shift and go to state 58
+    PLUS            reduce using rule 41 (exp -> assign .)
+    EXPONEN         reduce using rule 41 (exp -> assign .)
+    MINUS           reduce using rule 41 (exp -> assign .)
+    TIMES           reduce using rule 41 (exp -> assign .)
+    DIVIDE          reduce using rule 41 (exp -> assign .)
+    REST            reduce using rule 41 (exp -> assign .)
+    DOUBLEEQUAL     reduce using rule 41 (exp -> assign .)
+    TRIPLEEQUAL     reduce using rule 41 (exp -> assign .)
+    DIFF            reduce using rule 41 (exp -> assign .)
+    BIGGEST         reduce using rule 41 (exp -> assign .)
+    BIGGESTEQUAL    reduce using rule 41 (exp -> assign .)
+    SMALL           reduce using rule 41 (exp -> assign .)
+    SMALLEQUAL      reduce using rule 41 (exp -> assign .)
+    OR              reduce using rule 41 (exp -> assign .)
+    AND             reduce using rule 41 (exp -> assign .)
+
+  ! BREAKLINE       [ reduce using rule 41 (exp -> assign .) ]
+
+
+state 29
+
+    (43) call -> ID LPAREN . sigParams RPAREN
+    (44) call -> ID LPAREN . RPAREN
+    (47) sigParams -> . exp
+    (48) sigParams -> . exp VIRGULA sigParams
+    (25) exp -> . exp PLUS exp
+    (26) exp -> . exp EXPONEN exp
+    (27) exp -> . exp MINUS exp
+    (28) exp -> . exp TIMES exp
+    (29) exp -> . exp DIVIDE exp
+    (30) exp -> . exp REST exp
+    (31) exp -> . exp DOUBLEEQUAL exp
+    (32) exp -> . exp TRIPLEEQUAL exp
+    (33) exp -> . exp DIFF exp
+    (34) exp -> . exp BIGGEST exp
+    (35) exp -> . exp BIGGESTEQUAL exp
+    (36) exp -> . exp SMALL exp
+    (37) exp -> . exp SMALLEQUAL exp
+    (38) exp -> . exp OR exp
+    (39) exp -> . exp AND exp
+    (40) exp -> . call
+    (41) exp -> . assign
+    (42) exp -> . NUMBER
+    (43) call -> . ID LPAREN sigParams RPAREN
+    (44) call -> . ID LPAREN RPAREN
+    (45) call -> . ID
+    (46) call -> . ID sigParams
+    (49) assign -> . ID EQUAL exp
+
+    RPAREN          shift and go to state 60
+    NUMBER          shift and go to state 16
+    ID              shift and go to state 12
+
+    sigParams                      shift and go to state 59
+    exp                            shift and go to state 18
+    call                           shift and go to state 14
+    assign                         shift and go to state 15
+
+state 30
+
+    (46) call -> ID sigParams .
+
+    PLUS            reduce using rule 46 (call -> ID sigParams .)
+    EXPONEN         reduce using rule 46 (call -> ID sigParams .)
+    MINUS           reduce using rule 46 (call -> ID sigParams .)
+    TIMES           reduce using rule 46 (call -> ID sigParams .)
+    DIVIDE          reduce using rule 46 (call -> ID sigParams .)
+    REST            reduce using rule 46 (call -> ID sigParams .)
+    DOUBLEEQUAL     reduce using rule 46 (call -> ID sigParams .)
+    TRIPLEEQUAL     reduce using rule 46 (call -> ID sigParams .)
+    DIFF            reduce using rule 46 (call -> ID sigParams .)
+    BIGGEST         reduce using rule 46 (call -> ID sigParams .)
+    BIGGESTEQUAL    reduce using rule 46 (call -> ID sigParams .)
+    SMALL           reduce using rule 46 (call -> ID sigParams .)
+    SMALLEQUAL      reduce using rule 46 (call -> ID sigParams .)
+    OR              reduce using rule 46 (call -> ID sigParams .)
+    AND             reduce using rule 46 (call -> ID sigParams .)
+    DEF             reduce using rule 46 (call -> ID sigParams .)
+    ID              reduce using rule 46 (call -> ID sigParams .)
+    $end            reduce using rule 46 (call -> ID sigParams .)
+    VIRGULA         reduce using rule 46 (call -> ID sigParams .)
+    RPAREN          reduce using rule 46 (call -> ID sigParams .)
+    BREAKLINE       reduce using rule 46 (call -> ID sigParams .)
+    THEN            reduce using rule 46 (call -> ID sigParams .)
+    DO              reduce using rule 46 (call -> ID sigParams .)
+
+
+state 31
+
+    (25) exp -> exp PLUS . exp
+    (25) exp -> . exp PLUS exp
+    (26) exp -> . exp EXPONEN exp
+    (27) exp -> . exp MINUS exp
+    (28) exp -> . exp TIMES exp
+    (29) exp -> . exp DIVIDE exp
+    (30) exp -> . exp REST exp
+    (31) exp -> . exp DOUBLEEQUAL exp
+    (32) exp -> . exp TRIPLEEQUAL exp
+    (33) exp -> . exp DIFF exp
+    (34) exp -> . exp BIGGEST exp
+    (35) exp -> . exp BIGGESTEQUAL exp
+    (36) exp -> . exp SMALL exp
+    (37) exp -> . exp SMALLEQUAL exp
+    (38) exp -> . exp OR exp
+    (39) exp -> . exp AND exp
+    (40) exp -> . call
+    (41) exp -> . assign
+    (42) exp -> . NUMBER
+    (43) call -> . ID LPAREN sigParams RPAREN
+    (44) call -> . ID LPAREN RPAREN
+    (45) call -> . ID
+    (46) call -> . ID sigParams
+    (49) assign -> . ID EQUAL exp
+
+    NUMBER          shift and go to state 16
+    ID              shift and go to state 12
+
+    exp                            shift and go to state 61
+    call                           shift and go to state 14
+    assign                         shift and go to state 15
+
+state 32
+
+    (26) exp -> exp EXPONEN . exp
+    (25) exp -> . exp PLUS exp
+    (26) exp -> . exp EXPONEN exp
+    (27) exp -> . exp MINUS exp
+    (28) exp -> . exp TIMES exp
+    (29) exp -> . exp DIVIDE exp
+    (30) exp -> . exp REST exp
+    (31) exp -> . exp DOUBLEEQUAL exp
+    (32) exp -> . exp TRIPLEEQUAL exp
+    (33) exp -> . exp DIFF exp
+    (34) exp -> . exp BIGGEST exp
+    (35) exp -> . exp BIGGESTEQUAL exp
+    (36) exp -> . exp SMALL exp
+    (37) exp -> . exp SMALLEQUAL exp
+    (38) exp -> . exp OR exp
+    (39) exp -> . exp AND exp
+    (40) exp -> . call
+    (41) exp -> . assign
+    (42) exp -> . NUMBER
+    (43) call -> . ID LPAREN sigParams RPAREN
+    (44) call -> . ID LPAREN RPAREN
+    (45) call -> . ID
+    (46) call -> . ID sigParams
+    (49) assign -> . ID EQUAL exp
+
+    NUMBER          shift and go to state 16
+    ID              shift and go to state 12
+
+    exp                            shift and go to state 62
+    call                           shift and go to state 14
+    assign                         shift and go to state 15
+
+state 33
+
+    (27) exp -> exp MINUS . exp
+    (25) exp -> . exp PLUS exp
+    (26) exp -> . exp EXPONEN exp
+    (27) exp -> . exp MINUS exp
+    (28) exp -> . exp TIMES exp
+    (29) exp -> . exp DIVIDE exp
+    (30) exp -> . exp REST exp
+    (31) exp -> . exp DOUBLEEQUAL exp
+    (32) exp -> . exp TRIPLEEQUAL exp
+    (33) exp -> . exp DIFF exp
+    (34) exp -> . exp BIGGEST exp
+    (35) exp -> . exp BIGGESTEQUAL exp
+    (36) exp -> . exp SMALL exp
+    (37) exp -> . exp SMALLEQUAL exp
+    (38) exp -> . exp OR exp
+    (39) exp -> . exp AND exp
+    (40) exp -> . call
+    (41) exp -> . assign
+    (42) exp -> . NUMBER
+    (43) call -> . ID LPAREN sigParams RPAREN
+    (44) call -> . ID LPAREN RPAREN
+    (45) call -> . ID
+    (46) call -> . ID sigParams
+    (49) assign -> . ID EQUAL exp
+
+    NUMBER          shift and go to state 16
+    ID              shift and go to state 12
+
+    exp                            shift and go to state 63
+    call                           shift and go to state 14
+    assign                         shift and go to state 15
+
+state 34
+
+    (28) exp -> exp TIMES . exp
+    (25) exp -> . exp PLUS exp
+    (26) exp -> . exp EXPONEN exp
+    (27) exp -> . exp MINUS exp
+    (28) exp -> . exp TIMES exp
+    (29) exp -> . exp DIVIDE exp
+    (30) exp -> . exp REST exp
+    (31) exp -> . exp DOUBLEEQUAL exp
+    (32) exp -> . exp TRIPLEEQUAL exp
+    (33) exp -> . exp DIFF exp
+    (34) exp -> . exp BIGGEST exp
+    (35) exp -> . exp BIGGESTEQUAL exp
+    (36) exp -> . exp SMALL exp
+    (37) exp -> . exp SMALLEQUAL exp
+    (38) exp -> . exp OR exp
+    (39) exp -> . exp AND exp
+    (40) exp -> . call
+    (41) exp -> . assign
+    (42) exp -> . NUMBER
+    (43) call -> . ID LPAREN sigParams RPAREN
+    (44) call -> . ID LPAREN RPAREN
+    (45) call -> . ID
+    (46) call -> . ID sigParams
+    (49) assign -> . ID EQUAL exp
+
+    NUMBER          shift and go to state 16
+    ID              shift and go to state 12
+
+    exp                            shift and go to state 64
+    call                           shift and go to state 14
+    assign                         shift and go to state 15
+
+state 35
+
+    (29) exp -> exp DIVIDE . exp
+    (25) exp -> . exp PLUS exp
+    (26) exp -> . exp EXPONEN exp
+    (27) exp -> . exp MINUS exp
+    (28) exp -> . exp TIMES exp
+    (29) exp -> . exp DIVIDE exp
+    (30) exp -> . exp REST exp
+    (31) exp -> . exp DOUBLEEQUAL exp
+    (32) exp -> . exp TRIPLEEQUAL exp
+    (33) exp -> . exp DIFF exp
+    (34) exp -> . exp BIGGEST exp
+    (35) exp -> . exp BIGGESTEQUAL exp
+    (36) exp -> . exp SMALL exp
+    (37) exp -> . exp SMALLEQUAL exp
+    (38) exp -> . exp OR exp
+    (39) exp -> . exp AND exp
+    (40) exp -> . call
+    (41) exp -> . assign
+    (42) exp -> . NUMBER
+    (43) call -> . ID LPAREN sigParams RPAREN
+    (44) call -> . ID LPAREN RPAREN
+    (45) call -> . ID
+    (46) call -> . ID sigParams
+    (49) assign -> . ID EQUAL exp
+
+    NUMBER          shift and go to state 16
+    ID              shift and go to state 12
+
+    exp                            shift and go to state 65
+    call                           shift and go to state 14
+    assign                         shift and go to state 15
+
+state 36
+
+    (30) exp -> exp REST . exp
+    (25) exp -> . exp PLUS exp
+    (26) exp -> . exp EXPONEN exp
+    (27) exp -> . exp MINUS exp
+    (28) exp -> . exp TIMES exp
+    (29) exp -> . exp DIVIDE exp
+    (30) exp -> . exp REST exp
+    (31) exp -> . exp DOUBLEEQUAL exp
+    (32) exp -> . exp TRIPLEEQUAL exp
+    (33) exp -> . exp DIFF exp
+    (34) exp -> . exp BIGGEST exp
+    (35) exp -> . exp BIGGESTEQUAL exp
+    (36) exp -> . exp SMALL exp
+    (37) exp -> . exp SMALLEQUAL exp
+    (38) exp -> . exp OR exp
+    (39) exp -> . exp AND exp
+    (40) exp -> . call
+    (41) exp -> . assign
+    (42) exp -> . NUMBER
+    (43) call -> . ID LPAREN sigParams RPAREN
+    (44) call -> . ID LPAREN RPAREN
+    (45) call -> . ID
+    (46) call -> . ID sigParams
+    (49) assign -> . ID EQUAL exp
+
+    NUMBER          shift and go to state 16
+    ID              shift and go to state 12
+
+    exp                            shift and go to state 66
+    call                           shift and go to state 14
+    assign                         shift and go to state 15
+
+state 37
+
+    (31) exp -> exp DOUBLEEQUAL . exp
+    (25) exp -> . exp PLUS exp
+    (26) exp -> . exp EXPONEN exp
+    (27) exp -> . exp MINUS exp
+    (28) exp -> . exp TIMES exp
+    (29) exp -> . exp DIVIDE exp
+    (30) exp -> . exp REST exp
+    (31) exp -> . exp DOUBLEEQUAL exp
+    (32) exp -> . exp TRIPLEEQUAL exp
+    (33) exp -> . exp DIFF exp
+    (34) exp -> . exp BIGGEST exp
+    (35) exp -> . exp BIGGESTEQUAL exp
+    (36) exp -> . exp SMALL exp
+    (37) exp -> . exp SMALLEQUAL exp
+    (38) exp -> . exp OR exp
+    (39) exp -> . exp AND exp
+    (40) exp -> . call
+    (41) exp -> . assign
+    (42) exp -> . NUMBER
+    (43) call -> . ID LPAREN sigParams RPAREN
+    (44) call -> . ID LPAREN RPAREN
+    (45) call -> . ID
+    (46) call -> . ID sigParams
+    (49) assign -> . ID EQUAL exp
+
+    NUMBER          shift and go to state 16
+    ID              shift and go to state 12
+
+    exp                            shift and go to state 67
+    call                           shift and go to state 14
+    assign                         shift and go to state 15
+
+state 38
+
+    (32) exp -> exp TRIPLEEQUAL . exp
+    (25) exp -> . exp PLUS exp
+    (26) exp -> . exp EXPONEN exp
+    (27) exp -> . exp MINUS exp
+    (28) exp -> . exp TIMES exp
+    (29) exp -> . exp DIVIDE exp
+    (30) exp -> . exp REST exp
+    (31) exp -> . exp DOUBLEEQUAL exp
+    (32) exp -> . exp TRIPLEEQUAL exp
+    (33) exp -> . exp DIFF exp
+    (34) exp -> . exp BIGGEST exp
+    (35) exp -> . exp BIGGESTEQUAL exp
+    (36) exp -> . exp SMALL exp
+    (37) exp -> . exp SMALLEQUAL exp
+    (38) exp -> . exp OR exp
+    (39) exp -> . exp AND exp
+    (40) exp -> . call
+    (41) exp -> . assign
+    (42) exp -> . NUMBER
+    (43) call -> . ID LPAREN sigParams RPAREN
+    (44) call -> . ID LPAREN RPAREN
+    (45) call -> . ID
+    (46) call -> . ID sigParams
+    (49) assign -> . ID EQUAL exp
+
+    NUMBER          shift and go to state 16
+    ID              shift and go to state 12
+
+    exp                            shift and go to state 68
+    call                           shift and go to state 14
+    assign                         shift and go to state 15
+
+state 39
+
+    (33) exp -> exp DIFF . exp
+    (25) exp -> . exp PLUS exp
+    (26) exp -> . exp EXPONEN exp
+    (27) exp -> . exp MINUS exp
+    (28) exp -> . exp TIMES exp
+    (29) exp -> . exp DIVIDE exp
+    (30) exp -> . exp REST exp
+    (31) exp -> . exp DOUBLEEQUAL exp
+    (32) exp -> . exp TRIPLEEQUAL exp
+    (33) exp -> . exp DIFF exp
+    (34) exp -> . exp BIGGEST exp
+    (35) exp -> . exp BIGGESTEQUAL exp
+    (36) exp -> . exp SMALL exp
+    (37) exp -> . exp SMALLEQUAL exp
+    (38) exp -> . exp OR exp
+    (39) exp -> . exp AND exp
+    (40) exp -> . call
+    (41) exp -> . assign
+    (42) exp -> . NUMBER
+    (43) call -> . ID LPAREN sigParams RPAREN
+    (44) call -> . ID LPAREN RPAREN
+    (45) call -> . ID
+    (46) call -> . ID sigParams
+    (49) assign -> . ID EQUAL exp
+
+    NUMBER          shift and go to state 16
+    ID              shift and go to state 12
+
+    exp                            shift and go to state 69
+    call                           shift and go to state 14
+    assign                         shift and go to state 15
+
+state 40
+
+    (34) exp -> exp BIGGEST . exp
+    (25) exp -> . exp PLUS exp
+    (26) exp -> . exp EXPONEN exp
+    (27) exp -> . exp MINUS exp
+    (28) exp -> . exp TIMES exp
+    (29) exp -> . exp DIVIDE exp
+    (30) exp -> . exp REST exp
+    (31) exp -> . exp DOUBLEEQUAL exp
+    (32) exp -> . exp TRIPLEEQUAL exp
+    (33) exp -> . exp DIFF exp
+    (34) exp -> . exp BIGGEST exp
+    (35) exp -> . exp BIGGESTEQUAL exp
+    (36) exp -> . exp SMALL exp
+    (37) exp -> . exp SMALLEQUAL exp
+    (38) exp -> . exp OR exp
+    (39) exp -> . exp AND exp
+    (40) exp -> . call
+    (41) exp -> . assign
+    (42) exp -> . NUMBER
+    (43) call -> . ID LPAREN sigParams RPAREN
+    (44) call -> . ID LPAREN RPAREN
+    (45) call -> . ID
+    (46) call -> . ID sigParams
+    (49) assign -> . ID EQUAL exp
+
+    NUMBER          shift and go to state 16
+    ID              shift and go to state 12
+
+    exp                            shift and go to state 70
+    call                           shift and go to state 14
+    assign                         shift and go to state 15
+
+state 41
+
+    (35) exp -> exp BIGGESTEQUAL . exp
+    (25) exp -> . exp PLUS exp
+    (26) exp -> . exp EXPONEN exp
+    (27) exp -> . exp MINUS exp
+    (28) exp -> . exp TIMES exp
+    (29) exp -> . exp DIVIDE exp
+    (30) exp -> . exp REST exp
+    (31) exp -> . exp DOUBLEEQUAL exp
+    (32) exp -> . exp TRIPLEEQUAL exp
+    (33) exp -> . exp DIFF exp
+    (34) exp -> . exp BIGGEST exp
+    (35) exp -> . exp BIGGESTEQUAL exp
+    (36) exp -> . exp SMALL exp
+    (37) exp -> . exp SMALLEQUAL exp
+    (38) exp -> . exp OR exp
+    (39) exp -> . exp AND exp
+    (40) exp -> . call
+    (41) exp -> . assign
+    (42) exp -> . NUMBER
+    (43) call -> . ID LPAREN sigParams RPAREN
+    (44) call -> . ID LPAREN RPAREN
+    (45) call -> . ID
+    (46) call -> . ID sigParams
+    (49) assign -> . ID EQUAL exp
+
+    NUMBER          shift and go to state 16
+    ID              shift and go to state 12
+
+    exp                            shift and go to state 71
+    call                           shift and go to state 14
+    assign                         shift and go to state 15
+
+state 42
+
+    (36) exp -> exp SMALL . exp
+    (25) exp -> . exp PLUS exp
+    (26) exp -> . exp EXPONEN exp
+    (27) exp -> . exp MINUS exp
+    (28) exp -> . exp TIMES exp
+    (29) exp -> . exp DIVIDE exp
+    (30) exp -> . exp REST exp
+    (31) exp -> . exp DOUBLEEQUAL exp
+    (32) exp -> . exp TRIPLEEQUAL exp
+    (33) exp -> . exp DIFF exp
+    (34) exp -> . exp BIGGEST exp
+    (35) exp -> . exp BIGGESTEQUAL exp
+    (36) exp -> . exp SMALL exp
+    (37) exp -> . exp SMALLEQUAL exp
+    (38) exp -> . exp OR exp
+    (39) exp -> . exp AND exp
+    (40) exp -> . call
+    (41) exp -> . assign
+    (42) exp -> . NUMBER
+    (43) call -> . ID LPAREN sigParams RPAREN
+    (44) call -> . ID LPAREN RPAREN
+    (45) call -> . ID
+    (46) call -> . ID sigParams
+    (49) assign -> . ID EQUAL exp
+
+    NUMBER          shift and go to state 16
+    ID              shift and go to state 12
+
+    exp                            shift and go to state 72
+    call                           shift and go to state 14
+    assign                         shift and go to state 15
+
+state 43
+
+    (37) exp -> exp SMALLEQUAL . exp
+    (25) exp -> . exp PLUS exp
+    (26) exp -> . exp EXPONEN exp
+    (27) exp -> . exp MINUS exp
+    (28) exp -> . exp TIMES exp
+    (29) exp -> . exp DIVIDE exp
+    (30) exp -> . exp REST exp
+    (31) exp -> . exp DOUBLEEQUAL exp
+    (32) exp -> . exp TRIPLEEQUAL exp
+    (33) exp -> . exp DIFF exp
+    (34) exp -> . exp BIGGEST exp
+    (35) exp -> . exp BIGGESTEQUAL exp
+    (36) exp -> . exp SMALL exp
+    (37) exp -> . exp SMALLEQUAL exp
+    (38) exp -> . exp OR exp
+    (39) exp -> . exp AND exp
+    (40) exp -> . call
+    (41) exp -> . assign
+    (42) exp -> . NUMBER
+    (43) call -> . ID LPAREN sigParams RPAREN
+    (44) call -> . ID LPAREN RPAREN
+    (45) call -> . ID
+    (46) call -> . ID sigParams
+    (49) assign -> . ID EQUAL exp
+
+    NUMBER          shift and go to state 16
+    ID              shift and go to state 12
+
+    exp                            shift and go to state 73
+    call                           shift and go to state 14
+    assign                         shift and go to state 15
+
+state 44
+
+    (38) exp -> exp OR . exp
+    (25) exp -> . exp PLUS exp
+    (26) exp -> . exp EXPONEN exp
+    (27) exp -> . exp MINUS exp
+    (28) exp -> . exp TIMES exp
+    (29) exp -> . exp DIVIDE exp
+    (30) exp -> . exp REST exp
+    (31) exp -> . exp DOUBLEEQUAL exp
+    (32) exp -> . exp TRIPLEEQUAL exp
+    (33) exp -> . exp DIFF exp
+    (34) exp -> . exp BIGGEST exp
+    (35) exp -> . exp BIGGESTEQUAL exp
+    (36) exp -> . exp SMALL exp
+    (37) exp -> . exp SMALLEQUAL exp
+    (38) exp -> . exp OR exp
+    (39) exp -> . exp AND exp
+    (40) exp -> . call
+    (41) exp -> . assign
+    (42) exp -> . NUMBER
+    (43) call -> . ID LPAREN sigParams RPAREN
+    (44) call -> . ID LPAREN RPAREN
+    (45) call -> . ID
+    (46) call -> . ID sigParams
+    (49) assign -> . ID EQUAL exp
+
+    NUMBER          shift and go to state 16
+    ID              shift and go to state 12
+
+    exp                            shift and go to state 74
+    call                           shift and go to state 14
+    assign                         shift and go to state 15
+
+state 45
+
+    (39) exp -> exp AND . exp
+    (25) exp -> . exp PLUS exp
+    (26) exp -> . exp EXPONEN exp
+    (27) exp -> . exp MINUS exp
+    (28) exp -> . exp TIMES exp
+    (29) exp -> . exp DIVIDE exp
+    (30) exp -> . exp REST exp
+    (31) exp -> . exp DOUBLEEQUAL exp
+    (32) exp -> . exp TRIPLEEQUAL exp
+    (33) exp -> . exp DIFF exp
+    (34) exp -> . exp BIGGEST exp
+    (35) exp -> . exp BIGGESTEQUAL exp
+    (36) exp -> . exp SMALL exp
+    (37) exp -> . exp SMALLEQUAL exp
+    (38) exp -> . exp OR exp
+    (39) exp -> . exp AND exp
+    (40) exp -> . call
+    (41) exp -> . assign
+    (42) exp -> . NUMBER
+    (43) call -> . ID LPAREN sigParams RPAREN
+    (44) call -> . ID LPAREN RPAREN
+    (45) call -> . ID
+    (46) call -> . ID sigParams
+    (49) assign -> . ID EQUAL exp
+
+    NUMBER          shift and go to state 16
+    ID              shift and go to state 12
+
+    exp                            shift and go to state 75
+    call                           shift and go to state 14
+    assign                         shift and go to state 15
+
+state 46
+
+    (5) funcao -> DEF ID LPAREN sigParams RPAREN . BREAKLINE body
+
+    BREAKLINE       shift and go to state 76
+
+
+state 47
+
+    (48) sigParams -> exp VIRGULA . sigParams
+    (47) sigParams -> . exp
+    (48) sigParams -> . exp VIRGULA sigParams
+    (25) exp -> . exp PLUS exp
+    (26) exp -> . exp EXPONEN exp
+    (27) exp -> . exp MINUS exp
+    (28) exp -> . exp TIMES exp
+    (29) exp -> . exp DIVIDE exp
+    (30) exp -> . exp REST exp
+    (31) exp -> . exp DOUBLEEQUAL exp
+    (32) exp -> . exp TRIPLEEQUAL exp
+    (33) exp -> . exp DIFF exp
+    (34) exp -> . exp BIGGEST exp
+    (35) exp -> . exp BIGGESTEQUAL exp
+    (36) exp -> . exp SMALL exp
+    (37) exp -> . exp SMALLEQUAL exp
+    (38) exp -> . exp OR exp
+    (39) exp -> . exp AND exp
+    (40) exp -> . call
+    (41) exp -> . assign
+    (42) exp -> . NUMBER
+    (43) call -> . ID LPAREN sigParams RPAREN
+    (44) call -> . ID LPAREN RPAREN
+    (45) call -> . ID
+    (46) call -> . ID sigParams
+    (49) assign -> . ID EQUAL exp
+
+    NUMBER          shift and go to state 16
+    ID              shift and go to state 12
+
+    exp                            shift and go to state 18
+    sigParams                      shift and go to state 77
+    call                           shift and go to state 14
+    assign                         shift and go to state 15
+
+state 48
+
+    (13) body -> stms END .
+
+    DEF             reduce using rule 13 (body -> stms END .)
+    ID              reduce using rule 13 (body -> stms END .)
+    $end            reduce using rule 13 (body -> stms END .)
+    WHILE           reduce using rule 13 (body -> stms END .)
+    FOR             reduce using rule 13 (body -> stms END .)
+    IF              reduce using rule 13 (body -> stms END .)
+    RETURN          reduce using rule 13 (body -> stms END .)
+    NUMBER          reduce using rule 13 (body -> stms END .)
+    END             reduce using rule 13 (body -> stms END .)
+    ELSIF           reduce using rule 13 (body -> stms END .)
+    ELSE            reduce using rule 13 (body -> stms END .)
+
+
+state 49
+
+    (8) stms -> stm stms .
+
+    END             reduce using rule 8 (stms -> stm stms .)
+
+
+state 50
+
+    (14) stm -> exp BREAKLINE .
+
+    WHILE           reduce using rule 14 (stm -> exp BREAKLINE .)
+    FOR             reduce using rule 14 (stm -> exp BREAKLINE .)
+    IF              reduce using rule 14 (stm -> exp BREAKLINE .)
+    RETURN          reduce using rule 14 (stm -> exp BREAKLINE .)
+    NUMBER          reduce using rule 14 (stm -> exp BREAKLINE .)
+    ID              reduce using rule 14 (stm -> exp BREAKLINE .)
+    END             reduce using rule 14 (stm -> exp BREAKLINE .)
+
+
+state 51
+
+    (15) stm -> WHILE LPAREN . exp RPAREN BREAKLINE body
+    (25) exp -> . exp PLUS exp
+    (26) exp -> . exp EXPONEN exp
+    (27) exp -> . exp MINUS exp
+    (28) exp -> . exp TIMES exp
+    (29) exp -> . exp DIVIDE exp
+    (30) exp -> . exp REST exp
+    (31) exp -> . exp DOUBLEEQUAL exp
+    (32) exp -> . exp TRIPLEEQUAL exp
+    (33) exp -> . exp DIFF exp
+    (34) exp -> . exp BIGGEST exp
+    (35) exp -> . exp BIGGESTEQUAL exp
+    (36) exp -> . exp SMALL exp
+    (37) exp -> . exp SMALLEQUAL exp
+    (38) exp -> . exp OR exp
+    (39) exp -> . exp AND exp
+    (40) exp -> . call
+    (41) exp -> . assign
+    (42) exp -> . NUMBER
+    (43) call -> . ID LPAREN sigParams RPAREN
+    (44) call -> . ID LPAREN RPAREN
+    (45) call -> . ID
+    (46) call -> . ID sigParams
+    (49) assign -> . ID EQUAL exp
+
+    NUMBER          shift and go to state 16
+    ID              shift and go to state 12
+
+    exp                            shift and go to state 78
+    call                           shift and go to state 14
+    assign                         shift and go to state 15
+
+state 52
+
+    (16) stm -> WHILE exp . BREAKLINE body
+    (25) exp -> exp . PLUS exp
+    (26) exp -> exp . EXPONEN exp
+    (27) exp -> exp . MINUS exp
+    (28) exp -> exp . TIMES exp
+    (29) exp -> exp . DIVIDE exp
+    (30) exp -> exp . REST exp
+    (31) exp -> exp . DOUBLEEQUAL exp
+    (32) exp -> exp . TRIPLEEQUAL exp
+    (33) exp -> exp . DIFF exp
+    (34) exp -> exp . BIGGEST exp
+    (35) exp -> exp . BIGGESTEQUAL exp
+    (36) exp -> exp . SMALL exp
+    (37) exp -> exp . SMALLEQUAL exp
+    (38) exp -> exp . OR exp
+    (39) exp -> exp . AND exp
+
+    BREAKLINE       shift and go to state 79
+    PLUS            shift and go to state 31
+    EXPONEN         shift and go to state 32
+    MINUS           shift and go to state 33
+    TIMES           shift and go to state 34
+    DIVIDE          shift and go to state 35
+    REST            shift and go to state 36
+    DOUBLEEQUAL     shift and go to state 37
+    TRIPLEEQUAL     shift and go to state 38
+    DIFF            shift and go to state 39
+    BIGGEST         shift and go to state 40
+    BIGGESTEQUAL    shift and go to state 41
+    SMALL           shift and go to state 42
+    SMALLEQUAL      shift and go to state 43
+    OR              shift and go to state 44
+    AND             shift and go to state 45
+
+
+state 53
+
+    (17) stm -> FOR ID . IN exp DO BREAKLINE body
+    (18) stm -> FOR ID . IN exp BREAKLINE body
+
+    IN              shift and go to state 80
+
+
+state 54
+
+    (19) stm -> IF exp . THEN BREAKLINE body opcional
+    (20) stm -> IF exp . BREAKLINE body opcional
+    (25) exp -> exp . PLUS exp
+    (26) exp -> exp . EXPONEN exp
+    (27) exp -> exp . MINUS exp
+    (28) exp -> exp . TIMES exp
+    (29) exp -> exp . DIVIDE exp
+    (30) exp -> exp . REST exp
+    (31) exp -> exp . DOUBLEEQUAL exp
+    (32) exp -> exp . TRIPLEEQUAL exp
+    (33) exp -> exp . DIFF exp
+    (34) exp -> exp . BIGGEST exp
+    (35) exp -> exp . BIGGESTEQUAL exp
+    (36) exp -> exp . SMALL exp
+    (37) exp -> exp . SMALLEQUAL exp
+    (38) exp -> exp . OR exp
+    (39) exp -> exp . AND exp
+
+    THEN            shift and go to state 81
+    BREAKLINE       shift and go to state 82
+    PLUS            shift and go to state 31
+    EXPONEN         shift and go to state 32
+    MINUS           shift and go to state 33
+    TIMES           shift and go to state 34
+    DIVIDE          shift and go to state 35
+    REST            shift and go to state 36
+    DOUBLEEQUAL     shift and go to state 37
+    TRIPLEEQUAL     shift and go to state 38
+    DIFF            shift and go to state 39
+    BIGGEST         shift and go to state 40
+    BIGGESTEQUAL    shift and go to state 41
+    SMALL           shift and go to state 42
+    SMALLEQUAL      shift and go to state 43
+    OR              shift and go to state 44
+    AND             shift and go to state 45
+
+
+state 55
+
+    (21) stm -> IF LPAREN . exp RPAREN THEN BREAKLINE body opcional
+    (22) stm -> IF LPAREN . exp RPAREN BREAKLINE body opcional
+    (25) exp -> . exp PLUS exp
+    (26) exp -> . exp EXPONEN exp
+    (27) exp -> . exp MINUS exp
+    (28) exp -> . exp TIMES exp
+    (29) exp -> . exp DIVIDE exp
+    (30) exp -> . exp REST exp
+    (31) exp -> . exp DOUBLEEQUAL exp
+    (32) exp -> . exp TRIPLEEQUAL exp
+    (33) exp -> . exp DIFF exp
+    (34) exp -> . exp BIGGEST exp
+    (35) exp -> . exp BIGGESTEQUAL exp
+    (36) exp -> . exp SMALL exp
+    (37) exp -> . exp SMALLEQUAL exp
+    (38) exp -> . exp OR exp
+    (39) exp -> . exp AND exp
+    (40) exp -> . call
+    (41) exp -> . assign
+    (42) exp -> . NUMBER
+    (43) call -> . ID LPAREN sigParams RPAREN
+    (44) call -> . ID LPAREN RPAREN
+    (45) call -> . ID
+    (46) call -> . ID sigParams
+    (49) assign -> . ID EQUAL exp
+
+    NUMBER          shift and go to state 16
+    ID              shift and go to state 12
+
+    exp                            shift and go to state 83
+    call                           shift and go to state 14
+    assign                         shift and go to state 15
+
+state 56
+
+    (23) stm -> RETURN exp . BREAKLINE
+    (25) exp -> exp . PLUS exp
+    (26) exp -> exp . EXPONEN exp
+    (27) exp -> exp . MINUS exp
+    (28) exp -> exp . TIMES exp
+    (29) exp -> exp . DIVIDE exp
+    (30) exp -> exp . REST exp
+    (31) exp -> exp . DOUBLEEQUAL exp
+    (32) exp -> exp . TRIPLEEQUAL exp
+    (33) exp -> exp . DIFF exp
+    (34) exp -> exp . BIGGEST exp
+    (35) exp -> exp . BIGGESTEQUAL exp
+    (36) exp -> exp . SMALL exp
+    (37) exp -> exp . SMALLEQUAL exp
+    (38) exp -> exp . OR exp
+    (39) exp -> exp . AND exp
+
+    BREAKLINE       shift and go to state 84
+    PLUS            shift and go to state 31
+    EXPONEN         shift and go to state 32
+    MINUS           shift and go to state 33
+    TIMES           shift and go to state 34
+    DIVIDE          shift and go to state 35
+    REST            shift and go to state 36
+    DOUBLEEQUAL     shift and go to state 37
+    TRIPLEEQUAL     shift and go to state 38
+    DIFF            shift and go to state 39
+    BIGGEST         shift and go to state 40
+    BIGGESTEQUAL    shift and go to state 41
+    SMALL           shift and go to state 42
+    SMALLEQUAL      shift and go to state 43
+    OR              shift and go to state 44
+    AND             shift and go to state 45
+
+
+state 57
+
+    (24) stm -> RETURN BREAKLINE .
+
+    WHILE           reduce using rule 24 (stm -> RETURN BREAKLINE .)
+    FOR             reduce using rule 24 (stm -> RETURN BREAKLINE .)
+    IF              reduce using rule 24 (stm -> RETURN BREAKLINE .)
+    RETURN          reduce using rule 24 (stm -> RETURN BREAKLINE .)
+    NUMBER          reduce using rule 24 (stm -> RETURN BREAKLINE .)
+    ID              reduce using rule 24 (stm -> RETURN BREAKLINE .)
+    END             reduce using rule 24 (stm -> RETURN BREAKLINE .)
+
+
+state 58
+
+    (50) stm -> assign BREAKLINE .
+
+    WHILE           reduce using rule 50 (stm -> assign BREAKLINE .)
+    FOR             reduce using rule 50 (stm -> assign BREAKLINE .)
+    IF              reduce using rule 50 (stm -> assign BREAKLINE .)
+    RETURN          reduce using rule 50 (stm -> assign BREAKLINE .)
+    NUMBER          reduce using rule 50 (stm -> assign BREAKLINE .)
+    ID              reduce using rule 50 (stm -> assign BREAKLINE .)
+    END             reduce using rule 50 (stm -> assign BREAKLINE .)
+
+
+state 59
+
+    (43) call -> ID LPAREN sigParams . RPAREN
+
+    RPAREN          shift and go to state 85
+
+
+state 60
+
+    (44) call -> ID LPAREN RPAREN .
+
+    PLUS            reduce using rule 44 (call -> ID LPAREN RPAREN .)
+    EXPONEN         reduce using rule 44 (call -> ID LPAREN RPAREN .)
+    MINUS           reduce using rule 44 (call -> ID LPAREN RPAREN .)
+    TIMES           reduce using rule 44 (call -> ID LPAREN RPAREN .)
+    DIVIDE          reduce using rule 44 (call -> ID LPAREN RPAREN .)
+    REST            reduce using rule 44 (call -> ID LPAREN RPAREN .)
+    DOUBLEEQUAL     reduce using rule 44 (call -> ID LPAREN RPAREN .)
+    TRIPLEEQUAL     reduce using rule 44 (call -> ID LPAREN RPAREN .)
+    DIFF            reduce using rule 44 (call -> ID LPAREN RPAREN .)
+    BIGGEST         reduce using rule 44 (call -> ID LPAREN RPAREN .)
+    BIGGESTEQUAL    reduce using rule 44 (call -> ID LPAREN RPAREN .)
+    SMALL           reduce using rule 44 (call -> ID LPAREN RPAREN .)
+    SMALLEQUAL      reduce using rule 44 (call -> ID LPAREN RPAREN .)
+    OR              reduce using rule 44 (call -> ID LPAREN RPAREN .)
+    AND             reduce using rule 44 (call -> ID LPAREN RPAREN .)
+    DEF             reduce using rule 44 (call -> ID LPAREN RPAREN .)
+    ID              reduce using rule 44 (call -> ID LPAREN RPAREN .)
+    $end            reduce using rule 44 (call -> ID LPAREN RPAREN .)
+    VIRGULA         reduce using rule 44 (call -> ID LPAREN RPAREN .)
+    RPAREN          reduce using rule 44 (call -> ID LPAREN RPAREN .)
+    BREAKLINE       reduce using rule 44 (call -> ID LPAREN RPAREN .)
+    THEN            reduce using rule 44 (call -> ID LPAREN RPAREN .)
+    DO              reduce using rule 44 (call -> ID LPAREN RPAREN .)
+
+
+state 61
+
+    (25) exp -> exp PLUS exp .
+    (25) exp -> exp . PLUS exp
+    (26) exp -> exp . EXPONEN exp
+    (27) exp -> exp . MINUS exp
+    (28) exp -> exp . TIMES exp
+    (29) exp -> exp . DIVIDE exp
+    (30) exp -> exp . REST exp
+    (31) exp -> exp . DOUBLEEQUAL exp
+    (32) exp -> exp . TRIPLEEQUAL exp
+    (33) exp -> exp . DIFF exp
+    (34) exp -> exp . BIGGEST exp
+    (35) exp -> exp . BIGGESTEQUAL exp
+    (36) exp -> exp . SMALL exp
+    (37) exp -> exp . SMALLEQUAL exp
+    (38) exp -> exp . OR exp
+    (39) exp -> exp . AND exp
+
+    PLUS            reduce using rule 25 (exp -> exp PLUS exp .)
+    MINUS           reduce using rule 25 (exp -> exp PLUS exp .)
+    DOUBLEEQUAL     reduce using rule 25 (exp -> exp PLUS exp .)
+    TRIPLEEQUAL     reduce using rule 25 (exp -> exp PLUS exp .)
+    DIFF            reduce using rule 25 (exp -> exp PLUS exp .)
+    BIGGEST         reduce using rule 25 (exp -> exp PLUS exp .)
+    BIGGESTEQUAL    reduce using rule 25 (exp -> exp PLUS exp .)
+    SMALL           reduce using rule 25 (exp -> exp PLUS exp .)
+    SMALLEQUAL      reduce using rule 25 (exp -> exp PLUS exp .)
+    OR              reduce using rule 25 (exp -> exp PLUS exp .)
+    AND             reduce using rule 25 (exp -> exp PLUS exp .)
+    DEF             reduce using rule 25 (exp -> exp PLUS exp .)
+    ID              reduce using rule 25 (exp -> exp PLUS exp .)
+    $end            reduce using rule 25 (exp -> exp PLUS exp .)
+    VIRGULA         reduce using rule 25 (exp -> exp PLUS exp .)
+    RPAREN          reduce using rule 25 (exp -> exp PLUS exp .)
+    BREAKLINE       reduce using rule 25 (exp -> exp PLUS exp .)
+    THEN            reduce using rule 25 (exp -> exp PLUS exp .)
+    DO              reduce using rule 25 (exp -> exp PLUS exp .)
+    EXPONEN         shift and go to state 32
+    TIMES           shift and go to state 34
+    DIVIDE          shift and go to state 35
+    REST            shift and go to state 36
+
+  ! EXPONEN         [ reduce using rule 25 (exp -> exp PLUS exp .) ]
+  ! TIMES           [ reduce using rule 25 (exp -> exp PLUS exp .) ]
+  ! DIVIDE          [ reduce using rule 25 (exp -> exp PLUS exp .) ]
+  ! REST            [ reduce using rule 25 (exp -> exp PLUS exp .) ]
+  ! PLUS            [ shift and go to state 31 ]
+  ! MINUS           [ shift and go to state 33 ]
+  ! DOUBLEEQUAL     [ shift and go to state 37 ]
+  ! TRIPLEEQUAL     [ shift and go to state 38 ]
+  ! DIFF            [ shift and go to state 39 ]
+  ! BIGGEST         [ shift and go to state 40 ]
+  ! BIGGESTEQUAL    [ shift and go to state 41 ]
+  ! SMALL           [ shift and go to state 42 ]
+  ! SMALLEQUAL      [ shift and go to state 43 ]
+  ! OR              [ shift and go to state 44 ]
+  ! AND             [ shift and go to state 45 ]
+
+
+state 62
+
+    (26) exp -> exp EXPONEN exp .
+    (25) exp -> exp . PLUS exp
+    (26) exp -> exp . EXPONEN exp
+    (27) exp -> exp . MINUS exp
+    (28) exp -> exp . TIMES exp
+    (29) exp -> exp . DIVIDE exp
+    (30) exp -> exp . REST exp
+    (31) exp -> exp . DOUBLEEQUAL exp
+    (32) exp -> exp . TRIPLEEQUAL exp
+    (33) exp -> exp . DIFF exp
+    (34) exp -> exp . BIGGEST exp
+    (35) exp -> exp . BIGGESTEQUAL exp
+    (36) exp -> exp . SMALL exp
+    (37) exp -> exp . SMALLEQUAL exp
+    (38) exp -> exp . OR exp
+    (39) exp -> exp . AND exp
+
+    PLUS            reduce using rule 26 (exp -> exp EXPONEN exp .)
+    EXPONEN         reduce using rule 26 (exp -> exp EXPONEN exp .)
+    MINUS           reduce using rule 26 (exp -> exp EXPONEN exp .)
+    TIMES           reduce using rule 26 (exp -> exp EXPONEN exp .)
+    DIVIDE          reduce using rule 26 (exp -> exp EXPONEN exp .)
+    REST            reduce using rule 26 (exp -> exp EXPONEN exp .)
+    DOUBLEEQUAL     reduce using rule 26 (exp -> exp EXPONEN exp .)
+    TRIPLEEQUAL     reduce using rule 26 (exp -> exp EXPONEN exp .)
+    DIFF            reduce using rule 26 (exp -> exp EXPONEN exp .)
+    BIGGEST         reduce using rule 26 (exp -> exp EXPONEN exp .)
+    BIGGESTEQUAL    reduce using rule 26 (exp -> exp EXPONEN exp .)
+    SMALL           reduce using rule 26 (exp -> exp EXPONEN exp .)
+    SMALLEQUAL      reduce using rule 26 (exp -> exp EXPONEN exp .)
+    OR              reduce using rule 26 (exp -> exp EXPONEN exp .)
+    AND             reduce using rule 26 (exp -> exp EXPONEN exp .)
+    DEF             reduce using rule 26 (exp -> exp EXPONEN exp .)
+    ID              reduce using rule 26 (exp -> exp EXPONEN exp .)
+    $end            reduce using rule 26 (exp -> exp EXPONEN exp .)
+    VIRGULA         reduce using rule 26 (exp -> exp EXPONEN exp .)
+    RPAREN          reduce using rule 26 (exp -> exp EXPONEN exp .)
+    BREAKLINE       reduce using rule 26 (exp -> exp EXPONEN exp .)
+    THEN            reduce using rule 26 (exp -> exp EXPONEN exp .)
+    DO              reduce using rule 26 (exp -> exp EXPONEN exp .)
+
+  ! PLUS            [ shift and go to state 31 ]
+  ! EXPONEN         [ shift and go to state 32 ]
+  ! MINUS           [ shift and go to state 33 ]
+  ! TIMES           [ shift and go to state 34 ]
+  ! DIVIDE          [ shift and go to state 35 ]
+  ! REST            [ shift and go to state 36 ]
+  ! DOUBLEEQUAL     [ shift and go to state 37 ]
+  ! TRIPLEEQUAL     [ shift and go to state 38 ]
+  ! DIFF            [ shift and go to state 39 ]
+  ! BIGGEST         [ shift and go to state 40 ]
+  ! BIGGESTEQUAL    [ shift and go to state 41 ]
+  ! SMALL           [ shift and go to state 42 ]
+  ! SMALLEQUAL      [ shift and go to state 43 ]
+  ! OR              [ shift and go to state 44 ]
+  ! AND             [ shift and go to state 45 ]
+
+
+state 63
+
+    (27) exp -> exp MINUS exp .
+    (25) exp -> exp . PLUS exp
+    (26) exp -> exp . EXPONEN exp
+    (27) exp -> exp . MINUS exp
+    (28) exp -> exp . TIMES exp
+    (29) exp -> exp . DIVIDE exp
+    (30) exp -> exp . REST exp
+    (31) exp -> exp . DOUBLEEQUAL exp
+    (32) exp -> exp . TRIPLEEQUAL exp
+    (33) exp -> exp . DIFF exp
+    (34) exp -> exp . BIGGEST exp
+    (35) exp -> exp . BIGGESTEQUAL exp
+    (36) exp -> exp . SMALL exp
+    (37) exp -> exp . SMALLEQUAL exp
+    (38) exp -> exp . OR exp
+    (39) exp -> exp . AND exp
+
+    PLUS            reduce using rule 27 (exp -> exp MINUS exp .)
+    MINUS           reduce using rule 27 (exp -> exp MINUS exp .)
+    DOUBLEEQUAL     reduce using rule 27 (exp -> exp MINUS exp .)
+    TRIPLEEQUAL     reduce using rule 27 (exp -> exp MINUS exp .)
+    DIFF            reduce using rule 27 (exp -> exp MINUS exp .)
+    BIGGEST         reduce using rule 27 (exp -> exp MINUS exp .)
+    BIGGESTEQUAL    reduce using rule 27 (exp -> exp MINUS exp .)
+    SMALL           reduce using rule 27 (exp -> exp MINUS exp .)
+    SMALLEQUAL      reduce using rule 27 (exp -> exp MINUS exp .)
+    OR              reduce using rule 27 (exp -> exp MINUS exp .)
+    AND             reduce using rule 27 (exp -> exp MINUS exp .)
+    DEF             reduce using rule 27 (exp -> exp MINUS exp .)
+    ID              reduce using rule 27 (exp -> exp MINUS exp .)
+    $end            reduce using rule 27 (exp -> exp MINUS exp .)
+    VIRGULA         reduce using rule 27 (exp -> exp MINUS exp .)
+    RPAREN          reduce using rule 27 (exp -> exp MINUS exp .)
+    BREAKLINE       reduce using rule 27 (exp -> exp MINUS exp .)
+    THEN            reduce using rule 27 (exp -> exp MINUS exp .)
+    DO              reduce using rule 27 (exp -> exp MINUS exp .)
+    EXPONEN         shift and go to state 32
+    TIMES           shift and go to state 34
+    DIVIDE          shift and go to state 35
+    REST            shift and go to state 36
+
+  ! EXPONEN         [ reduce using rule 27 (exp -> exp MINUS exp .) ]
+  ! TIMES           [ reduce using rule 27 (exp -> exp MINUS exp .) ]
+  ! DIVIDE          [ reduce using rule 27 (exp -> exp MINUS exp .) ]
+  ! REST            [ reduce using rule 27 (exp -> exp MINUS exp .) ]
+  ! PLUS            [ shift and go to state 31 ]
+  ! MINUS           [ shift and go to state 33 ]
+  ! DOUBLEEQUAL     [ shift and go to state 37 ]
+  ! TRIPLEEQUAL     [ shift and go to state 38 ]
+  ! DIFF            [ shift and go to state 39 ]
+  ! BIGGEST         [ shift and go to state 40 ]
+  ! BIGGESTEQUAL    [ shift and go to state 41 ]
+  ! SMALL           [ shift and go to state 42 ]
+  ! SMALLEQUAL      [ shift and go to state 43 ]
+  ! OR              [ shift and go to state 44 ]
+  ! AND             [ shift and go to state 45 ]
+
+
+state 64
+
+    (28) exp -> exp TIMES exp .
+    (25) exp -> exp . PLUS exp
+    (26) exp -> exp . EXPONEN exp
+    (27) exp -> exp . MINUS exp
+    (28) exp -> exp . TIMES exp
+    (29) exp -> exp . DIVIDE exp
+    (30) exp -> exp . REST exp
+    (31) exp -> exp . DOUBLEEQUAL exp
+    (32) exp -> exp . TRIPLEEQUAL exp
+    (33) exp -> exp . DIFF exp
+    (34) exp -> exp . BIGGEST exp
+    (35) exp -> exp . BIGGESTEQUAL exp
+    (36) exp -> exp . SMALL exp
+    (37) exp -> exp . SMALLEQUAL exp
+    (38) exp -> exp . OR exp
+    (39) exp -> exp . AND exp
+
+    PLUS            reduce using rule 28 (exp -> exp TIMES exp .)
+    MINUS           reduce using rule 28 (exp -> exp TIMES exp .)
+    TIMES           reduce using rule 28 (exp -> exp TIMES exp .)
+    DIVIDE          reduce using rule 28 (exp -> exp TIMES exp .)
+    REST            reduce using rule 28 (exp -> exp TIMES exp .)
+    DOUBLEEQUAL     reduce using rule 28 (exp -> exp TIMES exp .)
+    TRIPLEEQUAL     reduce using rule 28 (exp -> exp TIMES exp .)
+    DIFF            reduce using rule 28 (exp -> exp TIMES exp .)
+    BIGGEST         reduce using rule 28 (exp -> exp TIMES exp .)
+    BIGGESTEQUAL    reduce using rule 28 (exp -> exp TIMES exp .)
+    SMALL           reduce using rule 28 (exp -> exp TIMES exp .)
+    SMALLEQUAL      reduce using rule 28 (exp -> exp TIMES exp .)
+    OR              reduce using rule 28 (exp -> exp TIMES exp .)
+    AND             reduce using rule 28 (exp -> exp TIMES exp .)
+    DEF             reduce using rule 28 (exp -> exp TIMES exp .)
+    ID              reduce using rule 28 (exp -> exp TIMES exp .)
+    $end            reduce using rule 28 (exp -> exp TIMES exp .)
+    VIRGULA         reduce using rule 28 (exp -> exp TIMES exp .)
+    RPAREN          reduce using rule 28 (exp -> exp TIMES exp .)
+    BREAKLINE       reduce using rule 28 (exp -> exp TIMES exp .)
+    THEN            reduce using rule 28 (exp -> exp TIMES exp .)
+    DO              reduce using rule 28 (exp -> exp TIMES exp .)
+    EXPONEN         shift and go to state 32
+
+  ! EXPONEN         [ reduce using rule 28 (exp -> exp TIMES exp .) ]
+  ! PLUS            [ shift and go to state 31 ]
+  ! MINUS           [ shift and go to state 33 ]
+  ! TIMES           [ shift and go to state 34 ]
+  ! DIVIDE          [ shift and go to state 35 ]
+  ! REST            [ shift and go to state 36 ]
+  ! DOUBLEEQUAL     [ shift and go to state 37 ]
+  ! TRIPLEEQUAL     [ shift and go to state 38 ]
+  ! DIFF            [ shift and go to state 39 ]
+  ! BIGGEST         [ shift and go to state 40 ]
+  ! BIGGESTEQUAL    [ shift and go to state 41 ]
+  ! SMALL           [ shift and go to state 42 ]
+  ! SMALLEQUAL      [ shift and go to state 43 ]
+  ! OR              [ shift and go to state 44 ]
+  ! AND             [ shift and go to state 45 ]
+
+
+state 65
+
+    (29) exp -> exp DIVIDE exp .
+    (25) exp -> exp . PLUS exp
+    (26) exp -> exp . EXPONEN exp
+    (27) exp -> exp . MINUS exp
+    (28) exp -> exp . TIMES exp
+    (29) exp -> exp . DIVIDE exp
+    (30) exp -> exp . REST exp
+    (31) exp -> exp . DOUBLEEQUAL exp
+    (32) exp -> exp . TRIPLEEQUAL exp
+    (33) exp -> exp . DIFF exp
+    (34) exp -> exp . BIGGEST exp
+    (35) exp -> exp . BIGGESTEQUAL exp
+    (36) exp -> exp . SMALL exp
+    (37) exp -> exp . SMALLEQUAL exp
+    (38) exp -> exp . OR exp
+    (39) exp -> exp . AND exp
+
+    PLUS            reduce using rule 29 (exp -> exp DIVIDE exp .)
+    MINUS           reduce using rule 29 (exp -> exp DIVIDE exp .)
+    TIMES           reduce using rule 29 (exp -> exp DIVIDE exp .)
+    DIVIDE          reduce using rule 29 (exp -> exp DIVIDE exp .)
+    REST            reduce using rule 29 (exp -> exp DIVIDE exp .)
+    DOUBLEEQUAL     reduce using rule 29 (exp -> exp DIVIDE exp .)
+    TRIPLEEQUAL     reduce using rule 29 (exp -> exp DIVIDE exp .)
+    DIFF            reduce using rule 29 (exp -> exp DIVIDE exp .)
+    BIGGEST         reduce using rule 29 (exp -> exp DIVIDE exp .)
+    BIGGESTEQUAL    reduce using rule 29 (exp -> exp DIVIDE exp .)
+    SMALL           reduce using rule 29 (exp -> exp DIVIDE exp .)
+    SMALLEQUAL      reduce using rule 29 (exp -> exp DIVIDE exp .)
+    OR              reduce using rule 29 (exp -> exp DIVIDE exp .)
+    AND             reduce using rule 29 (exp -> exp DIVIDE exp .)
+    DEF             reduce using rule 29 (exp -> exp DIVIDE exp .)
+    ID              reduce using rule 29 (exp -> exp DIVIDE exp .)
+    $end            reduce using rule 29 (exp -> exp DIVIDE exp .)
+    VIRGULA         reduce using rule 29 (exp -> exp DIVIDE exp .)
+    RPAREN          reduce using rule 29 (exp -> exp DIVIDE exp .)
+    BREAKLINE       reduce using rule 29 (exp -> exp DIVIDE exp .)
+    THEN            reduce using rule 29 (exp -> exp DIVIDE exp .)
+    DO              reduce using rule 29 (exp -> exp DIVIDE exp .)
+    EXPONEN         shift and go to state 32
+
+  ! EXPONEN         [ reduce using rule 29 (exp -> exp DIVIDE exp .) ]
+  ! PLUS            [ shift and go to state 31 ]
+  ! MINUS           [ shift and go to state 33 ]
+  ! TIMES           [ shift and go to state 34 ]
+  ! DIVIDE          [ shift and go to state 35 ]
+  ! REST            [ shift and go to state 36 ]
+  ! DOUBLEEQUAL     [ shift and go to state 37 ]
+  ! TRIPLEEQUAL     [ shift and go to state 38 ]
+  ! DIFF            [ shift and go to state 39 ]
+  ! BIGGEST         [ shift and go to state 40 ]
+  ! BIGGESTEQUAL    [ shift and go to state 41 ]
+  ! SMALL           [ shift and go to state 42 ]
+  ! SMALLEQUAL      [ shift and go to state 43 ]
+  ! OR              [ shift and go to state 44 ]
+  ! AND             [ shift and go to state 45 ]
+
+
+state 66
+
+    (30) exp -> exp REST exp .
+    (25) exp -> exp . PLUS exp
+    (26) exp -> exp . EXPONEN exp
+    (27) exp -> exp . MINUS exp
+    (28) exp -> exp . TIMES exp
+    (29) exp -> exp . DIVIDE exp
+    (30) exp -> exp . REST exp
+    (31) exp -> exp . DOUBLEEQUAL exp
+    (32) exp -> exp . TRIPLEEQUAL exp
+    (33) exp -> exp . DIFF exp
+    (34) exp -> exp . BIGGEST exp
+    (35) exp -> exp . BIGGESTEQUAL exp
+    (36) exp -> exp . SMALL exp
+    (37) exp -> exp . SMALLEQUAL exp
+    (38) exp -> exp . OR exp
+    (39) exp -> exp . AND exp
+
+    PLUS            reduce using rule 30 (exp -> exp REST exp .)
+    MINUS           reduce using rule 30 (exp -> exp REST exp .)
+    TIMES           reduce using rule 30 (exp -> exp REST exp .)
+    DIVIDE          reduce using rule 30 (exp -> exp REST exp .)
+    REST            reduce using rule 30 (exp -> exp REST exp .)
+    DOUBLEEQUAL     reduce using rule 30 (exp -> exp REST exp .)
+    TRIPLEEQUAL     reduce using rule 30 (exp -> exp REST exp .)
+    DIFF            reduce using rule 30 (exp -> exp REST exp .)
+    BIGGEST         reduce using rule 30 (exp -> exp REST exp .)
+    BIGGESTEQUAL    reduce using rule 30 (exp -> exp REST exp .)
+    SMALL           reduce using rule 30 (exp -> exp REST exp .)
+    SMALLEQUAL      reduce using rule 30 (exp -> exp REST exp .)
+    OR              reduce using rule 30 (exp -> exp REST exp .)
+    AND             reduce using rule 30 (exp -> exp REST exp .)
+    DEF             reduce using rule 30 (exp -> exp REST exp .)
+    ID              reduce using rule 30 (exp -> exp REST exp .)
+    $end            reduce using rule 30 (exp -> exp REST exp .)
+    VIRGULA         reduce using rule 30 (exp -> exp REST exp .)
+    RPAREN          reduce using rule 30 (exp -> exp REST exp .)
+    BREAKLINE       reduce using rule 30 (exp -> exp REST exp .)
+    THEN            reduce using rule 30 (exp -> exp REST exp .)
+    DO              reduce using rule 30 (exp -> exp REST exp .)
+    EXPONEN         shift and go to state 32
+
+  ! EXPONEN         [ reduce using rule 30 (exp -> exp REST exp .) ]
+  ! PLUS            [ shift and go to state 31 ]
+  ! MINUS           [ shift and go to state 33 ]
+  ! TIMES           [ shift and go to state 34 ]
+  ! DIVIDE          [ shift and go to state 35 ]
+  ! REST            [ shift and go to state 36 ]
+  ! DOUBLEEQUAL     [ shift and go to state 37 ]
+  ! TRIPLEEQUAL     [ shift and go to state 38 ]
+  ! DIFF            [ shift and go to state 39 ]
+  ! BIGGEST         [ shift and go to state 40 ]
+  ! BIGGESTEQUAL    [ shift and go to state 41 ]
+  ! SMALL           [ shift and go to state 42 ]
+  ! SMALLEQUAL      [ shift and go to state 43 ]
+  ! OR              [ shift and go to state 44 ]
+  ! AND             [ shift and go to state 45 ]
+
+
+state 67
+
+    (31) exp -> exp DOUBLEEQUAL exp .
+    (25) exp -> exp . PLUS exp
+    (26) exp -> exp . EXPONEN exp
+    (27) exp -> exp . MINUS exp
+    (28) exp -> exp . TIMES exp
+    (29) exp -> exp . DIVIDE exp
+    (30) exp -> exp . REST exp
+    (31) exp -> exp . DOUBLEEQUAL exp
+    (32) exp -> exp . TRIPLEEQUAL exp
+    (33) exp -> exp . DIFF exp
+    (34) exp -> exp . BIGGEST exp
+    (35) exp -> exp . BIGGESTEQUAL exp
+    (36) exp -> exp . SMALL exp
+    (37) exp -> exp . SMALLEQUAL exp
+    (38) exp -> exp . OR exp
+    (39) exp -> exp . AND exp
+
+    DOUBLEEQUAL     reduce using rule 31 (exp -> exp DOUBLEEQUAL exp .)
+    TRIPLEEQUAL     reduce using rule 31 (exp -> exp DOUBLEEQUAL exp .)
+    DIFF            reduce using rule 31 (exp -> exp DOUBLEEQUAL exp .)
+    OR              reduce using rule 31 (exp -> exp DOUBLEEQUAL exp .)
+    AND             reduce using rule 31 (exp -> exp DOUBLEEQUAL exp .)
+    DEF             reduce using rule 31 (exp -> exp DOUBLEEQUAL exp .)
+    ID              reduce using rule 31 (exp -> exp DOUBLEEQUAL exp .)
+    $end            reduce using rule 31 (exp -> exp DOUBLEEQUAL exp .)
+    VIRGULA         reduce using rule 31 (exp -> exp DOUBLEEQUAL exp .)
+    RPAREN          reduce using rule 31 (exp -> exp DOUBLEEQUAL exp .)
+    BREAKLINE       reduce using rule 31 (exp -> exp DOUBLEEQUAL exp .)
+    THEN            reduce using rule 31 (exp -> exp DOUBLEEQUAL exp .)
+    DO              reduce using rule 31 (exp -> exp DOUBLEEQUAL exp .)
+    PLUS            shift and go to state 31
+    EXPONEN         shift and go to state 32
+    MINUS           shift and go to state 33
+    TIMES           shift and go to state 34
+    DIVIDE          shift and go to state 35
+    REST            shift and go to state 36
+    BIGGEST         shift and go to state 40
+    BIGGESTEQUAL    shift and go to state 41
+    SMALL           shift and go to state 42
+    SMALLEQUAL      shift and go to state 43
+
+  ! PLUS            [ reduce using rule 31 (exp -> exp DOUBLEEQUAL exp .) ]
+  ! EXPONEN         [ reduce using rule 31 (exp -> exp DOUBLEEQUAL exp .) ]
+  ! MINUS           [ reduce using rule 31 (exp -> exp DOUBLEEQUAL exp .) ]
+  ! TIMES           [ reduce using rule 31 (exp -> exp DOUBLEEQUAL exp .) ]
+  ! DIVIDE          [ reduce using rule 31 (exp -> exp DOUBLEEQUAL exp .) ]
+  ! REST            [ reduce using rule 31 (exp -> exp DOUBLEEQUAL exp .) ]
+  ! BIGGEST         [ reduce using rule 31 (exp -> exp DOUBLEEQUAL exp .) ]
+  ! BIGGESTEQUAL    [ reduce using rule 31 (exp -> exp DOUBLEEQUAL exp .) ]
+  ! SMALL           [ reduce using rule 31 (exp -> exp DOUBLEEQUAL exp .) ]
+  ! SMALLEQUAL      [ reduce using rule 31 (exp -> exp DOUBLEEQUAL exp .) ]
+  ! DOUBLEEQUAL     [ shift and go to state 37 ]
+  ! TRIPLEEQUAL     [ shift and go to state 38 ]
+  ! DIFF            [ shift and go to state 39 ]
+  ! OR              [ shift and go to state 44 ]
+  ! AND             [ shift and go to state 45 ]
+
+
+state 68
+
+    (32) exp -> exp TRIPLEEQUAL exp .
+    (25) exp -> exp . PLUS exp
+    (26) exp -> exp . EXPONEN exp
+    (27) exp -> exp . MINUS exp
+    (28) exp -> exp . TIMES exp
+    (29) exp -> exp . DIVIDE exp
+    (30) exp -> exp . REST exp
+    (31) exp -> exp . DOUBLEEQUAL exp
+    (32) exp -> exp . TRIPLEEQUAL exp
+    (33) exp -> exp . DIFF exp
+    (34) exp -> exp . BIGGEST exp
+    (35) exp -> exp . BIGGESTEQUAL exp
+    (36) exp -> exp . SMALL exp
+    (37) exp -> exp . SMALLEQUAL exp
+    (38) exp -> exp . OR exp
+    (39) exp -> exp . AND exp
+
+    DOUBLEEQUAL     reduce using rule 32 (exp -> exp TRIPLEEQUAL exp .)
+    TRIPLEEQUAL     reduce using rule 32 (exp -> exp TRIPLEEQUAL exp .)
+    DIFF            reduce using rule 32 (exp -> exp TRIPLEEQUAL exp .)
+    OR              reduce using rule 32 (exp -> exp TRIPLEEQUAL exp .)
+    AND             reduce using rule 32 (exp -> exp TRIPLEEQUAL exp .)
+    DEF             reduce using rule 32 (exp -> exp TRIPLEEQUAL exp .)
+    ID              reduce using rule 32 (exp -> exp TRIPLEEQUAL exp .)
+    $end            reduce using rule 32 (exp -> exp TRIPLEEQUAL exp .)
+    VIRGULA         reduce using rule 32 (exp -> exp TRIPLEEQUAL exp .)
+    RPAREN          reduce using rule 32 (exp -> exp TRIPLEEQUAL exp .)
+    BREAKLINE       reduce using rule 32 (exp -> exp TRIPLEEQUAL exp .)
+    THEN            reduce using rule 32 (exp -> exp TRIPLEEQUAL exp .)
+    DO              reduce using rule 32 (exp -> exp TRIPLEEQUAL exp .)
+    PLUS            shift and go to state 31
+    EXPONEN         shift and go to state 32
+    MINUS           shift and go to state 33
+    TIMES           shift and go to state 34
+    DIVIDE          shift and go to state 35
+    REST            shift and go to state 36
+    BIGGEST         shift and go to state 40
+    BIGGESTEQUAL    shift and go to state 41
+    SMALL           shift and go to state 42
+    SMALLEQUAL      shift and go to state 43
+
+  ! PLUS            [ reduce using rule 32 (exp -> exp TRIPLEEQUAL exp .) ]
+  ! EXPONEN         [ reduce using rule 32 (exp -> exp TRIPLEEQUAL exp .) ]
+  ! MINUS           [ reduce using rule 32 (exp -> exp TRIPLEEQUAL exp .) ]
+  ! TIMES           [ reduce using rule 32 (exp -> exp TRIPLEEQUAL exp .) ]
+  ! DIVIDE          [ reduce using rule 32 (exp -> exp TRIPLEEQUAL exp .) ]
+  ! REST            [ reduce using rule 32 (exp -> exp TRIPLEEQUAL exp .) ]
+  ! BIGGEST         [ reduce using rule 32 (exp -> exp TRIPLEEQUAL exp .) ]
+  ! BIGGESTEQUAL    [ reduce using rule 32 (exp -> exp TRIPLEEQUAL exp .) ]
+  ! SMALL           [ reduce using rule 32 (exp -> exp TRIPLEEQUAL exp .) ]
+  ! SMALLEQUAL      [ reduce using rule 32 (exp -> exp TRIPLEEQUAL exp .) ]
+  ! DOUBLEEQUAL     [ shift and go to state 37 ]
+  ! TRIPLEEQUAL     [ shift and go to state 38 ]
+  ! DIFF            [ shift and go to state 39 ]
+  ! OR              [ shift and go to state 44 ]
+  ! AND             [ shift and go to state 45 ]
+
+
+state 69
+
+    (33) exp -> exp DIFF exp .
+    (25) exp -> exp . PLUS exp
+    (26) exp -> exp . EXPONEN exp
+    (27) exp -> exp . MINUS exp
+    (28) exp -> exp . TIMES exp
+    (29) exp -> exp . DIVIDE exp
+    (30) exp -> exp . REST exp
+    (31) exp -> exp . DOUBLEEQUAL exp
+    (32) exp -> exp . TRIPLEEQUAL exp
+    (33) exp -> exp . DIFF exp
+    (34) exp -> exp . BIGGEST exp
+    (35) exp -> exp . BIGGESTEQUAL exp
+    (36) exp -> exp . SMALL exp
+    (37) exp -> exp . SMALLEQUAL exp
+    (38) exp -> exp . OR exp
+    (39) exp -> exp . AND exp
+
+    DOUBLEEQUAL     reduce using rule 33 (exp -> exp DIFF exp .)
+    TRIPLEEQUAL     reduce using rule 33 (exp -> exp DIFF exp .)
+    DIFF            reduce using rule 33 (exp -> exp DIFF exp .)
+    OR              reduce using rule 33 (exp -> exp DIFF exp .)
+    AND             reduce using rule 33 (exp -> exp DIFF exp .)
+    DEF             reduce using rule 33 (exp -> exp DIFF exp .)
+    ID              reduce using rule 33 (exp -> exp DIFF exp .)
+    $end            reduce using rule 33 (exp -> exp DIFF exp .)
+    VIRGULA         reduce using rule 33 (exp -> exp DIFF exp .)
+    RPAREN          reduce using rule 33 (exp -> exp DIFF exp .)
+    BREAKLINE       reduce using rule 33 (exp -> exp DIFF exp .)
+    THEN            reduce using rule 33 (exp -> exp DIFF exp .)
+    DO              reduce using rule 33 (exp -> exp DIFF exp .)
+    PLUS            shift and go to state 31
+    EXPONEN         shift and go to state 32
+    MINUS           shift and go to state 33
+    TIMES           shift and go to state 34
+    DIVIDE          shift and go to state 35
+    REST            shift and go to state 36
+    BIGGEST         shift and go to state 40
+    BIGGESTEQUAL    shift and go to state 41
+    SMALL           shift and go to state 42
+    SMALLEQUAL      shift and go to state 43
+
+  ! PLUS            [ reduce using rule 33 (exp -> exp DIFF exp .) ]
+  ! EXPONEN         [ reduce using rule 33 (exp -> exp DIFF exp .) ]
+  ! MINUS           [ reduce using rule 33 (exp -> exp DIFF exp .) ]
+  ! TIMES           [ reduce using rule 33 (exp -> exp DIFF exp .) ]
+  ! DIVIDE          [ reduce using rule 33 (exp -> exp DIFF exp .) ]
+  ! REST            [ reduce using rule 33 (exp -> exp DIFF exp .) ]
+  ! BIGGEST         [ reduce using rule 33 (exp -> exp DIFF exp .) ]
+  ! BIGGESTEQUAL    [ reduce using rule 33 (exp -> exp DIFF exp .) ]
+  ! SMALL           [ reduce using rule 33 (exp -> exp DIFF exp .) ]
+  ! SMALLEQUAL      [ reduce using rule 33 (exp -> exp DIFF exp .) ]
+  ! DOUBLEEQUAL     [ shift and go to state 37 ]
+  ! TRIPLEEQUAL     [ shift and go to state 38 ]
+  ! DIFF            [ shift and go to state 39 ]
+  ! OR              [ shift and go to state 44 ]
+  ! AND             [ shift and go to state 45 ]
+
+
+state 70
+
+    (34) exp -> exp BIGGEST exp .
+    (25) exp -> exp . PLUS exp
+    (26) exp -> exp . EXPONEN exp
+    (27) exp -> exp . MINUS exp
+    (28) exp -> exp . TIMES exp
+    (29) exp -> exp . DIVIDE exp
+    (30) exp -> exp . REST exp
+    (31) exp -> exp . DOUBLEEQUAL exp
+    (32) exp -> exp . TRIPLEEQUAL exp
+    (33) exp -> exp . DIFF exp
+    (34) exp -> exp . BIGGEST exp
+    (35) exp -> exp . BIGGESTEQUAL exp
+    (36) exp -> exp . SMALL exp
+    (37) exp -> exp . SMALLEQUAL exp
+    (38) exp -> exp . OR exp
+    (39) exp -> exp . AND exp
+
+    DOUBLEEQUAL     reduce using rule 34 (exp -> exp BIGGEST exp .)
+    TRIPLEEQUAL     reduce using rule 34 (exp -> exp BIGGEST exp .)
+    DIFF            reduce using rule 34 (exp -> exp BIGGEST exp .)
+    BIGGEST         reduce using rule 34 (exp -> exp BIGGEST exp .)
+    BIGGESTEQUAL    reduce using rule 34 (exp -> exp BIGGEST exp .)
+    SMALL           reduce using rule 34 (exp -> exp BIGGEST exp .)
+    SMALLEQUAL      reduce using rule 34 (exp -> exp BIGGEST exp .)
+    OR              reduce using rule 34 (exp -> exp BIGGEST exp .)
+    AND             reduce using rule 34 (exp -> exp BIGGEST exp .)
+    DEF             reduce using rule 34 (exp -> exp BIGGEST exp .)
+    ID              reduce using rule 34 (exp -> exp BIGGEST exp .)
+    $end            reduce using rule 34 (exp -> exp BIGGEST exp .)
+    VIRGULA         reduce using rule 34 (exp -> exp BIGGEST exp .)
+    RPAREN          reduce using rule 34 (exp -> exp BIGGEST exp .)
+    BREAKLINE       reduce using rule 34 (exp -> exp BIGGEST exp .)
+    THEN            reduce using rule 34 (exp -> exp BIGGEST exp .)
+    DO              reduce using rule 34 (exp -> exp BIGGEST exp .)
+    PLUS            shift and go to state 31
+    EXPONEN         shift and go to state 32
+    MINUS           shift and go to state 33
+    TIMES           shift and go to state 34
+    DIVIDE          shift and go to state 35
+    REST            shift and go to state 36
+
+  ! PLUS            [ reduce using rule 34 (exp -> exp BIGGEST exp .) ]
+  ! EXPONEN         [ reduce using rule 34 (exp -> exp BIGGEST exp .) ]
+  ! MINUS           [ reduce using rule 34 (exp -> exp BIGGEST exp .) ]
+  ! TIMES           [ reduce using rule 34 (exp -> exp BIGGEST exp .) ]
+  ! DIVIDE          [ reduce using rule 34 (exp -> exp BIGGEST exp .) ]
+  ! REST            [ reduce using rule 34 (exp -> exp BIGGEST exp .) ]
+  ! DOUBLEEQUAL     [ shift and go to state 37 ]
+  ! TRIPLEEQUAL     [ shift and go to state 38 ]
+  ! DIFF            [ shift and go to state 39 ]
+  ! BIGGEST         [ shift and go to state 40 ]
+  ! BIGGESTEQUAL    [ shift and go to state 41 ]
+  ! SMALL           [ shift and go to state 42 ]
+  ! SMALLEQUAL      [ shift and go to state 43 ]
+  ! OR              [ shift and go to state 44 ]
+  ! AND             [ shift and go to state 45 ]
+
+
+state 71
+
+    (35) exp -> exp BIGGESTEQUAL exp .
+    (25) exp -> exp . PLUS exp
+    (26) exp -> exp . EXPONEN exp
+    (27) exp -> exp . MINUS exp
+    (28) exp -> exp . TIMES exp
+    (29) exp -> exp . DIVIDE exp
+    (30) exp -> exp . REST exp
+    (31) exp -> exp . DOUBLEEQUAL exp
+    (32) exp -> exp . TRIPLEEQUAL exp
+    (33) exp -> exp . DIFF exp
+    (34) exp -> exp . BIGGEST exp
+    (35) exp -> exp . BIGGESTEQUAL exp
+    (36) exp -> exp . SMALL exp
+    (37) exp -> exp . SMALLEQUAL exp
+    (38) exp -> exp . OR exp
+    (39) exp -> exp . AND exp
+
+    DOUBLEEQUAL     reduce using rule 35 (exp -> exp BIGGESTEQUAL exp .)
+    TRIPLEEQUAL     reduce using rule 35 (exp -> exp BIGGESTEQUAL exp .)
+    DIFF            reduce using rule 35 (exp -> exp BIGGESTEQUAL exp .)
+    BIGGEST         reduce using rule 35 (exp -> exp BIGGESTEQUAL exp .)
+    BIGGESTEQUAL    reduce using rule 35 (exp -> exp BIGGESTEQUAL exp .)
+    SMALL           reduce using rule 35 (exp -> exp BIGGESTEQUAL exp .)
+    SMALLEQUAL      reduce using rule 35 (exp -> exp BIGGESTEQUAL exp .)
+    OR              reduce using rule 35 (exp -> exp BIGGESTEQUAL exp .)
+    AND             reduce using rule 35 (exp -> exp BIGGESTEQUAL exp .)
+    DEF             reduce using rule 35 (exp -> exp BIGGESTEQUAL exp .)
+    ID              reduce using rule 35 (exp -> exp BIGGESTEQUAL exp .)
+    $end            reduce using rule 35 (exp -> exp BIGGESTEQUAL exp .)
+    VIRGULA         reduce using rule 35 (exp -> exp BIGGESTEQUAL exp .)
+    RPAREN          reduce using rule 35 (exp -> exp BIGGESTEQUAL exp .)
+    BREAKLINE       reduce using rule 35 (exp -> exp BIGGESTEQUAL exp .)
+    THEN            reduce using rule 35 (exp -> exp BIGGESTEQUAL exp .)
+    DO              reduce using rule 35 (exp -> exp BIGGESTEQUAL exp .)
+    PLUS            shift and go to state 31
+    EXPONEN         shift and go to state 32
+    MINUS           shift and go to state 33
+    TIMES           shift and go to state 34
+    DIVIDE          shift and go to state 35
+    REST            shift and go to state 36
+
+  ! PLUS            [ reduce using rule 35 (exp -> exp BIGGESTEQUAL exp .) ]
+  ! EXPONEN         [ reduce using rule 35 (exp -> exp BIGGESTEQUAL exp .) ]
+  ! MINUS           [ reduce using rule 35 (exp -> exp BIGGESTEQUAL exp .) ]
+  ! TIMES           [ reduce using rule 35 (exp -> exp BIGGESTEQUAL exp .) ]
+  ! DIVIDE          [ reduce using rule 35 (exp -> exp BIGGESTEQUAL exp .) ]
+  ! REST            [ reduce using rule 35 (exp -> exp BIGGESTEQUAL exp .) ]
+  ! DOUBLEEQUAL     [ shift and go to state 37 ]
+  ! TRIPLEEQUAL     [ shift and go to state 38 ]
+  ! DIFF            [ shift and go to state 39 ]
+  ! BIGGEST         [ shift and go to state 40 ]
+  ! BIGGESTEQUAL    [ shift and go to state 41 ]
+  ! SMALL           [ shift and go to state 42 ]
+  ! SMALLEQUAL      [ shift and go to state 43 ]
+  ! OR              [ shift and go to state 44 ]
+  ! AND             [ shift and go to state 45 ]
+
+
+state 72
+
+    (36) exp -> exp SMALL exp .
+    (25) exp -> exp . PLUS exp
+    (26) exp -> exp . EXPONEN exp
+    (27) exp -> exp . MINUS exp
+    (28) exp -> exp . TIMES exp
+    (29) exp -> exp . DIVIDE exp
+    (30) exp -> exp . REST exp
+    (31) exp -> exp . DOUBLEEQUAL exp
+    (32) exp -> exp . TRIPLEEQUAL exp
+    (33) exp -> exp . DIFF exp
+    (34) exp -> exp . BIGGEST exp
+    (35) exp -> exp . BIGGESTEQUAL exp
+    (36) exp -> exp . SMALL exp
+    (37) exp -> exp . SMALLEQUAL exp
+    (38) exp -> exp . OR exp
+    (39) exp -> exp . AND exp
+
+    DOUBLEEQUAL     reduce using rule 36 (exp -> exp SMALL exp .)
+    TRIPLEEQUAL     reduce using rule 36 (exp -> exp SMALL exp .)
+    DIFF            reduce using rule 36 (exp -> exp SMALL exp .)
+    BIGGEST         reduce using rule 36 (exp -> exp SMALL exp .)
+    BIGGESTEQUAL    reduce using rule 36 (exp -> exp SMALL exp .)
+    SMALL           reduce using rule 36 (exp -> exp SMALL exp .)
+    SMALLEQUAL      reduce using rule 36 (exp -> exp SMALL exp .)
+    OR              reduce using rule 36 (exp -> exp SMALL exp .)
+    AND             reduce using rule 36 (exp -> exp SMALL exp .)
+    DEF             reduce using rule 36 (exp -> exp SMALL exp .)
+    ID              reduce using rule 36 (exp -> exp SMALL exp .)
+    $end            reduce using rule 36 (exp -> exp SMALL exp .)
+    VIRGULA         reduce using rule 36 (exp -> exp SMALL exp .)
+    RPAREN          reduce using rule 36 (exp -> exp SMALL exp .)
+    BREAKLINE       reduce using rule 36 (exp -> exp SMALL exp .)
+    THEN            reduce using rule 36 (exp -> exp SMALL exp .)
+    DO              reduce using rule 36 (exp -> exp SMALL exp .)
+    PLUS            shift and go to state 31
+    EXPONEN         shift and go to state 32
+    MINUS           shift and go to state 33
+    TIMES           shift and go to state 34
+    DIVIDE          shift and go to state 35
+    REST            shift and go to state 36
+
+  ! PLUS            [ reduce using rule 36 (exp -> exp SMALL exp .) ]
+  ! EXPONEN         [ reduce using rule 36 (exp -> exp SMALL exp .) ]
+  ! MINUS           [ reduce using rule 36 (exp -> exp SMALL exp .) ]
+  ! TIMES           [ reduce using rule 36 (exp -> exp SMALL exp .) ]
+  ! DIVIDE          [ reduce using rule 36 (exp -> exp SMALL exp .) ]
+  ! REST            [ reduce using rule 36 (exp -> exp SMALL exp .) ]
+  ! DOUBLEEQUAL     [ shift and go to state 37 ]
+  ! TRIPLEEQUAL     [ shift and go to state 38 ]
+  ! DIFF            [ shift and go to state 39 ]
+  ! BIGGEST         [ shift and go to state 40 ]
+  ! BIGGESTEQUAL    [ shift and go to state 41 ]
+  ! SMALL           [ shift and go to state 42 ]
+  ! SMALLEQUAL      [ shift and go to state 43 ]
+  ! OR              [ shift and go to state 44 ]
+  ! AND             [ shift and go to state 45 ]
+
+
+state 73
+
+    (37) exp -> exp SMALLEQUAL exp .
+    (25) exp -> exp . PLUS exp
+    (26) exp -> exp . EXPONEN exp
+    (27) exp -> exp . MINUS exp
+    (28) exp -> exp . TIMES exp
+    (29) exp -> exp . DIVIDE exp
+    (30) exp -> exp . REST exp
+    (31) exp -> exp . DOUBLEEQUAL exp
+    (32) exp -> exp . TRIPLEEQUAL exp
+    (33) exp -> exp . DIFF exp
+    (34) exp -> exp . BIGGEST exp
+    (35) exp -> exp . BIGGESTEQUAL exp
+    (36) exp -> exp . SMALL exp
+    (37) exp -> exp . SMALLEQUAL exp
+    (38) exp -> exp . OR exp
+    (39) exp -> exp . AND exp
+
+    DOUBLEEQUAL     reduce using rule 37 (exp -> exp SMALLEQUAL exp .)
+    TRIPLEEQUAL     reduce using rule 37 (exp -> exp SMALLEQUAL exp .)
+    DIFF            reduce using rule 37 (exp -> exp SMALLEQUAL exp .)
+    BIGGEST         reduce using rule 37 (exp -> exp SMALLEQUAL exp .)
+    BIGGESTEQUAL    reduce using rule 37 (exp -> exp SMALLEQUAL exp .)
+    SMALL           reduce using rule 37 (exp -> exp SMALLEQUAL exp .)
+    SMALLEQUAL      reduce using rule 37 (exp -> exp SMALLEQUAL exp .)
+    OR              reduce using rule 37 (exp -> exp SMALLEQUAL exp .)
+    AND             reduce using rule 37 (exp -> exp SMALLEQUAL exp .)
+    DEF             reduce using rule 37 (exp -> exp SMALLEQUAL exp .)
+    ID              reduce using rule 37 (exp -> exp SMALLEQUAL exp .)
+    $end            reduce using rule 37 (exp -> exp SMALLEQUAL exp .)
+    VIRGULA         reduce using rule 37 (exp -> exp SMALLEQUAL exp .)
+    RPAREN          reduce using rule 37 (exp -> exp SMALLEQUAL exp .)
+    BREAKLINE       reduce using rule 37 (exp -> exp SMALLEQUAL exp .)
+    THEN            reduce using rule 37 (exp -> exp SMALLEQUAL exp .)
+    DO              reduce using rule 37 (exp -> exp SMALLEQUAL exp .)
+    PLUS            shift and go to state 31
+    EXPONEN         shift and go to state 32
+    MINUS           shift and go to state 33
+    TIMES           shift and go to state 34
+    DIVIDE          shift and go to state 35
+    REST            shift and go to state 36
+
+  ! PLUS            [ reduce using rule 37 (exp -> exp SMALLEQUAL exp .) ]
+  ! EXPONEN         [ reduce using rule 37 (exp -> exp SMALLEQUAL exp .) ]
+  ! MINUS           [ reduce using rule 37 (exp -> exp SMALLEQUAL exp .) ]
+  ! TIMES           [ reduce using rule 37 (exp -> exp SMALLEQUAL exp .) ]
+  ! DIVIDE          [ reduce using rule 37 (exp -> exp SMALLEQUAL exp .) ]
+  ! REST            [ reduce using rule 37 (exp -> exp SMALLEQUAL exp .) ]
+  ! DOUBLEEQUAL     [ shift and go to state 37 ]
+  ! TRIPLEEQUAL     [ shift and go to state 38 ]
+  ! DIFF            [ shift and go to state 39 ]
+  ! BIGGEST         [ shift and go to state 40 ]
+  ! BIGGESTEQUAL    [ shift and go to state 41 ]
+  ! SMALL           [ shift and go to state 42 ]
+  ! SMALLEQUAL      [ shift and go to state 43 ]
+  ! OR              [ shift and go to state 44 ]
+  ! AND             [ shift and go to state 45 ]
+
+
+state 74
+
+    (38) exp -> exp OR exp .
+    (25) exp -> exp . PLUS exp
+    (26) exp -> exp . EXPONEN exp
+    (27) exp -> exp . MINUS exp
+    (28) exp -> exp . TIMES exp
+    (29) exp -> exp . DIVIDE exp
+    (30) exp -> exp . REST exp
+    (31) exp -> exp . DOUBLEEQUAL exp
+    (32) exp -> exp . TRIPLEEQUAL exp
+    (33) exp -> exp . DIFF exp
+    (34) exp -> exp . BIGGEST exp
+    (35) exp -> exp . BIGGESTEQUAL exp
+    (36) exp -> exp . SMALL exp
+    (37) exp -> exp . SMALLEQUAL exp
+    (38) exp -> exp . OR exp
+    (39) exp -> exp . AND exp
+
+    OR              reduce using rule 38 (exp -> exp OR exp .)
+    AND             reduce using rule 38 (exp -> exp OR exp .)
+    DEF             reduce using rule 38 (exp -> exp OR exp .)
+    ID              reduce using rule 38 (exp -> exp OR exp .)
+    $end            reduce using rule 38 (exp -> exp OR exp .)
+    VIRGULA         reduce using rule 38 (exp -> exp OR exp .)
+    RPAREN          reduce using rule 38 (exp -> exp OR exp .)
+    BREAKLINE       reduce using rule 38 (exp -> exp OR exp .)
+    THEN            reduce using rule 38 (exp -> exp OR exp .)
+    DO              reduce using rule 38 (exp -> exp OR exp .)
+    PLUS            shift and go to state 31
+    EXPONEN         shift and go to state 32
+    MINUS           shift and go to state 33
+    TIMES           shift and go to state 34
+    DIVIDE          shift and go to state 35
+    REST            shift and go to state 36
+    DOUBLEEQUAL     shift and go to state 37
+    TRIPLEEQUAL     shift and go to state 38
+    DIFF            shift and go to state 39
+    BIGGEST         shift and go to state 40
+    BIGGESTEQUAL    shift and go to state 41
+    SMALL           shift and go to state 42
+    SMALLEQUAL      shift and go to state 43
+
+  ! PLUS            [ reduce using rule 38 (exp -> exp OR exp .) ]
+  ! EXPONEN         [ reduce using rule 38 (exp -> exp OR exp .) ]
+  ! MINUS           [ reduce using rule 38 (exp -> exp OR exp .) ]
+  ! TIMES           [ reduce using rule 38 (exp -> exp OR exp .) ]
+  ! DIVIDE          [ reduce using rule 38 (exp -> exp OR exp .) ]
+  ! REST            [ reduce using rule 38 (exp -> exp OR exp .) ]
+  ! DOUBLEEQUAL     [ reduce using rule 38 (exp -> exp OR exp .) ]
+  ! TRIPLEEQUAL     [ reduce using rule 38 (exp -> exp OR exp .) ]
+  ! DIFF            [ reduce using rule 38 (exp -> exp OR exp .) ]
+  ! BIGGEST         [ reduce using rule 38 (exp -> exp OR exp .) ]
+  ! BIGGESTEQUAL    [ reduce using rule 38 (exp -> exp OR exp .) ]
+  ! SMALL           [ reduce using rule 38 (exp -> exp OR exp .) ]
+  ! SMALLEQUAL      [ reduce using rule 38 (exp -> exp OR exp .) ]
+  ! OR              [ shift and go to state 44 ]
+  ! AND             [ shift and go to state 45 ]
+
+
+state 75
+
+    (39) exp -> exp AND exp .
+    (25) exp -> exp . PLUS exp
+    (26) exp -> exp . EXPONEN exp
+    (27) exp -> exp . MINUS exp
+    (28) exp -> exp . TIMES exp
+    (29) exp -> exp . DIVIDE exp
+    (30) exp -> exp . REST exp
+    (31) exp -> exp . DOUBLEEQUAL exp
+    (32) exp -> exp . TRIPLEEQUAL exp
+    (33) exp -> exp . DIFF exp
+    (34) exp -> exp . BIGGEST exp
+    (35) exp -> exp . BIGGESTEQUAL exp
+    (36) exp -> exp . SMALL exp
+    (37) exp -> exp . SMALLEQUAL exp
+    (38) exp -> exp . OR exp
+    (39) exp -> exp . AND exp
+
+    OR              reduce using rule 39 (exp -> exp AND exp .)
+    AND             reduce using rule 39 (exp -> exp AND exp .)
+    DEF             reduce using rule 39 (exp -> exp AND exp .)
+    ID              reduce using rule 39 (exp -> exp AND exp .)
+    $end            reduce using rule 39 (exp -> exp AND exp .)
+    VIRGULA         reduce using rule 39 (exp -> exp AND exp .)
+    RPAREN          reduce using rule 39 (exp -> exp AND exp .)
+    BREAKLINE       reduce using rule 39 (exp -> exp AND exp .)
+    THEN            reduce using rule 39 (exp -> exp AND exp .)
+    DO              reduce using rule 39 (exp -> exp AND exp .)
+    PLUS            shift and go to state 31
+    EXPONEN         shift and go to state 32
+    MINUS           shift and go to state 33
+    TIMES           shift and go to state 34
+    DIVIDE          shift and go to state 35
+    REST            shift and go to state 36
+    DOUBLEEQUAL     shift and go to state 37
+    TRIPLEEQUAL     shift and go to state 38
+    DIFF            shift and go to state 39
+    BIGGEST         shift and go to state 40
+    BIGGESTEQUAL    shift and go to state 41
+    SMALL           shift and go to state 42
+    SMALLEQUAL      shift and go to state 43
+
+  ! PLUS            [ reduce using rule 39 (exp -> exp AND exp .) ]
+  ! EXPONEN         [ reduce using rule 39 (exp -> exp AND exp .) ]
+  ! MINUS           [ reduce using rule 39 (exp -> exp AND exp .) ]
+  ! TIMES           [ reduce using rule 39 (exp -> exp AND exp .) ]
+  ! DIVIDE          [ reduce using rule 39 (exp -> exp AND exp .) ]
+  ! REST            [ reduce using rule 39 (exp -> exp AND exp .) ]
+  ! DOUBLEEQUAL     [ reduce using rule 39 (exp -> exp AND exp .) ]
+  ! TRIPLEEQUAL     [ reduce using rule 39 (exp -> exp AND exp .) ]
+  ! DIFF            [ reduce using rule 39 (exp -> exp AND exp .) ]
+  ! BIGGEST         [ reduce using rule 39 (exp -> exp AND exp .) ]
+  ! BIGGESTEQUAL    [ reduce using rule 39 (exp -> exp AND exp .) ]
+  ! SMALL           [ reduce using rule 39 (exp -> exp AND exp .) ]
+  ! SMALLEQUAL      [ reduce using rule 39 (exp -> exp AND exp .) ]
+  ! OR              [ shift and go to state 44 ]
+  ! AND             [ shift and go to state 45 ]
+
+
+state 76
+
+    (5) funcao -> DEF ID LPAREN sigParams RPAREN BREAKLINE . body
+    (13) body -> . stms END
+    (7) stms -> . stm
+    (8) stms -> . stm stms
+    (14) stm -> . exp BREAKLINE
+    (15) stm -> . WHILE LPAREN exp RPAREN BREAKLINE body
+    (16) stm -> . WHILE exp BREAKLINE body
+    (17) stm -> . FOR ID IN exp DO BREAKLINE body
+    (18) stm -> . FOR ID IN exp BREAKLINE body
+    (19) stm -> . IF exp THEN BREAKLINE body opcional
+    (20) stm -> . IF exp BREAKLINE body opcional
+    (21) stm -> . IF LPAREN exp RPAREN THEN BREAKLINE body opcional
+    (22) stm -> . IF LPAREN exp RPAREN BREAKLINE body opcional
+    (23) stm -> . RETURN exp BREAKLINE
+    (24) stm -> . RETURN BREAKLINE
+    (50) stm -> . assign BREAKLINE
+    (25) exp -> . exp PLUS exp
+    (26) exp -> . exp EXPONEN exp
+    (27) exp -> . exp MINUS exp
+    (28) exp -> . exp TIMES exp
+    (29) exp -> . exp DIVIDE exp
+    (30) exp -> . exp REST exp
+    (31) exp -> . exp DOUBLEEQUAL exp
+    (32) exp -> . exp TRIPLEEQUAL exp
+    (33) exp -> . exp DIFF exp
+    (34) exp -> . exp BIGGEST exp
+    (35) exp -> . exp BIGGESTEQUAL exp
+    (36) exp -> . exp SMALL exp
+    (37) exp -> . exp SMALLEQUAL exp
+    (38) exp -> . exp OR exp
+    (39) exp -> . exp AND exp
+    (40) exp -> . call
+    (41) exp -> . assign
+    (42) exp -> . NUMBER
+    (49) assign -> . ID EQUAL exp
+    (43) call -> . ID LPAREN sigParams RPAREN
+    (44) call -> . ID LPAREN RPAREN
+    (45) call -> . ID
+    (46) call -> . ID sigParams
+
+    WHILE           shift and go to state 24
+    FOR             shift and go to state 25
+    IF              shift and go to state 26
+    RETURN          shift and go to state 27
+    NUMBER          shift and go to state 16
+    ID              shift and go to state 19
+
+    body                           shift and go to state 86
+    stms                           shift and go to state 21
+    stm                            shift and go to state 22
+    exp                            shift and go to state 23
+    assign                         shift and go to state 28
+    call                           shift and go to state 14
+
+state 77
+
+    (48) sigParams -> exp VIRGULA sigParams .
+
+    RPAREN          reduce using rule 48 (sigParams -> exp VIRGULA sigParams .)
+    PLUS            reduce using rule 48 (sigParams -> exp VIRGULA sigParams .)
+    EXPONEN         reduce using rule 48 (sigParams -> exp VIRGULA sigParams .)
+    MINUS           reduce using rule 48 (sigParams -> exp VIRGULA sigParams .)
+    TIMES           reduce using rule 48 (sigParams -> exp VIRGULA sigParams .)
+    DIVIDE          reduce using rule 48 (sigParams -> exp VIRGULA sigParams .)
+    REST            reduce using rule 48 (sigParams -> exp VIRGULA sigParams .)
+    DOUBLEEQUAL     reduce using rule 48 (sigParams -> exp VIRGULA sigParams .)
+    TRIPLEEQUAL     reduce using rule 48 (sigParams -> exp VIRGULA sigParams .)
+    DIFF            reduce using rule 48 (sigParams -> exp VIRGULA sigParams .)
+    BIGGEST         reduce using rule 48 (sigParams -> exp VIRGULA sigParams .)
+    BIGGESTEQUAL    reduce using rule 48 (sigParams -> exp VIRGULA sigParams .)
+    SMALL           reduce using rule 48 (sigParams -> exp VIRGULA sigParams .)
+    SMALLEQUAL      reduce using rule 48 (sigParams -> exp VIRGULA sigParams .)
+    OR              reduce using rule 48 (sigParams -> exp VIRGULA sigParams .)
+    AND             reduce using rule 48 (sigParams -> exp VIRGULA sigParams .)
+    DEF             reduce using rule 48 (sigParams -> exp VIRGULA sigParams .)
+    ID              reduce using rule 48 (sigParams -> exp VIRGULA sigParams .)
+    $end            reduce using rule 48 (sigParams -> exp VIRGULA sigParams .)
+    VIRGULA         reduce using rule 48 (sigParams -> exp VIRGULA sigParams .)
+    BREAKLINE       reduce using rule 48 (sigParams -> exp VIRGULA sigParams .)
+    THEN            reduce using rule 48 (sigParams -> exp VIRGULA sigParams .)
+    DO              reduce using rule 48 (sigParams -> exp VIRGULA sigParams .)
+
+
+state 78
+
+    (15) stm -> WHILE LPAREN exp . RPAREN BREAKLINE body
+    (25) exp -> exp . PLUS exp
+    (26) exp -> exp . EXPONEN exp
+    (27) exp -> exp . MINUS exp
+    (28) exp -> exp . TIMES exp
+    (29) exp -> exp . DIVIDE exp
+    (30) exp -> exp . REST exp
+    (31) exp -> exp . DOUBLEEQUAL exp
+    (32) exp -> exp . TRIPLEEQUAL exp
+    (33) exp -> exp . DIFF exp
+    (34) exp -> exp . BIGGEST exp
+    (35) exp -> exp . BIGGESTEQUAL exp
+    (36) exp -> exp . SMALL exp
+    (37) exp -> exp . SMALLEQUAL exp
+    (38) exp -> exp . OR exp
+    (39) exp -> exp . AND exp
+
+    RPAREN          shift and go to state 87
+    PLUS            shift and go to state 31
+    EXPONEN         shift and go to state 32
+    MINUS           shift and go to state 33
+    TIMES           shift and go to state 34
+    DIVIDE          shift and go to state 35
+    REST            shift and go to state 36
+    DOUBLEEQUAL     shift and go to state 37
+    TRIPLEEQUAL     shift and go to state 38
+    DIFF            shift and go to state 39
+    BIGGEST         shift and go to state 40
+    BIGGESTEQUAL    shift and go to state 41
+    SMALL           shift and go to state 42
+    SMALLEQUAL      shift and go to state 43
+    OR              shift and go to state 44
+    AND             shift and go to state 45
+
+
+state 79
+
+    (16) stm -> WHILE exp BREAKLINE . body
+    (13) body -> . stms END
+    (7) stms -> . stm
+    (8) stms -> . stm stms
+    (14) stm -> . exp BREAKLINE
+    (15) stm -> . WHILE LPAREN exp RPAREN BREAKLINE body
+    (16) stm -> . WHILE exp BREAKLINE body
+    (17) stm -> . FOR ID IN exp DO BREAKLINE body
+    (18) stm -> . FOR ID IN exp BREAKLINE body
+    (19) stm -> . IF exp THEN BREAKLINE body opcional
+    (20) stm -> . IF exp BREAKLINE body opcional
+    (21) stm -> . IF LPAREN exp RPAREN THEN BREAKLINE body opcional
+    (22) stm -> . IF LPAREN exp RPAREN BREAKLINE body opcional
+    (23) stm -> . RETURN exp BREAKLINE
+    (24) stm -> . RETURN BREAKLINE
+    (50) stm -> . assign BREAKLINE
+    (25) exp -> . exp PLUS exp
+    (26) exp -> . exp EXPONEN exp
+    (27) exp -> . exp MINUS exp
+    (28) exp -> . exp TIMES exp
+    (29) exp -> . exp DIVIDE exp
+    (30) exp -> . exp REST exp
+    (31) exp -> . exp DOUBLEEQUAL exp
+    (32) exp -> . exp TRIPLEEQUAL exp
+    (33) exp -> . exp DIFF exp
+    (34) exp -> . exp BIGGEST exp
+    (35) exp -> . exp BIGGESTEQUAL exp
+    (36) exp -> . exp SMALL exp
+    (37) exp -> . exp SMALLEQUAL exp
+    (38) exp -> . exp OR exp
+    (39) exp -> . exp AND exp
+    (40) exp -> . call
+    (41) exp -> . assign
+    (42) exp -> . NUMBER
+    (49) assign -> . ID EQUAL exp
+    (43) call -> . ID LPAREN sigParams RPAREN
+    (44) call -> . ID LPAREN RPAREN
+    (45) call -> . ID
+    (46) call -> . ID sigParams
+
+    WHILE           shift and go to state 24
+    FOR             shift and go to state 25
+    IF              shift and go to state 26
+    RETURN          shift and go to state 27
+    NUMBER          shift and go to state 16
+    ID              shift and go to state 19
+
+    exp                            shift and go to state 23
+    body                           shift and go to state 88
+    stms                           shift and go to state 21
+    stm                            shift and go to state 22
+    assign                         shift and go to state 28
+    call                           shift and go to state 14
+
+state 80
+
+    (17) stm -> FOR ID IN . exp DO BREAKLINE body
+    (18) stm -> FOR ID IN . exp BREAKLINE body
+    (25) exp -> . exp PLUS exp
+    (26) exp -> . exp EXPONEN exp
+    (27) exp -> . exp MINUS exp
+    (28) exp -> . exp TIMES exp
+    (29) exp -> . exp DIVIDE exp
+    (30) exp -> . exp REST exp
+    (31) exp -> . exp DOUBLEEQUAL exp
+    (32) exp -> . exp TRIPLEEQUAL exp
+    (33) exp -> . exp DIFF exp
+    (34) exp -> . exp BIGGEST exp
+    (35) exp -> . exp BIGGESTEQUAL exp
+    (36) exp -> . exp SMALL exp
+    (37) exp -> . exp SMALLEQUAL exp
+    (38) exp -> . exp OR exp
+    (39) exp -> . exp AND exp
+    (40) exp -> . call
+    (41) exp -> . assign
+    (42) exp -> . NUMBER
+    (43) call -> . ID LPAREN sigParams RPAREN
+    (44) call -> . ID LPAREN RPAREN
+    (45) call -> . ID
+    (46) call -> . ID sigParams
+    (49) assign -> . ID EQUAL exp
+
+    NUMBER          shift and go to state 16
+    ID              shift and go to state 12
+
+    exp                            shift and go to state 89
+    call                           shift and go to state 14
+    assign                         shift and go to state 15
+
+state 81
+
+    (19) stm -> IF exp THEN . BREAKLINE body opcional
+
+    BREAKLINE       shift and go to state 90
+
+
+state 82
+
+    (20) stm -> IF exp BREAKLINE . body opcional
+    (13) body -> . stms END
+    (7) stms -> . stm
+    (8) stms -> . stm stms
+    (14) stm -> . exp BREAKLINE
+    (15) stm -> . WHILE LPAREN exp RPAREN BREAKLINE body
+    (16) stm -> . WHILE exp BREAKLINE body
+    (17) stm -> . FOR ID IN exp DO BREAKLINE body
+    (18) stm -> . FOR ID IN exp BREAKLINE body
+    (19) stm -> . IF exp THEN BREAKLINE body opcional
+    (20) stm -> . IF exp BREAKLINE body opcional
+    (21) stm -> . IF LPAREN exp RPAREN THEN BREAKLINE body opcional
+    (22) stm -> . IF LPAREN exp RPAREN BREAKLINE body opcional
+    (23) stm -> . RETURN exp BREAKLINE
+    (24) stm -> . RETURN BREAKLINE
+    (50) stm -> . assign BREAKLINE
+    (25) exp -> . exp PLUS exp
+    (26) exp -> . exp EXPONEN exp
+    (27) exp -> . exp MINUS exp
+    (28) exp -> . exp TIMES exp
+    (29) exp -> . exp DIVIDE exp
+    (30) exp -> . exp REST exp
+    (31) exp -> . exp DOUBLEEQUAL exp
+    (32) exp -> . exp TRIPLEEQUAL exp
+    (33) exp -> . exp DIFF exp
+    (34) exp -> . exp BIGGEST exp
+    (35) exp -> . exp BIGGESTEQUAL exp
+    (36) exp -> . exp SMALL exp
+    (37) exp -> . exp SMALLEQUAL exp
+    (38) exp -> . exp OR exp
+    (39) exp -> . exp AND exp
+    (40) exp -> . call
+    (41) exp -> . assign
+    (42) exp -> . NUMBER
+    (49) assign -> . ID EQUAL exp
+    (43) call -> . ID LPAREN sigParams RPAREN
+    (44) call -> . ID LPAREN RPAREN
+    (45) call -> . ID
+    (46) call -> . ID sigParams
+
+    WHILE           shift and go to state 24
+    FOR             shift and go to state 25
+    IF              shift and go to state 26
+    RETURN          shift and go to state 27
+    NUMBER          shift and go to state 16
+    ID              shift and go to state 19
+
+    exp                            shift and go to state 23
+    body                           shift and go to state 91
+    stms                           shift and go to state 21
+    stm                            shift and go to state 22
+    assign                         shift and go to state 28
+    call                           shift and go to state 14
+
+state 83
+
+    (21) stm -> IF LPAREN exp . RPAREN THEN BREAKLINE body opcional
+    (22) stm -> IF LPAREN exp . RPAREN BREAKLINE body opcional
+    (25) exp -> exp . PLUS exp
+    (26) exp -> exp . EXPONEN exp
+    (27) exp -> exp . MINUS exp
+    (28) exp -> exp . TIMES exp
+    (29) exp -> exp . DIVIDE exp
+    (30) exp -> exp . REST exp
+    (31) exp -> exp . DOUBLEEQUAL exp
+    (32) exp -> exp . TRIPLEEQUAL exp
+    (33) exp -> exp . DIFF exp
+    (34) exp -> exp . BIGGEST exp
+    (35) exp -> exp . BIGGESTEQUAL exp
+    (36) exp -> exp . SMALL exp
+    (37) exp -> exp . SMALLEQUAL exp
+    (38) exp -> exp . OR exp
+    (39) exp -> exp . AND exp
+
+    RPAREN          shift and go to state 92
+    PLUS            shift and go to state 31
+    EXPONEN         shift and go to state 32
+    MINUS           shift and go to state 33
+    TIMES           shift and go to state 34
+    DIVIDE          shift and go to state 35
+    REST            shift and go to state 36
+    DOUBLEEQUAL     shift and go to state 37
+    TRIPLEEQUAL     shift and go to state 38
+    DIFF            shift and go to state 39
+    BIGGEST         shift and go to state 40
+    BIGGESTEQUAL    shift and go to state 41
+    SMALL           shift and go to state 42
+    SMALLEQUAL      shift and go to state 43
+    OR              shift and go to state 44
+    AND             shift and go to state 45
+
+
+state 84
+
+    (23) stm -> RETURN exp BREAKLINE .
+
+    WHILE           reduce using rule 23 (stm -> RETURN exp BREAKLINE .)
+    FOR             reduce using rule 23 (stm -> RETURN exp BREAKLINE .)
+    IF              reduce using rule 23 (stm -> RETURN exp BREAKLINE .)
+    RETURN          reduce using rule 23 (stm -> RETURN exp BREAKLINE .)
+    NUMBER          reduce using rule 23 (stm -> RETURN exp BREAKLINE .)
+    ID              reduce using rule 23 (stm -> RETURN exp BREAKLINE .)
+    END             reduce using rule 23 (stm -> RETURN exp BREAKLINE .)
+
+
+state 85
+
+    (43) call -> ID LPAREN sigParams RPAREN .
+
+    PLUS            reduce using rule 43 (call -> ID LPAREN sigParams RPAREN .)
+    EXPONEN         reduce using rule 43 (call -> ID LPAREN sigParams RPAREN .)
+    MINUS           reduce using rule 43 (call -> ID LPAREN sigParams RPAREN .)
+    TIMES           reduce using rule 43 (call -> ID LPAREN sigParams RPAREN .)
+    DIVIDE          reduce using rule 43 (call -> ID LPAREN sigParams RPAREN .)
+    REST            reduce using rule 43 (call -> ID LPAREN sigParams RPAREN .)
+    DOUBLEEQUAL     reduce using rule 43 (call -> ID LPAREN sigParams RPAREN .)
+    TRIPLEEQUAL     reduce using rule 43 (call -> ID LPAREN sigParams RPAREN .)
+    DIFF            reduce using rule 43 (call -> ID LPAREN sigParams RPAREN .)
+    BIGGEST         reduce using rule 43 (call -> ID LPAREN sigParams RPAREN .)
+    BIGGESTEQUAL    reduce using rule 43 (call -> ID LPAREN sigParams RPAREN .)
+    SMALL           reduce using rule 43 (call -> ID LPAREN sigParams RPAREN .)
+    SMALLEQUAL      reduce using rule 43 (call -> ID LPAREN sigParams RPAREN .)
+    OR              reduce using rule 43 (call -> ID LPAREN sigParams RPAREN .)
+    AND             reduce using rule 43 (call -> ID LPAREN sigParams RPAREN .)
+    DEF             reduce using rule 43 (call -> ID LPAREN sigParams RPAREN .)
+    ID              reduce using rule 43 (call -> ID LPAREN sigParams RPAREN .)
+    $end            reduce using rule 43 (call -> ID LPAREN sigParams RPAREN .)
+    VIRGULA         reduce using rule 43 (call -> ID LPAREN sigParams RPAREN .)
+    RPAREN          reduce using rule 43 (call -> ID LPAREN sigParams RPAREN .)
+    BREAKLINE       reduce using rule 43 (call -> ID LPAREN sigParams RPAREN .)
+    THEN            reduce using rule 43 (call -> ID LPAREN sigParams RPAREN .)
+    DO              reduce using rule 43 (call -> ID LPAREN sigParams RPAREN .)
+
+
+state 86
+
+    (5) funcao -> DEF ID LPAREN sigParams RPAREN BREAKLINE body .
+
+    DEF             reduce using rule 5 (funcao -> DEF ID LPAREN sigParams RPAREN BREAKLINE body .)
+    ID              reduce using rule 5 (funcao -> DEF ID LPAREN sigParams RPAREN BREAKLINE body .)
+    $end            reduce using rule 5 (funcao -> DEF ID LPAREN sigParams RPAREN BREAKLINE body .)
+
+
+state 87
+
+    (15) stm -> WHILE LPAREN exp RPAREN . BREAKLINE body
+
+    BREAKLINE       shift and go to state 93
+
+
+state 88
+
+    (16) stm -> WHILE exp BREAKLINE body .
+
+    WHILE           reduce using rule 16 (stm -> WHILE exp BREAKLINE body .)
+    FOR             reduce using rule 16 (stm -> WHILE exp BREAKLINE body .)
+    IF              reduce using rule 16 (stm -> WHILE exp BREAKLINE body .)
+    RETURN          reduce using rule 16 (stm -> WHILE exp BREAKLINE body .)
+    NUMBER          reduce using rule 16 (stm -> WHILE exp BREAKLINE body .)
+    ID              reduce using rule 16 (stm -> WHILE exp BREAKLINE body .)
+    END             reduce using rule 16 (stm -> WHILE exp BREAKLINE body .)
+
+
+state 89
+
+    (17) stm -> FOR ID IN exp . DO BREAKLINE body
+    (18) stm -> FOR ID IN exp . BREAKLINE body
+    (25) exp -> exp . PLUS exp
+    (26) exp -> exp . EXPONEN exp
+    (27) exp -> exp . MINUS exp
+    (28) exp -> exp . TIMES exp
+    (29) exp -> exp . DIVIDE exp
+    (30) exp -> exp . REST exp
+    (31) exp -> exp . DOUBLEEQUAL exp
+    (32) exp -> exp . TRIPLEEQUAL exp
+    (33) exp -> exp . DIFF exp
+    (34) exp -> exp . BIGGEST exp
+    (35) exp -> exp . BIGGESTEQUAL exp
+    (36) exp -> exp . SMALL exp
+    (37) exp -> exp . SMALLEQUAL exp
+    (38) exp -> exp . OR exp
+    (39) exp -> exp . AND exp
+
+    DO              shift and go to state 94
+    BREAKLINE       shift and go to state 95
+    PLUS            shift and go to state 31
+    EXPONEN         shift and go to state 32
+    MINUS           shift and go to state 33
+    TIMES           shift and go to state 34
+    DIVIDE          shift and go to state 35
+    REST            shift and go to state 36
+    DOUBLEEQUAL     shift and go to state 37
+    TRIPLEEQUAL     shift and go to state 38
+    DIFF            shift and go to state 39
+    BIGGEST         shift and go to state 40
+    BIGGESTEQUAL    shift and go to state 41
+    SMALL           shift and go to state 42
+    SMALLEQUAL      shift and go to state 43
+    OR              shift and go to state 44
+    AND             shift and go to state 45
+
+
+state 90
+
+    (19) stm -> IF exp THEN BREAKLINE . body opcional
+    (13) body -> . stms END
+    (7) stms -> . stm
+    (8) stms -> . stm stms
+    (14) stm -> . exp BREAKLINE
+    (15) stm -> . WHILE LPAREN exp RPAREN BREAKLINE body
+    (16) stm -> . WHILE exp BREAKLINE body
+    (17) stm -> . FOR ID IN exp DO BREAKLINE body
+    (18) stm -> . FOR ID IN exp BREAKLINE body
+    (19) stm -> . IF exp THEN BREAKLINE body opcional
+    (20) stm -> . IF exp BREAKLINE body opcional
+    (21) stm -> . IF LPAREN exp RPAREN THEN BREAKLINE body opcional
+    (22) stm -> . IF LPAREN exp RPAREN BREAKLINE body opcional
+    (23) stm -> . RETURN exp BREAKLINE
+    (24) stm -> . RETURN BREAKLINE
+    (50) stm -> . assign BREAKLINE
+    (25) exp -> . exp PLUS exp
+    (26) exp -> . exp EXPONEN exp
+    (27) exp -> . exp MINUS exp
+    (28) exp -> . exp TIMES exp
+    (29) exp -> . exp DIVIDE exp
+    (30) exp -> . exp REST exp
+    (31) exp -> . exp DOUBLEEQUAL exp
+    (32) exp -> . exp TRIPLEEQUAL exp
+    (33) exp -> . exp DIFF exp
+    (34) exp -> . exp BIGGEST exp
+    (35) exp -> . exp BIGGESTEQUAL exp
+    (36) exp -> . exp SMALL exp
+    (37) exp -> . exp SMALLEQUAL exp
+    (38) exp -> . exp OR exp
+    (39) exp -> . exp AND exp
+    (40) exp -> . call
+    (41) exp -> . assign
+    (42) exp -> . NUMBER
+    (49) assign -> . ID EQUAL exp
+    (43) call -> . ID LPAREN sigParams RPAREN
+    (44) call -> . ID LPAREN RPAREN
+    (45) call -> . ID
+    (46) call -> . ID sigParams
+
+    WHILE           shift and go to state 24
+    FOR             shift and go to state 25
+    IF              shift and go to state 26
+    RETURN          shift and go to state 27
+    NUMBER          shift and go to state 16
+    ID              shift and go to state 19
+
+    exp                            shift and go to state 23
+    body                           shift and go to state 96
+    stms                           shift and go to state 21
+    stm                            shift and go to state 22
+    assign                         shift and go to state 28
+    call                           shift and go to state 14
+
+state 91
+
+    (20) stm -> IF exp BREAKLINE body . opcional
+    (9) opcional -> . ELSIF exp THEN body
+    (10) opcional -> . ELSE stms END
+    (11) opcional -> .
+    (12) opcional -> . ELSIF exp THEN body opcional
+
+    ELSIF           shift and go to state 98
+    ELSE            shift and go to state 99
+    WHILE           reduce using rule 11 (opcional -> .)
+    FOR             reduce using rule 11 (opcional -> .)
+    IF              reduce using rule 11 (opcional -> .)
+    RETURN          reduce using rule 11 (opcional -> .)
+    NUMBER          reduce using rule 11 (opcional -> .)
+    ID              reduce using rule 11 (opcional -> .)
+    END             reduce using rule 11 (opcional -> .)
+
+    opcional                       shift and go to state 97
+
+state 92
+
+    (21) stm -> IF LPAREN exp RPAREN . THEN BREAKLINE body opcional
+    (22) stm -> IF LPAREN exp RPAREN . BREAKLINE body opcional
+
+    THEN            shift and go to state 100
+    BREAKLINE       shift and go to state 101
+
+
+state 93
+
+    (15) stm -> WHILE LPAREN exp RPAREN BREAKLINE . body
+    (13) body -> . stms END
+    (7) stms -> . stm
+    (8) stms -> . stm stms
+    (14) stm -> . exp BREAKLINE
+    (15) stm -> . WHILE LPAREN exp RPAREN BREAKLINE body
+    (16) stm -> . WHILE exp BREAKLINE body
+    (17) stm -> . FOR ID IN exp DO BREAKLINE body
+    (18) stm -> . FOR ID IN exp BREAKLINE body
+    (19) stm -> . IF exp THEN BREAKLINE body opcional
+    (20) stm -> . IF exp BREAKLINE body opcional
+    (21) stm -> . IF LPAREN exp RPAREN THEN BREAKLINE body opcional
+    (22) stm -> . IF LPAREN exp RPAREN BREAKLINE body opcional
+    (23) stm -> . RETURN exp BREAKLINE
+    (24) stm -> . RETURN BREAKLINE
+    (50) stm -> . assign BREAKLINE
+    (25) exp -> . exp PLUS exp
+    (26) exp -> . exp EXPONEN exp
+    (27) exp -> . exp MINUS exp
+    (28) exp -> . exp TIMES exp
+    (29) exp -> . exp DIVIDE exp
+    (30) exp -> . exp REST exp
+    (31) exp -> . exp DOUBLEEQUAL exp
+    (32) exp -> . exp TRIPLEEQUAL exp
+    (33) exp -> . exp DIFF exp
+    (34) exp -> . exp BIGGEST exp
+    (35) exp -> . exp BIGGESTEQUAL exp
+    (36) exp -> . exp SMALL exp
+    (37) exp -> . exp SMALLEQUAL exp
+    (38) exp -> . exp OR exp
+    (39) exp -> . exp AND exp
+    (40) exp -> . call
+    (41) exp -> . assign
+    (42) exp -> . NUMBER
+    (49) assign -> . ID EQUAL exp
+    (43) call -> . ID LPAREN sigParams RPAREN
+    (44) call -> . ID LPAREN RPAREN
+    (45) call -> . ID
+    (46) call -> . ID sigParams
+
+    WHILE           shift and go to state 24
+    FOR             shift and go to state 25
+    IF              shift and go to state 26
+    RETURN          shift and go to state 27
+    NUMBER          shift and go to state 16
+    ID              shift and go to state 19
+
+    exp                            shift and go to state 23
+    body                           shift and go to state 102
+    stms                           shift and go to state 21
+    stm                            shift and go to state 22
+    assign                         shift and go to state 28
+    call                           shift and go to state 14
+
+state 94
+
+    (17) stm -> FOR ID IN exp DO . BREAKLINE body
+
+    BREAKLINE       shift and go to state 103
+
+
+state 95
+
+    (18) stm -> FOR ID IN exp BREAKLINE . body
+    (13) body -> . stms END
+    (7) stms -> . stm
+    (8) stms -> . stm stms
+    (14) stm -> . exp BREAKLINE
+    (15) stm -> . WHILE LPAREN exp RPAREN BREAKLINE body
+    (16) stm -> . WHILE exp BREAKLINE body
+    (17) stm -> . FOR ID IN exp DO BREAKLINE body
+    (18) stm -> . FOR ID IN exp BREAKLINE body
+    (19) stm -> . IF exp THEN BREAKLINE body opcional
+    (20) stm -> . IF exp BREAKLINE body opcional
+    (21) stm -> . IF LPAREN exp RPAREN THEN BREAKLINE body opcional
+    (22) stm -> . IF LPAREN exp RPAREN BREAKLINE body opcional
+    (23) stm -> . RETURN exp BREAKLINE
+    (24) stm -> . RETURN BREAKLINE
+    (50) stm -> . assign BREAKLINE
+    (25) exp -> . exp PLUS exp
+    (26) exp -> . exp EXPONEN exp
+    (27) exp -> . exp MINUS exp
+    (28) exp -> . exp TIMES exp
+    (29) exp -> . exp DIVIDE exp
+    (30) exp -> . exp REST exp
+    (31) exp -> . exp DOUBLEEQUAL exp
+    (32) exp -> . exp TRIPLEEQUAL exp
+    (33) exp -> . exp DIFF exp
+    (34) exp -> . exp BIGGEST exp
+    (35) exp -> . exp BIGGESTEQUAL exp
+    (36) exp -> . exp SMALL exp
+    (37) exp -> . exp SMALLEQUAL exp
+    (38) exp -> . exp OR exp
+    (39) exp -> . exp AND exp
+    (40) exp -> . call
+    (41) exp -> . assign
+    (42) exp -> . NUMBER
+    (49) assign -> . ID EQUAL exp
+    (43) call -> . ID LPAREN sigParams RPAREN
+    (44) call -> . ID LPAREN RPAREN
+    (45) call -> . ID
+    (46) call -> . ID sigParams
+
+    WHILE           shift and go to state 24
+    FOR             shift and go to state 25
+    IF              shift and go to state 26
+    RETURN          shift and go to state 27
+    NUMBER          shift and go to state 16
+    ID              shift and go to state 19
+
+    exp                            shift and go to state 23
+    body                           shift and go to state 104
+    stms                           shift and go to state 21
+    stm                            shift and go to state 22
+    assign                         shift and go to state 28
+    call                           shift and go to state 14
+
+state 96
+
+    (19) stm -> IF exp THEN BREAKLINE body . opcional
+    (9) opcional -> . ELSIF exp THEN body
+    (10) opcional -> . ELSE stms END
+    (11) opcional -> .
+    (12) opcional -> . ELSIF exp THEN body opcional
+
+    ELSIF           shift and go to state 98
+    ELSE            shift and go to state 99
+    WHILE           reduce using rule 11 (opcional -> .)
+    FOR             reduce using rule 11 (opcional -> .)
+    IF              reduce using rule 11 (opcional -> .)
+    RETURN          reduce using rule 11 (opcional -> .)
+    NUMBER          reduce using rule 11 (opcional -> .)
+    ID              reduce using rule 11 (opcional -> .)
+    END             reduce using rule 11 (opcional -> .)
+
+    opcional                       shift and go to state 105
+
+state 97
+
+    (20) stm -> IF exp BREAKLINE body opcional .
+
+    WHILE           reduce using rule 20 (stm -> IF exp BREAKLINE body opcional .)
+    FOR             reduce using rule 20 (stm -> IF exp BREAKLINE body opcional .)
+    IF              reduce using rule 20 (stm -> IF exp BREAKLINE body opcional .)
+    RETURN          reduce using rule 20 (stm -> IF exp BREAKLINE body opcional .)
+    NUMBER          reduce using rule 20 (stm -> IF exp BREAKLINE body opcional .)
+    ID              reduce using rule 20 (stm -> IF exp BREAKLINE body opcional .)
+    END             reduce using rule 20 (stm -> IF exp BREAKLINE body opcional .)
+
+
+state 98
+
+    (9) opcional -> ELSIF . exp THEN body
+    (12) opcional -> ELSIF . exp THEN body opcional
+    (25) exp -> . exp PLUS exp
+    (26) exp -> . exp EXPONEN exp
+    (27) exp -> . exp MINUS exp
+    (28) exp -> . exp TIMES exp
+    (29) exp -> . exp DIVIDE exp
+    (30) exp -> . exp REST exp
+    (31) exp -> . exp DOUBLEEQUAL exp
+    (32) exp -> . exp TRIPLEEQUAL exp
+    (33) exp -> . exp DIFF exp
+    (34) exp -> . exp BIGGEST exp
+    (35) exp -> . exp BIGGESTEQUAL exp
+    (36) exp -> . exp SMALL exp
+    (37) exp -> . exp SMALLEQUAL exp
+    (38) exp -> . exp OR exp
+    (39) exp -> . exp AND exp
+    (40) exp -> . call
+    (41) exp -> . assign
+    (42) exp -> . NUMBER
+    (43) call -> . ID LPAREN sigParams RPAREN
+    (44) call -> . ID LPAREN RPAREN
+    (45) call -> . ID
+    (46) call -> . ID sigParams
+    (49) assign -> . ID EQUAL exp
+
+    NUMBER          shift and go to state 16
+    ID              shift and go to state 12
+
+    exp                            shift and go to state 106
+    call                           shift and go to state 14
+    assign                         shift and go to state 15
+
+state 99
+
+    (10) opcional -> ELSE . stms END
+    (7) stms -> . stm
+    (8) stms -> . stm stms
+    (14) stm -> . exp BREAKLINE
+    (15) stm -> . WHILE LPAREN exp RPAREN BREAKLINE body
+    (16) stm -> . WHILE exp BREAKLINE body
+    (17) stm -> . FOR ID IN exp DO BREAKLINE body
+    (18) stm -> . FOR ID IN exp BREAKLINE body
+    (19) stm -> . IF exp THEN BREAKLINE body opcional
+    (20) stm -> . IF exp BREAKLINE body opcional
+    (21) stm -> . IF LPAREN exp RPAREN THEN BREAKLINE body opcional
+    (22) stm -> . IF LPAREN exp RPAREN BREAKLINE body opcional
+    (23) stm -> . RETURN exp BREAKLINE
+    (24) stm -> . RETURN BREAKLINE
+    (50) stm -> . assign BREAKLINE
+    (25) exp -> . exp PLUS exp
+    (26) exp -> . exp EXPONEN exp
+    (27) exp -> . exp MINUS exp
+    (28) exp -> . exp TIMES exp
+    (29) exp -> . exp DIVIDE exp
+    (30) exp -> . exp REST exp
+    (31) exp -> . exp DOUBLEEQUAL exp
+    (32) exp -> . exp TRIPLEEQUAL exp
+    (33) exp -> . exp DIFF exp
+    (34) exp -> . exp BIGGEST exp
+    (35) exp -> . exp BIGGESTEQUAL exp
+    (36) exp -> . exp SMALL exp
+    (37) exp -> . exp SMALLEQUAL exp
+    (38) exp -> . exp OR exp
+    (39) exp -> . exp AND exp
+    (40) exp -> . call
+    (41) exp -> . assign
+    (42) exp -> . NUMBER
+    (49) assign -> . ID EQUAL exp
+    (43) call -> . ID LPAREN sigParams RPAREN
+    (44) call -> . ID LPAREN RPAREN
+    (45) call -> . ID
+    (46) call -> . ID sigParams
+
+    WHILE           shift and go to state 24
+    FOR             shift and go to state 25
+    IF              shift and go to state 26
+    RETURN          shift and go to state 27
+    NUMBER          shift and go to state 16
+    ID              shift and go to state 19
+
+    stms                           shift and go to state 107
+    stm                            shift and go to state 22
+    exp                            shift and go to state 23
+    assign                         shift and go to state 28
+    call                           shift and go to state 14
+
+state 100
+
+    (21) stm -> IF LPAREN exp RPAREN THEN . BREAKLINE body opcional
+
+    BREAKLINE       shift and go to state 108
+
+
+state 101
+
+    (22) stm -> IF LPAREN exp RPAREN BREAKLINE . body opcional
+    (13) body -> . stms END
+    (7) stms -> . stm
+    (8) stms -> . stm stms
+    (14) stm -> . exp BREAKLINE
+    (15) stm -> . WHILE LPAREN exp RPAREN BREAKLINE body
+    (16) stm -> . WHILE exp BREAKLINE body
+    (17) stm -> . FOR ID IN exp DO BREAKLINE body
+    (18) stm -> . FOR ID IN exp BREAKLINE body
+    (19) stm -> . IF exp THEN BREAKLINE body opcional
+    (20) stm -> . IF exp BREAKLINE body opcional
+    (21) stm -> . IF LPAREN exp RPAREN THEN BREAKLINE body opcional
+    (22) stm -> . IF LPAREN exp RPAREN BREAKLINE body opcional
+    (23) stm -> . RETURN exp BREAKLINE
+    (24) stm -> . RETURN BREAKLINE
+    (50) stm -> . assign BREAKLINE
+    (25) exp -> . exp PLUS exp
+    (26) exp -> . exp EXPONEN exp
+    (27) exp -> . exp MINUS exp
+    (28) exp -> . exp TIMES exp
+    (29) exp -> . exp DIVIDE exp
+    (30) exp -> . exp REST exp
+    (31) exp -> . exp DOUBLEEQUAL exp
+    (32) exp -> . exp TRIPLEEQUAL exp
+    (33) exp -> . exp DIFF exp
+    (34) exp -> . exp BIGGEST exp
+    (35) exp -> . exp BIGGESTEQUAL exp
+    (36) exp -> . exp SMALL exp
+    (37) exp -> . exp SMALLEQUAL exp
+    (38) exp -> . exp OR exp
+    (39) exp -> . exp AND exp
+    (40) exp -> . call
+    (41) exp -> . assign
+    (42) exp -> . NUMBER
+    (49) assign -> . ID EQUAL exp
+    (43) call -> . ID LPAREN sigParams RPAREN
+    (44) call -> . ID LPAREN RPAREN
+    (45) call -> . ID
+    (46) call -> . ID sigParams
+
+    WHILE           shift and go to state 24
+    FOR             shift and go to state 25
+    IF              shift and go to state 26
+    RETURN          shift and go to state 27
+    NUMBER          shift and go to state 16
+    ID              shift and go to state 19
+
+    exp                            shift and go to state 23
+    body                           shift and go to state 109
+    stms                           shift and go to state 21
+    stm                            shift and go to state 22
+    assign                         shift and go to state 28
+    call                           shift and go to state 14
+
+state 102
+
+    (15) stm -> WHILE LPAREN exp RPAREN BREAKLINE body .
+
+    WHILE           reduce using rule 15 (stm -> WHILE LPAREN exp RPAREN BREAKLINE body .)
+    FOR             reduce using rule 15 (stm -> WHILE LPAREN exp RPAREN BREAKLINE body .)
+    IF              reduce using rule 15 (stm -> WHILE LPAREN exp RPAREN BREAKLINE body .)
+    RETURN          reduce using rule 15 (stm -> WHILE LPAREN exp RPAREN BREAKLINE body .)
+    NUMBER          reduce using rule 15 (stm -> WHILE LPAREN exp RPAREN BREAKLINE body .)
+    ID              reduce using rule 15 (stm -> WHILE LPAREN exp RPAREN BREAKLINE body .)
+    END             reduce using rule 15 (stm -> WHILE LPAREN exp RPAREN BREAKLINE body .)
+
+
+state 103
+
+    (17) stm -> FOR ID IN exp DO BREAKLINE . body
+    (13) body -> . stms END
+    (7) stms -> . stm
+    (8) stms -> . stm stms
+    (14) stm -> . exp BREAKLINE
+    (15) stm -> . WHILE LPAREN exp RPAREN BREAKLINE body
+    (16) stm -> . WHILE exp BREAKLINE body
+    (17) stm -> . FOR ID IN exp DO BREAKLINE body
+    (18) stm -> . FOR ID IN exp BREAKLINE body
+    (19) stm -> . IF exp THEN BREAKLINE body opcional
+    (20) stm -> . IF exp BREAKLINE body opcional
+    (21) stm -> . IF LPAREN exp RPAREN THEN BREAKLINE body opcional
+    (22) stm -> . IF LPAREN exp RPAREN BREAKLINE body opcional
+    (23) stm -> . RETURN exp BREAKLINE
+    (24) stm -> . RETURN BREAKLINE
+    (50) stm -> . assign BREAKLINE
+    (25) exp -> . exp PLUS exp
+    (26) exp -> . exp EXPONEN exp
+    (27) exp -> . exp MINUS exp
+    (28) exp -> . exp TIMES exp
+    (29) exp -> . exp DIVIDE exp
+    (30) exp -> . exp REST exp
+    (31) exp -> . exp DOUBLEEQUAL exp
+    (32) exp -> . exp TRIPLEEQUAL exp
+    (33) exp -> . exp DIFF exp
+    (34) exp -> . exp BIGGEST exp
+    (35) exp -> . exp BIGGESTEQUAL exp
+    (36) exp -> . exp SMALL exp
+    (37) exp -> . exp SMALLEQUAL exp
+    (38) exp -> . exp OR exp
+    (39) exp -> . exp AND exp
+    (40) exp -> . call
+    (41) exp -> . assign
+    (42) exp -> . NUMBER
+    (49) assign -> . ID EQUAL exp
+    (43) call -> . ID LPAREN sigParams RPAREN
+    (44) call -> . ID LPAREN RPAREN
+    (45) call -> . ID
+    (46) call -> . ID sigParams
+
+    WHILE           shift and go to state 24
+    FOR             shift and go to state 25
+    IF              shift and go to state 26
+    RETURN          shift and go to state 27
+    NUMBER          shift and go to state 16
+    ID              shift and go to state 19
+
+    exp                            shift and go to state 23
+    body                           shift and go to state 110
+    stms                           shift and go to state 21
+    stm                            shift and go to state 22
+    assign                         shift and go to state 28
+    call                           shift and go to state 14
+
+state 104
+
+    (18) stm -> FOR ID IN exp BREAKLINE body .
+
+    WHILE           reduce using rule 18 (stm -> FOR ID IN exp BREAKLINE body .)
+    FOR             reduce using rule 18 (stm -> FOR ID IN exp BREAKLINE body .)
+    IF              reduce using rule 18 (stm -> FOR ID IN exp BREAKLINE body .)
+    RETURN          reduce using rule 18 (stm -> FOR ID IN exp BREAKLINE body .)
+    NUMBER          reduce using rule 18 (stm -> FOR ID IN exp BREAKLINE body .)
+    ID              reduce using rule 18 (stm -> FOR ID IN exp BREAKLINE body .)
+    END             reduce using rule 18 (stm -> FOR ID IN exp BREAKLINE body .)
+
+
+state 105
+
+    (19) stm -> IF exp THEN BREAKLINE body opcional .
+
+    WHILE           reduce using rule 19 (stm -> IF exp THEN BREAKLINE body opcional .)
+    FOR             reduce using rule 19 (stm -> IF exp THEN BREAKLINE body opcional .)
+    IF              reduce using rule 19 (stm -> IF exp THEN BREAKLINE body opcional .)
+    RETURN          reduce using rule 19 (stm -> IF exp THEN BREAKLINE body opcional .)
+    NUMBER          reduce using rule 19 (stm -> IF exp THEN BREAKLINE body opcional .)
+    ID              reduce using rule 19 (stm -> IF exp THEN BREAKLINE body opcional .)
+    END             reduce using rule 19 (stm -> IF exp THEN BREAKLINE body opcional .)
+
+
+state 106
+
+    (9) opcional -> ELSIF exp . THEN body
+    (12) opcional -> ELSIF exp . THEN body opcional
+    (25) exp -> exp . PLUS exp
+    (26) exp -> exp . EXPONEN exp
+    (27) exp -> exp . MINUS exp
+    (28) exp -> exp . TIMES exp
+    (29) exp -> exp . DIVIDE exp
+    (30) exp -> exp . REST exp
+    (31) exp -> exp . DOUBLEEQUAL exp
+    (32) exp -> exp . TRIPLEEQUAL exp
+    (33) exp -> exp . DIFF exp
+    (34) exp -> exp . BIGGEST exp
+    (35) exp -> exp . BIGGESTEQUAL exp
+    (36) exp -> exp . SMALL exp
+    (37) exp -> exp . SMALLEQUAL exp
+    (38) exp -> exp . OR exp
+    (39) exp -> exp . AND exp
+
+    THEN            shift and go to state 111
+    PLUS            shift and go to state 31
+    EXPONEN         shift and go to state 32
+    MINUS           shift and go to state 33
+    TIMES           shift and go to state 34
+    DIVIDE          shift and go to state 35
+    REST            shift and go to state 36
+    DOUBLEEQUAL     shift and go to state 37
+    TRIPLEEQUAL     shift and go to state 38
+    DIFF            shift and go to state 39
+    BIGGEST         shift and go to state 40
+    BIGGESTEQUAL    shift and go to state 41
+    SMALL           shift and go to state 42
+    SMALLEQUAL      shift and go to state 43
+    OR              shift and go to state 44
+    AND             shift and go to state 45
+
+
+state 107
+
+    (10) opcional -> ELSE stms . END
+
+    END             shift and go to state 112
+
+
+state 108
+
+    (21) stm -> IF LPAREN exp RPAREN THEN BREAKLINE . body opcional
+    (13) body -> . stms END
+    (7) stms -> . stm
+    (8) stms -> . stm stms
+    (14) stm -> . exp BREAKLINE
+    (15) stm -> . WHILE LPAREN exp RPAREN BREAKLINE body
+    (16) stm -> . WHILE exp BREAKLINE body
+    (17) stm -> . FOR ID IN exp DO BREAKLINE body
+    (18) stm -> . FOR ID IN exp BREAKLINE body
+    (19) stm -> . IF exp THEN BREAKLINE body opcional
+    (20) stm -> . IF exp BREAKLINE body opcional
+    (21) stm -> . IF LPAREN exp RPAREN THEN BREAKLINE body opcional
+    (22) stm -> . IF LPAREN exp RPAREN BREAKLINE body opcional
+    (23) stm -> . RETURN exp BREAKLINE
+    (24) stm -> . RETURN BREAKLINE
+    (50) stm -> . assign BREAKLINE
+    (25) exp -> . exp PLUS exp
+    (26) exp -> . exp EXPONEN exp
+    (27) exp -> . exp MINUS exp
+    (28) exp -> . exp TIMES exp
+    (29) exp -> . exp DIVIDE exp
+    (30) exp -> . exp REST exp
+    (31) exp -> . exp DOUBLEEQUAL exp
+    (32) exp -> . exp TRIPLEEQUAL exp
+    (33) exp -> . exp DIFF exp
+    (34) exp -> . exp BIGGEST exp
+    (35) exp -> . exp BIGGESTEQUAL exp
+    (36) exp -> . exp SMALL exp
+    (37) exp -> . exp SMALLEQUAL exp
+    (38) exp -> . exp OR exp
+    (39) exp -> . exp AND exp
+    (40) exp -> . call
+    (41) exp -> . assign
+    (42) exp -> . NUMBER
+    (49) assign -> . ID EQUAL exp
+    (43) call -> . ID LPAREN sigParams RPAREN
+    (44) call -> . ID LPAREN RPAREN
+    (45) call -> . ID
+    (46) call -> . ID sigParams
+
+    WHILE           shift and go to state 24
+    FOR             shift and go to state 25
+    IF              shift and go to state 26
+    RETURN          shift and go to state 27
+    NUMBER          shift and go to state 16
+    ID              shift and go to state 19
+
+    exp                            shift and go to state 23
+    body                           shift and go to state 113
+    stms                           shift and go to state 21
+    stm                            shift and go to state 22
+    assign                         shift and go to state 28
+    call                           shift and go to state 14
+
+state 109
+
+    (22) stm -> IF LPAREN exp RPAREN BREAKLINE body . opcional
+    (9) opcional -> . ELSIF exp THEN body
+    (10) opcional -> . ELSE stms END
+    (11) opcional -> .
+    (12) opcional -> . ELSIF exp THEN body opcional
+
+    ELSIF           shift and go to state 98
+    ELSE            shift and go to state 99
+    WHILE           reduce using rule 11 (opcional -> .)
+    FOR             reduce using rule 11 (opcional -> .)
+    IF              reduce using rule 11 (opcional -> .)
+    RETURN          reduce using rule 11 (opcional -> .)
+    NUMBER          reduce using rule 11 (opcional -> .)
+    ID              reduce using rule 11 (opcional -> .)
+    END             reduce using rule 11 (opcional -> .)
+
+    opcional                       shift and go to state 114
+
+state 110
+
+    (17) stm -> FOR ID IN exp DO BREAKLINE body .
+
+    WHILE           reduce using rule 17 (stm -> FOR ID IN exp DO BREAKLINE body .)
+    FOR             reduce using rule 17 (stm -> FOR ID IN exp DO BREAKLINE body .)
+    IF              reduce using rule 17 (stm -> FOR ID IN exp DO BREAKLINE body .)
+    RETURN          reduce using rule 17 (stm -> FOR ID IN exp DO BREAKLINE body .)
+    NUMBER          reduce using rule 17 (stm -> FOR ID IN exp DO BREAKLINE body .)
+    ID              reduce using rule 17 (stm -> FOR ID IN exp DO BREAKLINE body .)
+    END             reduce using rule 17 (stm -> FOR ID IN exp DO BREAKLINE body .)
+
+
+state 111
+
+    (9) opcional -> ELSIF exp THEN . body
+    (12) opcional -> ELSIF exp THEN . body opcional
+    (13) body -> . stms END
+    (7) stms -> . stm
+    (8) stms -> . stm stms
+    (14) stm -> . exp BREAKLINE
+    (15) stm -> . WHILE LPAREN exp RPAREN BREAKLINE body
+    (16) stm -> . WHILE exp BREAKLINE body
+    (17) stm -> . FOR ID IN exp DO BREAKLINE body
+    (18) stm -> . FOR ID IN exp BREAKLINE body
+    (19) stm -> . IF exp THEN BREAKLINE body opcional
+    (20) stm -> . IF exp BREAKLINE body opcional
+    (21) stm -> . IF LPAREN exp RPAREN THEN BREAKLINE body opcional
+    (22) stm -> . IF LPAREN exp RPAREN BREAKLINE body opcional
+    (23) stm -> . RETURN exp BREAKLINE
+    (24) stm -> . RETURN BREAKLINE
+    (50) stm -> . assign BREAKLINE
+    (25) exp -> . exp PLUS exp
+    (26) exp -> . exp EXPONEN exp
+    (27) exp -> . exp MINUS exp
+    (28) exp -> . exp TIMES exp
+    (29) exp -> . exp DIVIDE exp
+    (30) exp -> . exp REST exp
+    (31) exp -> . exp DOUBLEEQUAL exp
+    (32) exp -> . exp TRIPLEEQUAL exp
+    (33) exp -> . exp DIFF exp
+    (34) exp -> . exp BIGGEST exp
+    (35) exp -> . exp BIGGESTEQUAL exp
+    (36) exp -> . exp SMALL exp
+    (37) exp -> . exp SMALLEQUAL exp
+    (38) exp -> . exp OR exp
+    (39) exp -> . exp AND exp
+    (40) exp -> . call
+    (41) exp -> . assign
+    (42) exp -> . NUMBER
+    (49) assign -> . ID EQUAL exp
+    (43) call -> . ID LPAREN sigParams RPAREN
+    (44) call -> . ID LPAREN RPAREN
+    (45) call -> . ID
+    (46) call -> . ID sigParams
+
+    WHILE           shift and go to state 24
+    FOR             shift and go to state 25
+    IF              shift and go to state 26
+    RETURN          shift and go to state 27
+    NUMBER          shift and go to state 16
+    ID              shift and go to state 19
+
+    exp                            shift and go to state 23
+    body                           shift and go to state 115
+    stms                           shift and go to state 21
+    stm                            shift and go to state 22
+    assign                         shift and go to state 28
+    call                           shift and go to state 14
+
+state 112
+
+    (10) opcional -> ELSE stms END .
+
+    WHILE           reduce using rule 10 (opcional -> ELSE stms END .)
+    FOR             reduce using rule 10 (opcional -> ELSE stms END .)
+    IF              reduce using rule 10 (opcional -> ELSE stms END .)
+    RETURN          reduce using rule 10 (opcional -> ELSE stms END .)
+    NUMBER          reduce using rule 10 (opcional -> ELSE stms END .)
+    ID              reduce using rule 10 (opcional -> ELSE stms END .)
+    END             reduce using rule 10 (opcional -> ELSE stms END .)
+
+
+state 113
+
+    (21) stm -> IF LPAREN exp RPAREN THEN BREAKLINE body . opcional
+    (9) opcional -> . ELSIF exp THEN body
+    (10) opcional -> . ELSE stms END
+    (11) opcional -> .
+    (12) opcional -> . ELSIF exp THEN body opcional
+
+    ELSIF           shift and go to state 98
+    ELSE            shift and go to state 99
+    WHILE           reduce using rule 11 (opcional -> .)
+    FOR             reduce using rule 11 (opcional -> .)
+    IF              reduce using rule 11 (opcional -> .)
+    RETURN          reduce using rule 11 (opcional -> .)
+    NUMBER          reduce using rule 11 (opcional -> .)
+    ID              reduce using rule 11 (opcional -> .)
+    END             reduce using rule 11 (opcional -> .)
+
+    opcional                       shift and go to state 116
+
+state 114
+
+    (22) stm -> IF LPAREN exp RPAREN BREAKLINE body opcional .
+
+    WHILE           reduce using rule 22 (stm -> IF LPAREN exp RPAREN BREAKLINE body opcional .)
+    FOR             reduce using rule 22 (stm -> IF LPAREN exp RPAREN BREAKLINE body opcional .)
+    IF              reduce using rule 22 (stm -> IF LPAREN exp RPAREN BREAKLINE body opcional .)
+    RETURN          reduce using rule 22 (stm -> IF LPAREN exp RPAREN BREAKLINE body opcional .)
+    NUMBER          reduce using rule 22 (stm -> IF LPAREN exp RPAREN BREAKLINE body opcional .)
+    ID              reduce using rule 22 (stm -> IF LPAREN exp RPAREN BREAKLINE body opcional .)
+    END             reduce using rule 22 (stm -> IF LPAREN exp RPAREN BREAKLINE body opcional .)
+
+
+state 115
+
+    (9) opcional -> ELSIF exp THEN body .
+    (12) opcional -> ELSIF exp THEN body . opcional
+    (9) opcional -> . ELSIF exp THEN body
+    (10) opcional -> . ELSE stms END
+    (11) opcional -> .
+    (12) opcional -> . ELSIF exp THEN body opcional
+
+  ! reduce/reduce conflict for WHILE resolved using rule 9 (opcional -> ELSIF exp THEN body .)
+  ! reduce/reduce conflict for FOR resolved using rule 9 (opcional -> ELSIF exp THEN body .)
+  ! reduce/reduce conflict for IF resolved using rule 9 (opcional -> ELSIF exp THEN body .)
+  ! reduce/reduce conflict for RETURN resolved using rule 9 (opcional -> ELSIF exp THEN body .)
+  ! reduce/reduce conflict for NUMBER resolved using rule 9 (opcional -> ELSIF exp THEN body .)
+  ! reduce/reduce conflict for ID resolved using rule 9 (opcional -> ELSIF exp THEN body .)
+  ! reduce/reduce conflict for END resolved using rule 9 (opcional -> ELSIF exp THEN body .)
+    WHILE           reduce using rule 9 (opcional -> ELSIF exp THEN body .)
+    FOR             reduce using rule 9 (opcional -> ELSIF exp THEN body .)
+    IF              reduce using rule 9 (opcional -> ELSIF exp THEN body .)
+    RETURN          reduce using rule 9 (opcional -> ELSIF exp THEN body .)
+    NUMBER          reduce using rule 9 (opcional -> ELSIF exp THEN body .)
+    ID              reduce using rule 9 (opcional -> ELSIF exp THEN body .)
+    END             reduce using rule 9 (opcional -> ELSIF exp THEN body .)
+    ELSIF           shift and go to state 98
+    ELSE            shift and go to state 99
+
+  ! WHILE           [ reduce using rule 11 (opcional -> .) ]
+  ! FOR             [ reduce using rule 11 (opcional -> .) ]
+  ! IF              [ reduce using rule 11 (opcional -> .) ]
+  ! RETURN          [ reduce using rule 11 (opcional -> .) ]
+  ! NUMBER          [ reduce using rule 11 (opcional -> .) ]
+  ! ID              [ reduce using rule 11 (opcional -> .) ]
+  ! END             [ reduce using rule 11 (opcional -> .) ]
+
+    opcional                       shift and go to state 117
+
+state 116
+
+    (21) stm -> IF LPAREN exp RPAREN THEN BREAKLINE body opcional .
+
+    WHILE           reduce using rule 21 (stm -> IF LPAREN exp RPAREN THEN BREAKLINE body opcional .)
+    FOR             reduce using rule 21 (stm -> IF LPAREN exp RPAREN THEN BREAKLINE body opcional .)
+    IF              reduce using rule 21 (stm -> IF LPAREN exp RPAREN THEN BREAKLINE body opcional .)
+    RETURN          reduce using rule 21 (stm -> IF LPAREN exp RPAREN THEN BREAKLINE body opcional .)
+    NUMBER          reduce using rule 21 (stm -> IF LPAREN exp RPAREN THEN BREAKLINE body opcional .)
+    ID              reduce using rule 21 (stm -> IF LPAREN exp RPAREN THEN BREAKLINE body opcional .)
+    END             reduce using rule 21 (stm -> IF LPAREN exp RPAREN THEN BREAKLINE body opcional .)
+
+
+state 117
+
+    (12) opcional -> ELSIF exp THEN body opcional .
+
+    WHILE           reduce using rule 12 (opcional -> ELSIF exp THEN body opcional .)
+    FOR             reduce using rule 12 (opcional -> ELSIF exp THEN body opcional .)
+    IF              reduce using rule 12 (opcional -> ELSIF exp THEN body opcional .)
+    RETURN          reduce using rule 12 (opcional -> ELSIF exp THEN body opcional .)
+    NUMBER          reduce using rule 12 (opcional -> ELSIF exp THEN body opcional .)
+    ID              reduce using rule 12 (opcional -> ELSIF exp THEN body opcional .)
+    END             reduce using rule 12 (opcional -> ELSIF exp THEN body opcional .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for PLUS in state 13 resolved as shift
+WARNING: shift/reduce conflict for EXPONEN in state 13 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 13 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 13 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 13 resolved as shift
+WARNING: shift/reduce conflict for REST in state 13 resolved as shift
+WARNING: shift/reduce conflict for DOUBLEEQUAL in state 13 resolved as shift
+WARNING: shift/reduce conflict for TRIPLEEQUAL in state 13 resolved as shift
+WARNING: shift/reduce conflict for DIFF in state 13 resolved as shift
+WARNING: shift/reduce conflict for BIGGEST in state 13 resolved as shift
+WARNING: shift/reduce conflict for BIGGESTEQUAL in state 13 resolved as shift
+WARNING: shift/reduce conflict for SMALL in state 13 resolved as shift
+WARNING: shift/reduce conflict for SMALLEQUAL in state 13 resolved as shift
+WARNING: shift/reduce conflict for OR in state 13 resolved as shift
+WARNING: shift/reduce conflict for AND in state 13 resolved as shift
+WARNING: shift/reduce conflict for VIRGULA in state 18 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 18 resolved as shift
+WARNING: shift/reduce conflict for EXPONEN in state 18 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 18 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 18 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 18 resolved as shift
+WARNING: shift/reduce conflict for REST in state 18 resolved as shift
+WARNING: shift/reduce conflict for DOUBLEEQUAL in state 18 resolved as shift
+WARNING: shift/reduce conflict for TRIPLEEQUAL in state 18 resolved as shift
+WARNING: shift/reduce conflict for DIFF in state 18 resolved as shift
+WARNING: shift/reduce conflict for BIGGEST in state 18 resolved as shift
+WARNING: shift/reduce conflict for BIGGESTEQUAL in state 18 resolved as shift
+WARNING: shift/reduce conflict for SMALL in state 18 resolved as shift
+WARNING: shift/reduce conflict for SMALLEQUAL in state 18 resolved as shift
+WARNING: shift/reduce conflict for OR in state 18 resolved as shift
+WARNING: shift/reduce conflict for AND in state 18 resolved as shift
+WARNING: shift/reduce conflict for BREAKLINE in state 28 resolved as shift
+WARNING: reduce/reduce conflict in state 115 resolved using rule (opcional -> ELSIF exp THEN body)
+WARNING: rejected rule (opcional -> <empty>) in state 115

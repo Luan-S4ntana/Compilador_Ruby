@@ -1,20 +1,12 @@
-import ply.lex as lex 
+import ply.lex as lex
 
-stack = [0]
 
-def space_counter(token):
-    spaces = 0
-    for c in token.value:
-        if c == ' ':
-            spaces += 1
-        elif c == '\t':
-            spaces += 8 - (spaces % 8)
-    return spaces
+tokens = ['COMMENT', 'MINUS', 'PLUS', 'TIMES', 'DIVIDE', 'REST', 'EXPONEN', 'LSHIFT', 'RSHIFT', 'BIGGEST', 'SMALL','EQUAL', 'SMALLEQUAL', 'BIGGESTEQUAL', 'BIGSMALLERESQUAL','DOUBLEEQUAL','TRIPLEEQUAL', 'DIFF', 'SIMPLEE', 'SIMPLEBAR', 'EXCLAMATION', 'DOUBLEE', 'DOUBLEBAR',  'LPAREN', 'RPAREN', 'AND', 'OR', 'FALSE','TRUE','NOT','IF', 'ELSE', 'ELSIF', 'BEGIN', 'BREAK', 'CLASS', 'DEF', 'DO', 'END', 'FOR', 'IN', 'MODULE', 'NIL', 'RETURN', 'SELF', 'SUPER', 'THEN', 'WHILE', 'NUMBER', 'ID','OPENKEY','CLOSEKEY','PONTO','PONTOEVIRGULA','VIRGULA', 'LINHA', 'IDENT', 'DEDENT','BREAKLINE']
 
-states = (('idstate', 'exclusive'),
-          ('dedstate', 'exclusive'),)
-
-tokens = ['COMMENT', 'MINUS', 'PLUS', 'TIMES', 'DIVIDE', 'REST', 'EXPONEN', 'LSHIFT', 'RSHIFT', 'BIGGEST', 'SMALL','EQUAL', 'SMALLEQUAL', 'BIGGESTEQUAL', 'BIGSMALLERESQUAL','DOUBLEEQUAL','TRIPLEEQUAL', 'DIFF', 'SIMPLEE', 'SIMPLEBAR', 'EXCLAMATION', 'DOUBLEE', 'DOUBLEBAR', 'ATR', 'LPAREN', 'RPAREN', 'AND', 'OR', 'FALSE','TRUE','NOT','IF', 'ELSE', 'ELSIF', 'BEGIN', 'BREAK', 'CLASS', 'DEF', 'DO', 'END', 'FOR', 'IN', 'MODULE', 'NIL', 'RETURN', 'SELF', 'SUPER', 'THEN', 'WHILE', 'NUMBER', 'ID','OPENKEY','CLOSEKEY','PONTO','PONTOEVIRGULA','VIRGULA', 'LINHA', 'IDENT', 'DEDENT']
+#Comentário de multiplas linhas
+def t_MULTILINECOMMENT(t):
+  r'=begin(.|\n)*=end'
+  pass
 
 # operadores e delimitadores
 t_MINUS = r'-'
@@ -98,86 +90,39 @@ def t_COMMENT(t):
   r'\#.*'
 
 def t_LINHA(t):
-  r'[A-Za-z][A-Za-z \t]+'
-  t.lexer.begin('indentstate')    
+  r'[A-Za-z][A-Za-z \t]+'  
   return t
     
+def t_BREAKLINE(t):
+  r'\n+'                                 
+  return t
 
-def t_breakline(t):
-    r'\n+'                                 
-    t.lexer.lineno += len(t.value) 
-    t.lexer.begin('idstate')
-
-def t_idstate_blankline(t):
-    r'([ \t]+)\n'                          
-    pass
-
-def t_idstate_linewithcode(t):
-    '([ \t]+) | ([a-zA-Z])'                 
-    n_spaces = space_counter(t)
-    t.lexer.begin('INITIAL')
-    if n_spaces < stack[-1]:
-        t.lexer.skip(-len(t.value))
-        stack.pop()
-        t.type='DEDENT'
-        t.lexer.begin('dedstate')
-        return t
-    elif n_spaces > stack[-1]:
-        stack.append(n_spaces)
-        t.type='IDENT'
-        return t
-    elif n_spaces == 0:
-        t.lexer.skip(-1)
-
-def t_dedstate_linewithdedent(t):
-    '([ \t]+) | ([a-zA-Z])'                 
-    n_spaces = space_counter(t)
-    if n_spaces < stack[-1]:
-        t.lexer.skip(-len(t.value))
-        stack.pop()
-        t.type='DEDENT'
-        return t
-    elif n_spaces >= stack[-1]:  
-        t.lexer.begin('INITIAL')
-        if n_spaces > stack[-1]:
-            print('Erro de dedentação --->', n_spaces)
-        elif n_spaces == 0:                  
-            t.lexer.skip(-1)
+def t_BRANCO(t):
+  r'\s+'
+  pass
 
 def t_error(t):
-    print("ERROR in INITIAL state")
-    print(t.value)
+    print("ERROR in INITIAL state[", t.value, "]")
+   ## print(t.value)
     t.lexer.skip(1)
 
-def t_idstate_error(t):
-    print("ERROR in idstate state")
-    t.lexer.skip(1)
-
-def t_dedstate_error(t):
-    print("ERROR in dedstate state")
-    t.lexer.skip(1)
-def t_MULTILINECOMMENT(t):
-  r'\=begin.*=end'
-  return t 
-t_ATR = r'='
 lex.lex()
-programa = """cleardef perm
-    if len lsurf   
-                
-       return lalala land
-r sapore torf
-    for i in range len l  
-             s  lili lost
-             p perm
+programa = """def perm
+    if len
+       return 2
+    for i in r do 
+             s = lili + lost
+             p = perm
              for x in pix
-                append tipo tor
+                append = x + pix
               =begin
               asdiaosdja
               =end
-    return r
+    return
+    end
 """
 lex.input(programa)
 
 
-##for token in lex.lexer:
- ##   print('[', token.type, ',', token.value, ']->', stack)
+#for token in lex.lexer:
+#    print('[', token.type, ',', token.value, ']->')

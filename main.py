@@ -1,3 +1,3 @@
 from sintatico import *
 parser = yacc.yacc()
-parser.parse()
+parser.parse(debug = True)
